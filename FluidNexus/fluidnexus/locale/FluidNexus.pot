@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FluidNexus 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-07-06 00:37-0400\n"
+"POT-Creation-Date: 2011-07-06 01:19-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,5 +31,9 @@ msgstr ""
 
 #: fluidnexus/views.py:82
 msgid " || Fluid Nexus Blog Post"
+msgstr ""
+
+#: fluidnexus/templates/blog.pt:10
+msgid " Posted by ${username} at ${formatted_time}. "
 msgstr ""
 

@@ -1,10 +1,14 @@
-<div metal:use-macro="main.macros['main']">
+<div xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n" 
+    metal:use-macro="main.macros['main']">
     <div class="post" metal:fill-slot="body" tal:repeat="post posts">
 		<h1><a href="${post.post_url}">${post.title}</a></h1>
 		<div class="content" tal:replace="structure post.formatted_content">
 		</div>
-		<div class="time">
-			Posted by ${post.username} at ${post.formatted_time}
+		<div class="time" i18n:translate="">
+			Posted by <span tal:replace="post.username" i18n:name="username" /> at <span tal:replace="post.formatted_time" i18n:name="formatted_time" />.
 		</div>
 	</div>
 </div>
