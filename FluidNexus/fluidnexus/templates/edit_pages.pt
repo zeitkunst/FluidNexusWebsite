@@ -1,0 +1,10 @@
+<div metal:use-macro="main.macros['main']">
+    <div class="pages" metal:fill-slot="body">
+	<h1><a href="${new_page_url}">Create new page</a></h1>
+	<h1>Pages to edit</h1>
+        <div class="page" tal:repeat="page pages">
+		<p><a href="${page.page_url}">${page.title}</a></p>
+	</div>
+    </div>
+</div>
+

@@ -1,0 +1,8 @@
+<div metal:use-macro="main.macros['main']">
+    <div class="page" metal:fill-slot="body">
+	<form action="" method="POST">
+		${form}
+		<input type="submit" value="${save_name}" name="submitted"/>&nbsp;&nbsp;&nbsp;<input type="submit" value="${delete_name}" name="delete"/>
+	</form>
+    </div>
+</div>

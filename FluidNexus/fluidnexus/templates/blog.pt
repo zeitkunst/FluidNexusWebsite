@@ -1,0 +1,10 @@
+<div metal:use-macro="main.macros['main']">
+    <div class="post" metal:fill-slot="body" tal:repeat="post posts">
+		<h1><a href="${post.post_url}">${post.title}</a></h1>
+		<div class="content" tal:replace="structure post.formatted_content">
+		</div>
+		<div class="time">
+			Posted by ${post.username} at ${post.formatted_time}
+		</div>
+	</div>
+</div>
