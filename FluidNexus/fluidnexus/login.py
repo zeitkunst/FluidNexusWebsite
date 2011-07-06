@@ -1,4 +1,5 @@
 import hashlib
+import bcrypt
 
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -26,7 +27,9 @@ def login(request):
         login = request.params['login']
         password = request.params['password']
         try:
-            user = session.query(User).filter(User.username==login).filter(User.password==hashlib.sha256(password).hexdigest()).one()
+            hashed_password = session.query(User.password).filter(User.username==login).one()[0]
+            #user = session.query(User).filter(User.username==login).filter(User.password==hashlib.sha256(password).hexdigest()).one()
+            user = session.query(User).filter(User.username==login).filter(User.password==bcrypt.hashpw(password, hashed_password)).one()
         except NoResultFound:
             user = None
         if (user is not None):

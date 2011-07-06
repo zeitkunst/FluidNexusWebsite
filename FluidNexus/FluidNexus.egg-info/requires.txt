@@ -10,3 +10,4 @@ fa.jquery
 textile
 Babel
 lingua
+py-bcrypt

@@ -20,6 +20,7 @@ requires = [
     'textile',
     'Babel',
     'lingua',
+    'py-bcrypt',
     ]
 
 if sys.version_info[:3] < (2,5,0):

@@ -37,7 +37,7 @@ def view_blog(request):
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
         modifiedPosts.append(post)
 
-    return dict(main = main, title = "Fluid Nexus Blog posts", posts = modifiedPosts, logged_in = logged_in)
+    return dict(main = main, title = _("Fluid Nexus Blog posts"), posts = modifiedPosts, logged_in = logged_in)
 
 def view_blog_post(request):
     session = DBSession()

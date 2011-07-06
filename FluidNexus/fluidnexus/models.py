@@ -147,11 +147,12 @@ def initialize_sql():
     try:
         session = DBSession()
     
-        import hashlib, time
+        import bcrypt, time
         now = time.time()
         user = User()
         user.username = "admin"
-        user.password = hashlib.sha256("password").hexdigest()
+        #user.password = hashlib.sha256("password").hexdigest()
+        user.password = bcrypt.hashpw("password", bcrypt.gensalt())
         user.given_name = "Admin"
         user.surname = "Admin"
         user.homepage = "http://example.com"
