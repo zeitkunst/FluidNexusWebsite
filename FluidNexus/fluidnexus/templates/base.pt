@@ -28,24 +28,19 @@
             </div>
             <div class="col_6 last">
                 <img src="${request.static_url('fluidnexus:static/images/tagline.png')}" alt="mobile messaging without the mobile phone network"/>
-                <p>
-		            <span tal:condition="logged_in">
-		                <a href="${request.application_url}/logout">Logout</a>
-		            </span>
-		            <span tal:condition="not logged_in">
-		                <a href="${request.application_url}/login">Login</a>
-		            </span>
-
-                </p>
             </div>
         </div>
     </div>
 
+    <!-- TODO
+    * ensure display still works on mobile version
+    -->
     <div id="nav" class="container test">
         <div class="row">
             <div class="col_12">
                 <ul id="navigation">
                     <li><a href="/concept" title="Concept">concept</a></li>
+                    <li><a href="/blog" title="Blog">blog</a></li>
                     <li><a href="/download" title="Download">download</a></li>
                     <li><a href="/community" title="Community">community</a></li>
                     <li><a href="/media" title="Media">media</a></li>
@@ -58,6 +53,26 @@
     <div id="content" class="container test">
         <tal:block metal:define-slot="content">
         </tal:block>
+    </div>
+
+    <div id="footer" class="container test">
+        <div class="row">
+            <div class="pre_2 col_4">
+                &nbsp;
+            </div>
+            <div class="col_4">
+                <p>
+		            <span tal:condition="logged_in">
+		                <a href="${request.application_url}/logout">Logout</a>
+		            </span>
+		            <span tal:condition="not logged_in">
+		                <a href="${request.application_url}/login">Login</a>
+		            </span>
+
+                </p>
+            </div>
+            <div class="col_2 last">&nbsp;</div>
+        </div>
     </div>
 </body>
 </html>

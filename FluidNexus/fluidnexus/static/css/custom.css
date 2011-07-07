@@ -6,7 +6,36 @@ body {
 
 }
 
+ul#navigation {
+    margin-top: 20px;
+    margin-left: 0;
+    padding-left: 0;
+    white-space: nowrap;
+}
 
+ul#navigation li {
+    display: inline;
+    list-style-type: none;
+}
+
+ul#navigation a {
+    color: #eee;
+    text-decoration: none;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #eb302d;
+    padding: 8px 12px;
+    font-size: 1.5em;
+    font-family: "Delicious", "sans-serif";
+    font-weight: bold;
+
+}
+
+ul#navigation a:hover {
+    color: #eee;
+    text-decoration: none;
+    background-color: #84302d;
+}
 
 
 /*
@@ -18,8 +47,14 @@ Mobile version - preset code from cssgrid.net */
 	.examplecontainer {}
 
 	body {}
-	
+
+	ul#navigation li {
+        display: block;
+        list-style-type: none;
+        margin-bottom: 16px;
+    }
 }
+
 
 
 /*

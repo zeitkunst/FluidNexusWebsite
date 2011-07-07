@@ -3,13 +3,18 @@
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     metal:use-macro="base">
     <div id="posts" metal:fill-slot="content">
-        <div class="post" tal:repeat="post posts">
+    <tal:block metal:fill-slot="content">
+        <div class="row">
+	    <div class="col_12 last">
+		<div class="post" tal:repeat="post posts">
     		<h1><a href="${post.post_url}">${post.title}</a></h1>
     		<div class="content" tal:replace="structure post.formatted_content">
     		</div>
     		<div class="time" i18n:translate="">
     			Posted by <span tal:replace="post.username" i18n:name="username" /> at <span tal:replace="post.formatted_time" i18n:name="formatted_time" />.
     		</div>
-        </div>
+		</div>
+	    </div>
 	</div>
+    </tal:block>
 </html>
