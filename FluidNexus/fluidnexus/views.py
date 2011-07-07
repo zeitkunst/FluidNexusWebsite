@@ -21,6 +21,7 @@ _ = TranslationStringFactory('fluidnexus')
 save_name = _("Save")
 delete_name = _("Delete")
 
+@view_config(route_name = "view_blog", renderer = "templates/blog.pt")
 def view_blog(request):
     session = DBSession()
     main = get_renderer('templates/main.pt').implementation()
@@ -39,6 +40,7 @@ def view_blog(request):
 
     return dict(main = main, title = _("Fluid Nexus Blog posts"), posts = modifiedPosts, logged_in = logged_in)
 
+@view_config(route_name = "view_blog_post", renderer = "templates/blog_post.pt")
 def view_blog_post(request):
     session = DBSession()
     main = get_renderer('templates/post_comments.pt').implementation()
@@ -81,6 +83,7 @@ def view_blog_post(request):
 
     return dict(main = main, title = post.title + _(" || Fluid Nexus Blog Post"), post = post, logged_in = logged_in, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
 
+@view_config(route_name = "edit_users", renderer = "templates/edit_users.pt")
 def edit_users(request):
     session = DBSession()
     users = session.query(User).order_by(User.id).all()
@@ -92,6 +95,7 @@ def edit_users(request):
 
     return dict(users = modifiedUsers)
 
+@view_config(route_name = "edit_user", renderer = "templates/edit_user.pt")
 def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
@@ -103,6 +107,7 @@ def edit_user(request):
     form = fs.render()
     return dict(form = form, username = user.username)
 
+@view_config(route_name = "edit_blog", renderer = "templates/edit_blog.pt", permission = "edit_blog")
 def edit_blog(request):
     session = DBSession()
     posts = session.query(Post).join(User).order_by(desc(Post.modified_time)).all()
@@ -122,7 +127,7 @@ def edit_blog(request):
     #form = g.render()
     return dict(posts = modifiedPosts, new_blog_post_url = new_blog_post_url)
 
-
+@view_config(route_name = "new_blog_post", renderer = "templates/new_blog_post.pt", permission = "edit_blog")
 def new_blog_post(request):
     session = DBSession()
     print authenticated_userid(request)
@@ -146,6 +151,7 @@ def new_blog_post(request):
     form = fs.render()
     return dict(form = form, new_blog_post_url = new_blog_post_url)
 
+@view_config(route_name = "edit_blog_post", renderer = "templates/edit_blog_post.pt", permission = "edit_blog")
 def edit_blog_post(request):
     session = DBSession()
     matchdict = request.matchdict
@@ -174,6 +180,7 @@ def edit_blog_post(request):
     form = fs.render()
     return dict(form = form, title = post.title, edit_blog_post_url = edit_blog_post_url)
 
+@view_config(route_name = "view_page", renderer = "templates/view_page.pt")
 def view_page(request):
     """View a given page."""
     session = DBSession()
@@ -186,6 +193,7 @@ def view_page(request):
 
     return dict(title = page.title, content = textile.textile(page.content))
 
+@view_config(route_name = "edit_pages", renderer="templates/edit_pages.pt", permission = "edit_pages")
 def edit_pages(request):
     """List pages to edit."""
     session = DBSession()
@@ -205,6 +213,7 @@ def edit_pages(request):
     new_page_url = route_url("new_page", request)
     return dict(main = main, title = "Edit pages", new_page_url = new_page_url, pages = modifiedPages, logged_in = logged_in)
 
+@view_config(route_name = "edit_page", renderer = "templates/edit_page.pt", permission = "edit_pages")
 def edit_page(request):
     """Edit a given page."""
     session = DBSession()
@@ -240,6 +249,7 @@ def edit_page(request):
     # Figure out how to delete using checkboxes
     return dict(main = main, title = "Edit '%s'" % page.title, save_name = save_name, delete_name = delete_name, form = form, logged_in = logged_in)
 
+@view_config(route_name = "new_page", renderer = "templates/new_page.pt", permission="edit_pages")
 def new_page(request):
     session = DBSession()
     main = get_renderer('templates/admin.pt').implementation()

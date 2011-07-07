@@ -21,6 +21,9 @@ requires = [
     'Babel',
     'lingua',
     'py-bcrypt',
+    'beaker',
+    'pyramid-beaker',
+    'pycryptopp',
     ]
 
 if sys.version_info[:3] < (2,5,0):

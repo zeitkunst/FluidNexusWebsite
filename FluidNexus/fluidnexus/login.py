@@ -7,10 +7,12 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
 from pyramid.security import forget
 from pyramid.url import route_url
+from pyramid.view import view_config
 
 from fluidnexus.models import DBSession, User
 from fluidnexus.security import USERS
 
+@view_config(route_name = "login", renderer = "templates/login.pt")
 def login(request):
     login_url = route_url('login', request)
     referrer = request.url
@@ -45,6 +47,7 @@ def login(request):
                 password = password,
                )
 
+@view_config(route_name = "logout")
 def logout(request):
     headers = forget(request)
     return HTTPFound(location = route_url('view_blog', request),

@@ -11,3 +11,6 @@ textile
 Babel
 lingua
 py-bcrypt
+beaker
+pyramid-beaker
+pycryptopp
