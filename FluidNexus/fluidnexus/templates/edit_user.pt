@@ -40,15 +40,10 @@
       <div class="bottom">
 		<form action="" method="post">
 			${form}
-			${form.group_info.name}
 			<input type="submit" name="submitted" value="Save"/>
 		</form>
       </div>
     </div>
-  </div>
-  <div id="footer">
-    <div class="footer"
-         >&copy; Copyright 2008-2011, Agendaless Consulting.</div>
   </div>
 </body>
 </html>

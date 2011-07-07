@@ -100,7 +100,6 @@ def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
-    #user = session.query(User).filter(User.id == matchdict["user_id"]).one()
 
     fs = FieldSet(user)
     fs.configure(exclude = [fs["password"], fs["created_time"]])

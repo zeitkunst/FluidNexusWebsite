@@ -21,6 +21,8 @@ from pyramid_formalchemy.resources import Models
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
+import bcrypt
+
 class RootFactory(object):
     __acl__ = [(Allow, Everyone, 'view'),
                (Allow, 'group:admin', 'admin'),
@@ -53,6 +55,27 @@ class User(Base):
 
     def __repr__(self):
         return "<User '%s'>" % self.username
+
+    @classmethod
+    def getByUsername(cls, username):
+        return DBSession.query(cls).filter(cls.username == username).first()
+
+    @classmethod
+    def checkPassword(cls, username, password):
+        user = cls.getByUsername(username)
+        if not user:
+            return False
+
+        hashed_password = DBSession.query(User.password).filter(User.username == username).one()[0]
+
+        if bcrypt.hashpw(password, hashed_password) == hashed_password:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def getID(cls, username):
+        return DBSession.query(cls.id).filter(cls.username == username).one()[0]
 
 class GroupInfo(Base):
     __label__ = "GroupInfo"

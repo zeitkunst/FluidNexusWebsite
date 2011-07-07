@@ -28,14 +28,9 @@ def login(request):
         session = DBSession()
         login = request.params['login']
         password = request.params['password']
-        try:
-            hashed_password = session.query(User.password).filter(User.username==login).one()[0]
-            #user = session.query(User).filter(User.username==login).filter(User.password==hashlib.sha256(password).hexdigest()).one()
-            user = session.query(User).filter(User.username==login).filter(User.password==bcrypt.hashpw(password, hashed_password)).one()
-        except NoResultFound:
-            user = None
-        if (user is not None):
-            headers = remember(request, user.id)
+
+        if (User.checkPassword(login, password)):
+            headers = remember(request, User.getID(login))
             return HTTPFound(location = came_from, headers = headers)
 
         message = 'Failed login'
