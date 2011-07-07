@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+<head>
+    <title>${title}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="keywords" content="python web application" />
+    <meta name="description" content="pyramid web application" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${request.static_url('fluidnexus:static/css/columnal.css')}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="${request.static_url('fluidnexus:static/css/custom.css')}" type="text/css" media="screen" />
+
+<!-- Page build tools - only needed while creating a site, remove when          launching - Gray box colors and page debugging tools -->
+    <link rel="stylesheet" href="${request.static_url('fluidnexus:static/css/build.css')}" type="text/css" media="screen" />
+    <link rel="shortcut icon" href="${request.static_url('fluidnexus:static/favicon.ico')}" />
+    <!--<link rel="stylesheet"
+        href="${request.static_url('fluidnexus:static/pylons.css')}"
+        type="text/css" media="screen" charset="utf-8" />-->
+</head>
+<body>
+    <div class="container test">
+        <div class="row">
+            <div class="col_6">
+                <a href="/" name="Home"><img src="${request.static_url('fluidnexus:static/images/FluidNexus.png')}" alt="Fluid Nexus"/></a>
+            </div>
+            <div class="col_6 last">
+                <img src="${request.static_url('fluidnexus:static/images/tagline.png')}" alt="mobile messaging without the mobile phone network"/>
+                <p>
+		            <span tal:condition="logged_in">
+		                <a href="${request.application_url}/logout">Logout</a>
+		            </span>
+		            <span tal:condition="not logged_in">
+		                <a href="${request.application_url}/login">Login</a>
+		            </span>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="nav" class="container test">
+        <div class="row">
+            <div class="col_12">
+                <ul id="navigation">
+                    <li><a href="/concept" title="Concept">concept</a></li>
+                    <li><a href="/download" title="Download">download</a></li>
+                    <li><a href="/community" title="Community">community</a></li>
+                    <li><a href="/media" title="Media">media</a></li>
+                    <li><a href="/credits" title="Credits">credits</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="content" class="container test">
+        <tal:block metal:define-slot="content">
+        </tal:block>
+    </div>
+</body>
+</html>
+

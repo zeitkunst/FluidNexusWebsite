@@ -1,5 +1,5 @@
-<div metal:use-macro="main.macros['main']">
-    <div id="post" metal:fill-slot="body">
+<div metal:use-macro="base">
+    <div id="post" metal:fill-slot="content">
         <h1>${post.title}</h1>
 		<div class="content" tal:replace="structure post.formatted_content">
 		</div>

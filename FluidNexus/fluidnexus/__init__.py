@@ -24,9 +24,13 @@ def main(global_config, **settings):
                          root_factory='fluidnexus.models.RootFactory',
                          authentication_policy = authn_policy,
                          authorization_policy=authz_policy)
+    config.add_subscriber('fluidnexus.subscribers.add_base_template',
+                          'pyramid.events.BeforeRender')
     config.include("pyramid_formalchemy")
     config.include("fa.jquery")
     config.add_static_view('static', 'fluidnexus:static')
+
+    config.add_route('home', '/')
 
     # USERS/LOGIN
     config.add_route('login', '/login')

@@ -21,10 +21,14 @@ _ = TranslationStringFactory('fluidnexus')
 save_name = _("Save")
 delete_name = _("Delete")
 
+@view_config(route_name = "home", renderer = "templates/home.pt")
+def home(request):
+    logged_in = authenticated_userid(request)
+    return dict(title = "Fluid Nexus", logged_in = logged_in)
+
 @view_config(route_name = "view_blog", renderer = "templates/blog.pt")
 def view_blog(request):
     session = DBSession()
-    main = get_renderer('templates/main.pt').implementation()
     posts = session.query(Post).join(User).order_by(desc(Post.modified_time)).all()
 
     # TODO
@@ -38,12 +42,11 @@ def view_blog(request):
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
         modifiedPosts.append(post)
 
-    return dict(main = main, title = _("Fluid Nexus Blog posts"), posts = modifiedPosts, logged_in = logged_in)
+    return dict(title = _("Fluid Nexus Blog posts"), posts = modifiedPosts, logged_in = logged_in)
 
 @view_config(route_name = "view_blog_post", renderer = "templates/blog_post.pt")
 def view_blog_post(request):
     session = DBSession()
-    main = get_renderer('templates/post_comments.pt').implementation()
     logged_in = authenticated_userid(request)
     matchdict = request.matchdict
     post = session.query(Post).filter(Post.id == matchdict["post_id"]).one()
@@ -81,7 +84,7 @@ def view_blog_post(request):
         fs.configure(options = [fs.email.label(fs.email.label() + _(" (will not be shared)")), fs.content.textarea(size=(45, 10)), fs.created_time.hidden(), fs.post_id.hidden()], exclude = [fs.post])
     comment_form = fs.render()
 
-    return dict(main = main, title = post.title + _(" || Fluid Nexus Blog Post"), post = post, logged_in = logged_in, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
+    return dict(title = post.title + _(" || Fluid Nexus Blog Post"), post = post, logged_in = logged_in, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
 
 @view_config(route_name = "edit_users", renderer = "templates/edit_users.pt")
 def edit_users(request):

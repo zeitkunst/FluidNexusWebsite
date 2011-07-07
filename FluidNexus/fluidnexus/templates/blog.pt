@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
-    metal:use-macro="main.macros['main']">
-    <div id="posts" metal:fill-slot="body">
+    metal:use-macro="base">
+    <div id="posts" metal:fill-slot="content">
         <div class="post" tal:repeat="post posts">
     		<h1><a href="${post.post_url}">${post.title}</a></h1>
     		<div class="content" tal:replace="structure post.formatted_content">
