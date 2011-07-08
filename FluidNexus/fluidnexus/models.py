@@ -1,3 +1,7 @@
+import time
+
+import textile
+
 import transaction
 
 from sqlalchemy import Column
@@ -77,6 +81,19 @@ class User(Base):
     def getID(cls, username):
         return DBSession.query(cls.id).filter(cls.username == username).one()[0]
 
+class OpenID(Base):
+    __label__ = 'OpenID'
+    __plural__ = 'OpenIDs'
+    __tablename__ = "openids"
+    id = Column(Integer, primary_key = True)
+    openid_url = Column(Unicode, nullable = False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
+
+    user = relationship(User, backref=backref('openids', order_by=id))
+
+    def __repr__(self):
+        return "<OpenID '%s'>" % self.openid_url
+
 class GroupInfo(Base):
     __label__ = "GroupInfo"
     __plural__ = "GroupInfos"
@@ -125,6 +142,17 @@ class Post(Base):
 
     def __repr__(self):
         return "<Post '%s'>" % self.title
+
+    def getISOTime(self):
+        """Format the time for display."""
+        timetuple = time.gmtime(self.created_time)
+        return time.strftime("%Y-%m-%dT%H:%M:%S", timetuple)
+
+    def getFormattedTime(self):
+        return time.ctime(self.created_time)
+
+    def getFormattedContent(self):
+        return textile.textile(self.content)
 
 class Page(Base):
     __tablename__ = 'pages'

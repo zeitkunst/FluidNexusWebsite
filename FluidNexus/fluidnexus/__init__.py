@@ -31,6 +31,9 @@ def main(global_config, **settings):
     config.add_static_view('static', 'fluidnexus:static')
 
     config.add_route('home', '/')
+    config.add_route('openid', '/openid')
+    config.add_route("verify_openid", pattern = "/do_openid", view = "pyramid_openid.verify_openid")
+    #config.add_view(route_name = "verify_openid", view = "pyramid_openid.verify_openid")
 
     # USERS/LOGIN
     config.add_route('login', '/login')

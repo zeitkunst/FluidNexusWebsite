@@ -2,8 +2,135 @@
 _______________________________
 Desktop version layout - place your custom code here */
 
-body {
+/* FONTS */
+@font-face {
+    font-family: 'Delicious';
+    src: url('fonts/delicious-bold-webfont.eot');
+    src: url('fonts/delicious-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/delicious-bold-webfont.woff') format('woff'),
+         url('fonts/delicious-bold-webfont.ttf') format('truetype'),
+         url('fonts/delicious-bold-webfont.svg#DeliciousBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
 
+}
+
+@font-face {
+    font-family: 'Delicious';
+    src: url('fonts/delicious-bolditalic-webfont.eot');
+    src: url('fonts/delicious-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/delicious-bolditalic-webfont.woff') format('woff'),
+         url('fonts/delicious-bolditalic-webfont.ttf') format('truetype'),
+         url('fonts/delicious-bolditalic-webfont.svg#DeliciousBoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'Delicious';
+    src: url('fonts/delicious-italic-webfont.eot');
+    src: url('fonts/delicious-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/delicious-italic-webfont.woff') format('woff'),
+         url('fonts/delicious-italic-webfont.ttf') format('truetype'),
+         url('fonts/delicious-italic-webfont.svg#DeliciousItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'Delicious';
+    src: url('fonts/delicious-roman-webfont.eot');
+    src: url('fonts/delicious-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/delicious-roman-webfont.woff') format('woff'),
+         url('fonts/delicious-roman-webfont.ttf') format('truetype'),
+         url('fonts/delicious-roman-webfont.svg#DeliciousRoman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'DeliciousSmallCapsRegular';
+    src: url('fonts/delicious-smallcaps-webfont.eot');
+    src: url('fonts/delicious-smallcaps-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/delicious-smallcaps-webfont.woff') format('woff'),
+         url('fonts/delicious-smallcaps-webfont.ttf') format('truetype'),
+         url('fonts/delicious-smallcaps-webfont.svg#DeliciousSmallCapsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'DejaWeb';
+	src: url('fonts/dejaweb-webfont.eot');
+	src: local('DejaWeb'), url('fonts/dejaweb-webfont.woff') format('woff'), url('fonts/dejaweb-webfont.ttf') format('truetype'), url('fonts/dejaweb-webfont.svg#webfontVuTWy87b') format('svg');
+}
+
+@font-face {
+	font-family: 'DejaWeb';
+    font-weight: bold;
+	src: url('fonts/dejaweb-bold-webfont.eot');
+	src: local('DejaWeb Bold'), local('DejaWeb-Bold'), url('fonts/dejaweb-bold-webfont.woff') format('woff'), url('fonts/dejaweb-bold-webfont.ttf') format('truetype'), url('fonts/dejaweb-bold-webfont.svg#webfontPfPqo0rw') format('svg');
+}
+
+@font-face {
+	font-family: 'DejaWeb';
+    font-style: italic;
+	src: url('fonts/dejaweb-italic-webfont.eot');
+	src: local('DejaWeb Italic'), local('DejaWeb Italic'), url('fonts/dejaweb-italic-webfont.woff') format('woff'), url('fonts/dejaweb-italic-webfont.ttf') format('truetype'), url('fonts/dejaweb-italic-webfont.svg#webfontLQ5v0P1l') format('svg');
+}
+
+
+
+@font-face {
+	font-family: 'DejaWeb';
+    font-weight: bold;
+    font-style: italic;
+	src: url('fonts/dejaweb-bolditalic-webfont.eot');
+	src: local('DejaWeb Bold Italic'), local('DejaWeb-BoldItalic'), url('fonts/dejaweb-bolditalic-webfont.woff') format('woff'), url('fonts/dejaweb-bolditalic-webfont.ttf') format('truetype'), url('fonts/dejaweb-bolditalic-webfont.svg#webfontQKiA3fPP') format('svg');
+}
+
+body {
+    font-family: "DejaWeb", Verdana, "sans-serif";
+    font-size: 1.1em;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+nav, header, section, article {
+    display: block;
+}
+
+#main_header {
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(71,71,71)),
+        color-stop(0.51, rgb(194,194,194)),
+        color-stop(0.76, rgb(235,235,235))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(71,71,71) 0%,
+        rgb(194,194,194) 51%,
+        rgb(235,235,235) 76%
+    );
+
+}
+
+#header_image {
+    text-align: right;
+}
+
+#main_nav {
+    text-align: center;
 }
 
 ul#navigation {
@@ -37,6 +164,32 @@ ul#navigation a:hover {
     background-color: #84302d;
 }
 
+#content {
+    margin-top: 1em;
+}
+
+#footer {
+    margin-top: 1em;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.0, rgb(194,194,194)),
+        color-stop(0.75, rgb(235,235,235))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(194,194,194) 0%,
+        rgb(255,255,255) 75%
+    );
+
+}
+
+/* formalchemy error messages */
+.ui-state-error {
+    color: #EB302D;
+}
 
 /*
 _______________________________

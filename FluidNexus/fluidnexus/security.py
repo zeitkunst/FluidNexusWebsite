@@ -18,3 +18,5 @@ def groupfinder(userid, request):
             groupNames.append("group:" + group.group_info.name)
 
     return groupNames
+
+

@@ -4,6 +4,7 @@ import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 
 from pyramid.httpexceptions import HTTPFound
+from pyramid.security import authenticated_userid
 from pyramid.security import remember
 from pyramid.security import forget
 from pyramid.url import route_url
@@ -15,6 +16,7 @@ from fluidnexus.security import USERS
 @view_config(route_name = "login", renderer = "templates/login.pt")
 def login(request):
     login_url = route_url('login', request)
+    logged_in = authenticated_userid(request)
     referrer = request.url
     if (referrer == login_url):
         referrer = '/blog' # never use the login form itself as came_from
@@ -39,6 +41,8 @@ def login(request):
                 url = request.application_url + "/login",
                 came_from = came_from,
                 login = login,
+                title = "Fluid Nexus login",
+                logged_in = logged_in,
                 password = password,
                )
 

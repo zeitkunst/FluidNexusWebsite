@@ -1,29 +1,49 @@
-<div metal:use-macro="base">
-    <div id="post" metal:fill-slot="content">
-        <h1>${post.title}</h1>
-		<div class="content" tal:replace="structure post.formatted_content">
-		</div>
-		<div class="time">
-			Posted by ${post.username} at ${post.formatted_time}
-		</div>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    metal:use-macro="base_comments">
+
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+		<article class="post">
+    		<h1>${post.title}</h1>
+    		<div class="content" tal:replace="structure post.getFormattedContent()">
+    		</div>
+    		<div class="time" i18n:translate="">
+    			Posted by <span tal:replace="post.username" i18n:name="username" /> at <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
+    		</div>
+		</article>
+	    </div>
+	</div>
+    </tal:block>
+
+    <tal:block metal:fill-slot="comments">
+        <div id="comments" tal:condition="comments.count()" class="row">
+            <div class="pre_2 col_8 last">
+         		<h2>Comments</h2>
+        		<div class="comments">
+        			<div class="comment" tal:repeat="comment comments">
+        				<p>By ${comment.name}</p>
+        				<div>
+        					${comment.content}
+        				</div>
+        			</div>
+        		</div>
+            </div>
+        </div>
+    </tal:block>
+
+    <tal:block metal:fill-slot="comment_form">
+    <div id="comment_form" class="row">
+        <div class="pre_2 col_8 last">
+            <h2>Add new comment</h2>
+            <form action="${post_comment_url}" method="POST">
+                ${comment_form}        
+                <input type="submit" name="submitted" value="Submit"/>
+            </form>    
+        </div>
     </div>
-    <div id="comments" tal:condition="comments.count()" metal:fill-slot="comments">
- 		<h2>Comments</h2>
-		<div class="comments">
-			<div class="comment" tal:repeat="comment comments">
-				<p>By ${comment.name}</p>
-				<div>
-					${comment.content}
-				</div>
-			</div>
-		</div>
-    </div>
-    <div id="comment_form" metal:fill-slot="comment_form">
-        <h2>Add new comment</h2>
-        <form action="${post_comment_url}" method="POST">
-            ${comment_form}        
-            <input type="submit" name="submitted" value="Submit"/>
-        </form>    
-    </div>
-</div>
+    </tal:block>
+</html>
 

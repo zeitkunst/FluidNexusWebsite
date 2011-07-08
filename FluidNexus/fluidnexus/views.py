@@ -36,8 +36,8 @@ def view_blog(request):
     modifiedPosts = []
     logged_in = authenticated_userid(request)
     for post in posts:
-        post.formatted_time = time.ctime(post.modified_time)
-        post.formatted_content = textile.textile(post.content)
+        # TODO
+        # move these to classmethod
         post.username = post.user.username
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
         modifiedPosts.append(post)
@@ -50,8 +50,6 @@ def view_blog_post(request):
     logged_in = authenticated_userid(request)
     matchdict = request.matchdict
     post = session.query(Post).filter(Post.id == matchdict["post_id"]).one()
-    post.formatted_time = time.ctime(post.modified_time)
-    post.formatted_content = textile.textile(post.content)
     user = session.query(User).filter(User.id == post.user_id).one()
     post.username = user.username
     post_comment_url = route_url("view_blog_post", request, post_id = post.id)
@@ -277,3 +275,13 @@ def new_page(request):
     form = fs.render()
     return dict(main = main, title = "Create new Fluid Nexus page", save_name = save_name, logged_in = logged_in, form = form)
 
+@view_config(route_name = "openid", renderer = "templates/openid.pt")
+def openid(request):
+    logged_in = authenticated_userid(request)
+    return dict(title = "OpenID login", logged_in = logged_in, message = "", login = "")
+
+# Callback for openid library
+def remember_me(context, request, result):
+    print result
+
+    return HTTPFound(location = route_url("openid", request))
