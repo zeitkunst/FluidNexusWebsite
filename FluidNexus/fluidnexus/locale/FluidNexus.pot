@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FluidNexus 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-07-10 02:29-0400\n"
+"POT-Creation-Date: 2011-07-10 03:39-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgid "Your username cannot be the same as one that already exists in the databa
 msgstr ""
 
 #: fluidnexus/forms.py:24
-msgid "Username (can be the same as your openid)"
+msgid "Username (will be used publicly to identify you on the website)"
 msgstr ""
 
 #: fluidnexus/forms.py:25 fluidnexus/forms.py:45 fluidnexus/forms.py:64
@@ -53,12 +53,28 @@ msgstr ""
 msgid "* Confirm password"
 msgstr ""
 
-#: fluidnexus/login.py:25 fluidnexus/views.py:128 fluidnexus/views.py:172
-#: fluidnexus/views.py:397
+#: fluidnexus/forms.py:77
+msgid "Name"
+msgstr ""
+
+#: fluidnexus/forms.py:78
+msgid "E-mail (will not be shared)"
+msgstr ""
+
+#: fluidnexus/forms.py:79
+msgid "Homepage"
+msgstr ""
+
+#: fluidnexus/forms.py:80
+msgid "Comment"
+msgstr ""
+
+#: fluidnexus/login.py:24 fluidnexus/views.py:129 fluidnexus/views.py:173
+#: fluidnexus/views.py:403
 msgid "You are already logged in and therefore cannot register for a new account."
 msgstr ""
 
-#: fluidnexus/login.py:59
+#: fluidnexus/login.py:58
 msgid "You have successfully logged out"
 msgstr ""
 
@@ -74,24 +90,24 @@ msgstr ""
 msgid "Fluid Nexus Blog posts"
 msgstr ""
 
-#: fluidnexus/views.py:86
-msgid " (will not be shared)"
+#: fluidnexus/views.py:79
+msgid "Your comment was successfully posted."
 msgstr ""
 
 #: fluidnexus/views.py:89
 msgid " || Fluid Nexus Blog Post"
 msgstr ""
 
-#: fluidnexus/views.py:119
+#: fluidnexus/views.py:102
+msgid "Edit users"
+msgstr ""
+
+#: fluidnexus/views.py:120
 msgid "Edit"
 msgstr ""
 
-#: fluidnexus/views.py:163 fluidnexus/views.py:211
+#: fluidnexus/views.py:164 fluidnexus/views.py:211
 msgid "Register new user"
-msgstr ""
-
-#: fluidnexus/views.py:176
-msgid "Username (can be the same as your OpenID)"
 msgstr ""
 
 #: fluidnexus/views.py:207
@@ -102,7 +118,13 @@ msgstr ""
 msgid "Viewing "
 msgstr ""
 
-#: fluidnexus/views.py:412
+#: fluidnexus/views.py:395
+msgid ""
+"You do not have access to the requested resource.  Either login using an "
+"account that does have access, or contact the administrators of the site."
+msgstr ""
+
+#: fluidnexus/views.py:418
 msgid "You now need to register after validating your OpenID"
 msgstr ""
 

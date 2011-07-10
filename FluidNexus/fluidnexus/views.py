@@ -76,6 +76,7 @@ def view_blog_post(request):
             comment.created_time = now
             comment.post_id = post.id
             session.add(comment)
+            request.session.flash(_("Your comment was successfully posted."))
             fs = None
 
     comments = session.query(Comment).filter(Comment.post_id == post.id).order_by(desc(Comment.created_time))
