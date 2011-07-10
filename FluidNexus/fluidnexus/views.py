@@ -5,15 +5,19 @@ from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.i18n import TranslationStringFactory
 from pyramid.renderers import get_renderer
 from pyramid.security import authenticated_userid
+from pyramid.security import remember
 from pyramid.url import route_url
 from pyramid.view import view_config
 
 from formalchemy import types, Field, FieldSet, Grid
 
 import textile
+import bcrypt
 
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, Comment, Page
+from fluidnexus.models import Post, User, Group, GroupInfo, Comment, Page
+from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet
+
 import time
 
 _ = TranslationStringFactory('fluidnexus')
@@ -100,12 +104,84 @@ def edit_users(request):
 def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
+    logged_in = authenticated_userid(request)
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
 
-    fs = FieldSet(user)
-    fs.configure(exclude = [fs["password"], fs["created_time"]])
+    fs = UserFieldSet().bind(user, session = session, data = request.POST or None)
+    if 'submitted' in request.params:
+        valid = fs.validate()
+        if valid:
+            user.password = bcrypt.hashpw(fs.password1.value, bcrypt.gensalt())
+            fs.sync()
+            return HTTPFound(location = route_url("edit_users", request))
+
     form = fs.render()
-    return dict(form = form, username = user.username)
+    return dict(form = form, title = _("Edit") + " " + user.username, logged_in = logged_in)
+
+@view_config(route_name = "register_user", renderer = "templates/register_user.pt")
+def register_user(request):
+    session = DBSession()
+    matchdict = request.matchdict
+    logged_in = authenticated_userid(request)
+
+    if (logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
+        return HTTPFound(location = route_url("home", request))
+
+    login_url = route_url('login', request)
+    referrer = request.url
+    if (referrer == login_url):
+        referrer = '/' # never use the login form itself as came_from
+    
+    came_from = request.params.get('came_from', referrer)
+
+    if 'submitted' in request.params:
+        fs = RegisterUserFieldSet().bind(User, session = session, data = request.params or None)
+        valid = fs.validate()
+        if valid:
+            user = User()
+            password = bcrypt.hashpw(fs.password1.value, bcrypt.gensalt())
+
+            # TODO
+            # Shouldn't have to do this, but doing it for simplicity now
+            user.username = fs.username.value
+            user.password = password
+            user.given_name = fs.given_name.value
+            user.surname = fs.surname.value
+            user.homepage = fs.homepage.value
+            user.created_time =  time.time()
+            session.add(user)
+            session.flush()
+
+            # Add user to nexus group
+            # TODO
+            # move to class method?  or instance method?
+            #group_info_id = session.query(GroupInfo).filter(GroupInfo.description == "nexus").one()[0]
+            #user_id = User.getID(fs.username.value)
+            #group = Group()
+            #group.group_info_id = group_info_id
+            #group.user_id = user_id
+            #session.add(group)
+
+            User.addToGroup(fs.username.value, "nexus")
+            request.session["username"] = fs.username.value
+            headers = remember(request, User.getID(fs.username.value))
+            return HTTPFound(location = came_from, headers = headers)
+
+    fs = RegisterUserFieldSet().bind(User, session = session)
+    form = fs.render()
+    return dict(form = form, title = _("Register new user"), logged_in = logged_in)
+
+
+@view_config(route_name = "view_user", renderer = "templates/view_user.pt")
+def view_user(request):
+    session = DBSession()
+    matchdict = request.matchdict
+    logged_in = authenticated_userid(request)
+    user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
+
+    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username, logged_in = logged_in)
+
 
 @view_config(route_name = "edit_blog", renderer = "templates/edit_blog.pt", permission = "edit_blog")
 def edit_blog(request):

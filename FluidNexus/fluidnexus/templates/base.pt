@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${css_static_url}/columnal.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="${css_static_url}/custom.css" type="text/css" media="screen" />
-
 <!-- Page build tools - only needed while creating a site, remove when          launching - Gray box colors and page debugging tools -->
     <tal:block condition="testing">
         <link rel="stylesheet" href="${request.static_url('fluidnexus:static/css/build.css')}" type="text/css" media="screen" />
@@ -50,6 +49,13 @@
 
 
     <div id="content" class="container test">
+        <div class="pre_2 col_8 last">
+            <div id="flash_messages" tal:condition="request.session.peek_flash()">
+                <p class="flash_message" tal:repeat="message request.session.pop_flash()">
+                    ${message}
+                </p>
+            </div>
+        </div>
         <tal:block metal:define-slot="content">
         </tal:block>
     </div>
@@ -62,7 +68,7 @@
             <div class="col_4">
                 <p>
 		            <span tal:condition="logged_in">
-		                <a href="${request.application_url}/logout">Logout</a>
+                        <a href="${request.application_url}/logout">Logout (${request.session['username']})</a>
 		            </span>
 		            <span tal:condition="not logged_in">
 		                <a href="${request.application_url}/login">Login</a>

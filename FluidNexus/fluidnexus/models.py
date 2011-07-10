@@ -81,12 +81,22 @@ class User(Base):
     def getID(cls, username):
         return DBSession.query(cls.id).filter(cls.username == username).one()[0]
 
+    @classmethod
+    def addToGroup(cls, username, groupname):
+        group_info_id = DBSession.query(GroupInfo.id).filter(GroupInfo.group_name == groupname).one()[0]
+        user_id = DBSession.query(cls.id).filter(cls.username == username).one()[0]
+        group = Group()
+        group.group_info_id = group_info_id
+        group.user_id = user_id
+        DBSession.add(group)
+
 class OpenID(Base):
     __label__ = 'OpenID'
     __plural__ = 'OpenIDs'
     __tablename__ = "openids"
     id = Column(Integer, primary_key = True)
-    openid_url = Column(Unicode, nullable = False)
+    openid = Column(Unicode, nullable = False)
+    openid_url = Column(Unicode)
     user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
     user = relationship(User, backref=backref('openids', order_by=id))
@@ -100,14 +110,14 @@ class GroupInfo(Base):
     __tablename__ = "group_info"
 
     id = Column(Integer, primary_key = True)
-    name = Column(Unicode, nullable = False)
+    group_name = Column(Unicode, nullable = False)
     description = Column(Unicode, nullable = False)
 
     def __repr__(self):
-        return "<GroupInfo '%s'>" % self.name
+        return "<GroupInfo '%s'>" % self.group_name
 
-    def __init__(self, name = "", description = ""):
-        self.name = name
+    def __init__(self, group_name = "", description = ""):
+        self.group_name = group_name
         self.description = description
 
 class Group(Base):
@@ -210,16 +220,16 @@ def initialize_sql():
         user.created_time = now
         session.add(user)
     
-        group_info = GroupInfo(name = "admin", description = "Admin Group")
+        group_info = GroupInfo(group_name = "admin", description = "Admin Group")
         session.add(group_info)
     
-        group_info = GroupInfo(name = "blog", description = "Blog Group")
+        group_info = GroupInfo(group_name = "blog", description = "Blog Group")
         session.add(group_info)
     
-        group_info = GroupInfo(name = "nexus", description = "Nexus Group")
+        group_info = GroupInfo(group_name = "nexus", description = "Nexus Group")
         session.add(group_info)
 
-        group_info = GroupInfo(name = "pages", description = "Pages Group")
+        group_info = GroupInfo(group_name = "pages", description = "Pages Group")
         session.add(group_info)
 
         group = Group()
@@ -241,6 +251,12 @@ def initialize_sql():
         group.user_id = 1
         group.group_info_id = 4
         session.add(group)
+
+        # Fake openid info
+        openid = OpenID()
+        openid.openid = "blank"
+        openid.openid_url = "http://example.com"
+        openid.user_id = "0"
 
         post = Post()
         now = time.time()

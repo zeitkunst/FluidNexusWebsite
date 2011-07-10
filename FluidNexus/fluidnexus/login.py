@@ -19,10 +19,9 @@ def login(request):
     logged_in = authenticated_userid(request)
     referrer = request.url
     if (referrer == login_url):
-        referrer = '/blog' # never use the login form itself as came_from
+        referrer = '/' # never use the login form itself as came_from
     
     came_from = request.params.get('came_from', referrer)
-    message = ''
     login = ''
     password = ''
 
@@ -32,13 +31,13 @@ def login(request):
         password = request.params['password']
 
         if (User.checkPassword(login, password)):
+            request.session["username"] = login
             headers = remember(request, User.getID(login))
             return HTTPFound(location = came_from, headers = headers)
 
-        message = 'Failed login'
+        request.session.flash('Failed login')
 
-    return dict(message = message,
-                url = request.application_url + "/login",
+    return dict(url = request.application_url + "/login",
                 came_from = came_from,
                 login = login,
                 title = "Fluid Nexus login",
@@ -49,5 +48,5 @@ def login(request):
 @view_config(route_name = "logout")
 def logout(request):
     headers = forget(request)
-    return HTTPFound(location = route_url('view_blog', request),
+    return HTTPFound(location = route_url('home', request),
                      headers = headers)

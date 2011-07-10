@@ -186,6 +186,11 @@ ul#navigation a:hover {
 
 }
 
+/* flass messages */
+.flash_message {
+    color: #EB302D;
+}
+
 /* formalchemy error messages */
 .ui-state-error {
     color: #EB302D;

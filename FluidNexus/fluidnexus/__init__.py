@@ -38,8 +38,10 @@ def main(global_config, **settings):
     # USERS/LOGIN
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
+    config.add_route('register_user', "/register")
     config.add_route("edit_users", "/admin/users")
     config.add_route("edit_user", "/admin/users/edit/{user_id}")
+    config.add_route("view_user", "/users/{user_id}")
 
     # BLOG POSTS
     config.add_route("view_blog", "/blog")

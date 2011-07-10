@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+        <div class = "row">
+            <div class = "pre_1 col_10 last">
+		<div id="message" tal:condition="request.session.peek_flash()">
+			<p tal:repeat="message request.session.pop_flash()">
+ 				${message}
+			</p>
+		</div>
+                <div class="login_message">
+                  <b>Login using your Google ID</b><br/>
+                  <span tal:replace="message"/>
+                </div>
+                <div class="login">
+                    <form action="/do_openid" method="post">
+                        <input type="hidden" name="openid" value="https://www.google.com/accounts/o8/id" />
+                        <label for="login">Google ID: </label><input type="text" name="login" value="${login}"/><br/>
+                        <input type="submit" name="submitted" value="Log In"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </tal:block>
+</html>
+

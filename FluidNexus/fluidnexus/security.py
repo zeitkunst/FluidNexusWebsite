@@ -15,7 +15,7 @@ def groupfinder(userid, request):
     if (user is not None):
         groups = user.groups
         for group in groups:
-            groupNames.append("group:" + group.group_info.name)
+            groupNames.append("group:" + group.group_info.group_name)
 
     return groupNames
 
