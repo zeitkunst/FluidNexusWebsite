@@ -15,7 +15,7 @@ from fluidnexus.models import DBSession, User
 
 _ = TranslationStringFactory('fluidnexus')
 
-@view_config(route_name = "login", renderer = "templates/login.pt")
+@view_config(route_name = "login", renderer = "../templates/login.pt")
 def login(request):
     login_url = route_url('login', request)
     logged_in = authenticated_userid(request)

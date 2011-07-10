@@ -24,8 +24,6 @@ def main(global_config, **settings):
                          root_factory='fluidnexus.models.RootFactory',
                          authentication_policy = authn_policy,
                          authorization_policy=authz_policy)
-    config.add_subscriber('fluidnexus.subscribers.add_base_template',
-                          'pyramid.events.BeforeRender')
     config.include("pyramid_formalchemy")
     config.include("fa.jquery")
     config.add_static_view('static', 'fluidnexus:static')
@@ -58,7 +56,13 @@ def main(global_config, **settings):
     config.add_route("edit_page", "/admin/pages/edit/{page_id}")
     config.add_route("view_page", "/{page_location}")
 
-    config.add_view('fluidnexus.views.forbidden',
+    # NEXUS
+    config.add_route("nexus_messages", "/nexus")
+
+    # API
+    #
+
+    config.add_view('fluidnexus.views.views.forbidden',
                     context='pyramid.exceptions.Forbidden')
     config.formalchemy_admin('/admin', package="fluidnexus", view="fa.jquery.pyramid.ModelView", factory=FormAlchemyRootFactory)
     config.scan()

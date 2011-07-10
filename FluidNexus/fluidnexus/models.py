@@ -1,4 +1,4 @@
-import time
+import hashlib, time
 
 import textile
 
@@ -9,6 +9,8 @@ from sqlalchemy import Integer
 from sqlalchemy import Unicode
 from sqlalchemy import Float
 from sqlalchemy import ForeignKey
+from sqlalchemy import String
+from sqlalchemy import Boolean
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
@@ -222,6 +224,21 @@ class Comment(Base):
 
         return "<Comment '%s'>" % self.content
 
+class NexusMessage(Base):
+    __tablename__ = "nexus_messages"
+
+    id = Column('id', Integer, primary_key=True)
+    message_type = Column('type', Integer, nullable = False, default = 0)
+    title = Column('title', String, nullable = False)
+    content = Column('content', String, nullable = False)
+    message_hash = Column('hash', String(length = 64), nullable = False, unique = True) 
+    time = Column('time', Float, default = float(0.0))
+    attachment_path = Column('attachment_path', String, default = "")
+    attachment_original_filename = Column('attachment_original_filename',       String, default = "")
+    user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
+
+    user = relationship(User, backref=backref('nexus_messages', order_by=id))
+
 def initialize_sql():
     try:
         session = DBSession()
@@ -303,6 +320,15 @@ def initialize_sql():
         page.location = "concept"
         page.user_id = 1
         session.add(page)
+
+        message = NexusMessage()
+        now = time.time()
+        message.title = "First Nexus message"
+        message.content = "Nexus message content"
+        message.time = now
+        message.user_id = 1
+        message.message_hash = hashlib.sha256(message.title + message.content).hexdigest()
+        session.add(message)
 
         transaction.commit()
     except IntegrityError:

@@ -3,7 +3,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); images_static_url request.static_url('fluidnexus:static/images')">
+    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); images_static_url request.static_url('fluidnexus:static/images'); logged_in request.logged_in">
 <head>
     <title>${title}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>

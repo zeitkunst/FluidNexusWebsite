@@ -3,7 +3,6 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.i18n import TranslationStringFactory
-from pyramid.renderers import get_renderer
 from pyramid.security import authenticated_userid
 from pyramid.security import remember
 from pyramid.url import route_url
@@ -25,12 +24,11 @@ _ = TranslationStringFactory('fluidnexus')
 save_name = _("Save")
 delete_name = _("Delete")
 
-@view_config(route_name = "home", renderer = "templates/home.pt")
+@view_config(route_name = "home", renderer = "../templates/home.pt")
 def home(request):
-    logged_in = authenticated_userid(request)
-    return dict(title = "Fluid Nexus", logged_in = logged_in)
+    return dict(title = "Fluid Nexus")
 
-@view_config(route_name = "view_blog", renderer = "templates/blog.pt")
+@view_config(route_name = "view_blog", renderer = "../templates/blog.pt")
 def view_blog(request):
     session = DBSession()
     posts = session.query(Post).join(User).order_by(desc(Post.modified_time)).all()
@@ -38,7 +36,6 @@ def view_blog(request):
     # TODO
     # horribly inefficient; probably a much better way of doing things, perhaps in the template itself?
     modifiedPosts = []
-    logged_in = authenticated_userid(request)
     for post in posts:
         # TODO
         # move these to classmethod
@@ -46,12 +43,11 @@ def view_blog(request):
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
         modifiedPosts.append(post)
 
-    return dict(title = _("Fluid Nexus Blog posts"), posts = modifiedPosts, logged_in = logged_in)
+    return dict(title = _("Fluid Nexus Blog posts"), posts = modifiedPosts)
 
-@view_config(route_name = "view_blog_post", renderer = "templates/blog_post.pt")
+@view_config(route_name = "view_blog_post", renderer = "../templates/blog_post.pt")
 def view_blog_post(request):
     session = DBSession()
-    logged_in = authenticated_userid(request)
     matchdict = request.matchdict
     post = session.query(Post).filter(Post.id == matchdict["post_id"]).one()
     user = session.query(User).filter(User.id == post.user_id).one()
@@ -86,12 +82,11 @@ def view_blog_post(request):
 
     comment_form = fs.render()
 
-    return dict(title = post.title + _(" || Fluid Nexus Blog Post"), post = post, logged_in = logged_in, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
+    return dict(title = post.title + _(" || Fluid Nexus Blog Post"), post = post, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
 
-@view_config(route_name = "edit_users", renderer = "templates/edit_users.pt", permission = "admin")
+@view_config(route_name = "edit_users", renderer = "../templates/edit_users.pt", permission = "admin")
 def edit_users(request):
     session = DBSession()
-    logged_in = authenticated_userid(request)
     users = session.query(User).order_by(User.id).all()
 
     modifiedUsers = []
@@ -99,13 +94,12 @@ def edit_users(request):
         user.edit_url = route_url("edit_user", request, user_id = user.id)
         modifiedUsers.append(user)
 
-    return dict(users = modifiedUsers, title = _("Edit users"), logged_in = logged_in)
+    return dict(users = modifiedUsers, title = _("Edit users"))
 
-@view_config(route_name = "edit_user", renderer = "templates/edit_user.pt", permission = "admin")
+@view_config(route_name = "edit_user", renderer = "../templates/edit_user.pt", permission = "admin")
 def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
-    logged_in = authenticated_userid(request)
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
 
     fs = UserFieldSet().bind(user, session = session, data = request.POST or None)
@@ -117,15 +111,14 @@ def edit_user(request):
             return HTTPFound(location = route_url("edit_users", request))
 
     form = fs.render()
-    return dict(form = form, title = _("Edit") + " " + user.username, logged_in = logged_in)
+    return dict(form = form, title = _("Edit") + " " + user.username)
 
-@view_config(route_name = "register_user", renderer = "templates/register_user.pt")
+@view_config(route_name = "register_user", renderer = "../templates/register_user.pt")
 def register_user(request):
     session = DBSession()
     matchdict = request.matchdict
-    logged_in = authenticated_userid(request)
 
-    if (logged_in):
+    if (request.logged_in):
         request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
         return HTTPFound(location = route_url("home", request))
 
@@ -161,15 +154,14 @@ def register_user(request):
 
     fs = RegisterUserFieldSet().bind(User, session = session)
     form = fs.render()
-    return dict(form = form, title = _("Register new user"), logged_in = logged_in)
+    return dict(form = form, title = _("Register new user"))
 
-@view_config(route_name = "register_user_openid", renderer = "templates/register_user.pt")
+@view_config(route_name = "register_user_openid", renderer = "../templates/register_user.pt")
 def register_user_openid(request):
     session = DBSession()
     matchdict = request.matchdict
-    logged_in = authenticated_userid(request)
 
-    if (logged_in):
+    if (request.logged_in):
         request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
         return HTTPFound(location = route_url("home", request))
 
@@ -208,20 +200,19 @@ def register_user_openid(request):
             return HTTPFound(location = route_url("home", request), headers = headers)
 
     form = fs.render()
-    return dict(form = form, title = _("Register new user"), logged_in = logged_in)
+    return dict(form = form, title = _("Register new user"))
 
 
-@view_config(route_name = "view_user", renderer = "templates/view_user.pt")
+@view_config(route_name = "view_user", renderer = "../templates/view_user.pt")
 def view_user(request):
     session = DBSession()
     matchdict = request.matchdict
-    logged_in = authenticated_userid(request)
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
 
-    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username, logged_in = logged_in)
+    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username)
 
 
-@view_config(route_name = "edit_blog", renderer = "templates/edit_blog.pt", permission = "edit_blog")
+@view_config(route_name = "edit_blog", renderer = "../templates/edit_blog.pt", permission = "edit_blog")
 def edit_blog(request):
     session = DBSession()
     posts = session.query(Post).join(User).order_by(desc(Post.modified_time)).all()
@@ -241,7 +232,7 @@ def edit_blog(request):
     #form = g.render()
     return dict(posts = modifiedPosts, new_blog_post_url = new_blog_post_url)
 
-@view_config(route_name = "new_blog_post", renderer = "templates/new_blog_post.pt", permission = "edit_blog")
+@view_config(route_name = "new_blog_post", renderer = "../templates/new_blog_post.pt", permission = "edit_blog")
 def new_blog_post(request):
     session = DBSession()
     print authenticated_userid(request)
@@ -265,7 +256,7 @@ def new_blog_post(request):
     form = fs.render()
     return dict(form = form, new_blog_post_url = new_blog_post_url)
 
-@view_config(route_name = "edit_blog_post", renderer = "templates/edit_blog_post.pt", permission = "edit_blog")
+@view_config(route_name = "edit_blog_post", renderer = "../templates/edit_blog_post.pt", permission = "edit_blog")
 def edit_blog_post(request):
     session = DBSession()
     matchdict = request.matchdict
@@ -294,7 +285,7 @@ def edit_blog_post(request):
     form = fs.render()
     return dict(form = form, title = post.title, edit_blog_post_url = edit_blog_post_url)
 
-@view_config(route_name = "view_page", renderer = "templates/view_page.pt")
+@view_config(route_name = "view_page", renderer = "../templates/view_page.pt")
 def view_page(request):
     """View a given page."""
     session = DBSession()
@@ -307,14 +298,11 @@ def view_page(request):
 
     return dict(title = page.title, content = textile.textile(page.content))
 
-@view_config(route_name = "edit_pages", renderer="templates/edit_pages.pt", permission = "edit_pages")
+@view_config(route_name = "edit_pages", renderer="../templates/edit_pages.pt", permission = "edit_pages")
 def edit_pages(request):
     """List pages to edit."""
     session = DBSession()
-    main = get_renderer('templates/admin.pt').implementation()
     pages = session.query(Page).join(User).order_by(desc(Page.modified_time)).all()
-    logged_in = authenticated_userid(request)
-
     modifiedPages = []
     for page in pages:
         page.formatted_time = time.ctime(page.modified_time)
@@ -325,14 +313,12 @@ def edit_pages(request):
     # TODO
     # Figure out how to delete using checkboxes
     new_page_url = route_url("new_page", request)
-    return dict(main = main, title = "Edit pages", new_page_url = new_page_url, pages = modifiedPages, logged_in = logged_in)
+    return dict(title = "Edit pages", new_page_url = new_page_url, pages = modifiedPages)
 
-@view_config(route_name = "edit_page", renderer = "templates/edit_page.pt", permission = "edit_pages")
+@view_config(route_name = "edit_page", renderer = "../templates/edit_page.pt", permission = "edit_pages")
 def edit_page(request):
     """Edit a given page."""
     session = DBSession()
-    logged_in = authenticated_userid(request)
-    main = get_renderer('templates/admin.pt').implementation()
     matchdict = request.matchdict
     page = session.query(Page).join(User).filter(Page.id == matchdict["page_id"]).order_by(desc(Page.modified_time)).one()
 
@@ -361,13 +347,11 @@ def edit_page(request):
 
     # TODO
     # Figure out how to delete using checkboxes
-    return dict(main = main, title = "Edit '%s'" % page.title, save_name = save_name, delete_name = delete_name, form = form, logged_in = logged_in)
+    return dict(title = "Edit '%s'" % page.title, save_name = save_name, delete_name = delete_name, form = form)
 
-@view_config(route_name = "new_page", renderer = "templates/new_page.pt", permission="edit_pages")
+@view_config(route_name = "new_page", renderer = "../templates/new_page.pt", permission="edit_pages")
 def new_page(request):
     session = DBSession()
-    main = get_renderer('templates/admin.pt').implementation()
-    logged_in = authenticated_userid(request)
 
     if 'submitted' in request.params:
         page = Page()
@@ -387,7 +371,7 @@ def new_page(request):
     fs = FieldSet(Page, session = session)
     fs.configure(options=[fs.content.textarea(size=(45, 10))], exclude = [fs["modified_time"], fs["user"], fs["created_time"]])
     form = fs.render()
-    return dict(main = main, title = "Create new Fluid Nexus page", save_name = save_name, logged_in = logged_in, form = form)
+    return dict(title = "Create new Fluid Nexus page", save_name = save_name, form = form)
 
 def forbidden(request):
     """We get here if somebody tries to access a resource they do not have access to."""
@@ -395,15 +379,14 @@ def forbidden(request):
     request.session.flash(_("You do not have access to the requested resource.  Either login using an account that does have access, or contact the administrators of the site."))
     return HTTPFound(location = route_url("home", request))
 
-@view_config(route_name = "openid", renderer = "templates/openid.pt")
+@view_config(route_name = "openid", renderer = "../templates/openid.pt")
 def openid(request):
-    logged_in = authenticated_userid(request)
 
-    if (logged_in):
+    if (request.logged_in):
         request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
         return HTTPFound(location = route_url("home", request))
     
-    return dict(title = "OpenID login", logged_in = logged_in, message = "", login = "")
+    return dict(title = "OpenID login", message = "", login = "")
 
 # Callback for openid library
 def remember_me(context, request, result):
