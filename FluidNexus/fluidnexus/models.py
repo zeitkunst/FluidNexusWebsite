@@ -232,6 +232,7 @@ class NexusMessage(Base):
     title = Column('title', String, nullable = False)
     content = Column('content', String, nullable = False)
     message_hash = Column('hash', String(length = 64), nullable = False, unique = True) 
+    message_type = Column('type', Integer, nullable = False) 
     created_time = Column('time', Float, default = float(0.0))
     attachment_path = Column('attachment_path', String, default = "")
     attachment_original_filename = Column('attachment_original_filename',       String, default = "")
