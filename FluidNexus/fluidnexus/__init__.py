@@ -58,8 +58,7 @@ def main(global_config, **settings):
     config.add_route("edit_page", "/admin/pages/edit/{page_id}")
     config.add_route("view_page", "/{page_location}")
 
-    config.add_view('fluidnexus.login.login',
-                    renderer='fluidnexus:templates/login.pt',
+    config.add_view('fluidnexus.views.forbidden',
                     context='pyramid.exceptions.Forbidden')
     config.formalchemy_admin('/admin', package="fluidnexus", view="fa.jquery.pyramid.ModelView", factory=FormAlchemyRootFactory)
     config.scan()

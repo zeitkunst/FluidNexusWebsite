@@ -296,11 +296,11 @@ def initialize_sql():
 
         page = Page()
         now = time.time()
-        page.title = "About"
-        page.content = "About the project"
+        page.title = "Concept"
+        page.content = "Regarding the project"
         page.created_time = now
         page.modified_time = now
-        page.location = "about"
+        page.location = "concept"
         page.user_id = 1
         session.add(page)
 

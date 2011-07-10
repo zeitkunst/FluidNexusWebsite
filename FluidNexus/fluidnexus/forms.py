@@ -2,7 +2,7 @@ from formalchemy import forms, tables, types, Field, FieldSet, Grid, validators
 
 from pyramid.i18n import TranslationStringFactory
 
-from fluidnexus.models import User
+from fluidnexus.models import Comment, User
 
 _ = TranslationStringFactory('fluidnexus_forms')
 
@@ -66,3 +66,18 @@ class UserFieldSet(FieldSet):
                self.homepage.label(_("Homepage (please include 'http://')"))
               ]
         self.configure(include = inc)
+
+class CommentFieldSet(FieldSet):
+    """Used to present a basic comment form."""
+
+    def __init__(self):
+        FieldSet.__init__(self, Comment)
+
+        options = [self.content.textarea(size = (45,20))]
+        inc = [self.name.label(_("Name")),
+               self.email.label(_("E-mail (will not be shared)")),
+               self.homepage.label(_("Homepage")),
+               self.content.label(_("Comment")).required()
+              ]
+        self.configure(include = inc, options = options)
+

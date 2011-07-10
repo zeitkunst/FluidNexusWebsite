@@ -12,7 +12,6 @@ from pyramid.url import route_url
 from pyramid.view import view_config
 
 from fluidnexus.models import DBSession, User
-from fluidnexus.security import USERS
 
 _ = TranslationStringFactory('fluidnexus')
 

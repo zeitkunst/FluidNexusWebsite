@@ -1,10 +1,18 @@
-<div metal:use-macro="main.macros['main']">
-    <div class="pages" metal:fill-slot="body">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+        <div class = "row">
+            <div class = "pre_2 col_8 last">
 	<h1><a href="${new_page_url}">Create new page</a></h1>
 	<h1>Pages to edit</h1>
         <div class="page" tal:repeat="page pages">
 		<p><a href="${page.page_url}">${page.title}</a></p>
 	</div>
-    </div>
-</div>
+    	    </div>
+	</div>
+    </tal:block>
+</html>
 

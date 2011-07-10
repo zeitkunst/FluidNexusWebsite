@@ -98,12 +98,28 @@ body {
     font-size: 1.1em;
 }
 
-h1 {
+h1, h2, h3 {
     font-weight: bold;
+    font-family: "Delicious", "DejaWeb", sans-serif;
 }
 
 nav, header, section, article {
     display: block;
+}
+
+a {
+    color: #EB302D;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #EB302D;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #84302d;
+    text-decoration: none;
 }
 
 #main_header {

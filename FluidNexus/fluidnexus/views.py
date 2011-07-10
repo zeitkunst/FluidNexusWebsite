@@ -16,7 +16,7 @@ import bcrypt
 
 from fluidnexus.models import DBSession
 from fluidnexus.models import Post, User, Group, Comment, Page, OpenID
-from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet
+from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
 
 import time
 
@@ -65,11 +65,9 @@ def view_blog_post(request):
     # * add in field that asks for user to type word to submit form
     if 'submitted' in request.params:
         comment = Comment()
-        fs = FieldSet(Comment, session = session, data=request.params)
-        fs.configure(options = [fs.content.textarea(size=(45, 10)), fs.created_time.hidden(), fs.post_id.hidden()], exclude = [fs.post])
+        fs = CommentFieldSet().bind(Comment, session = session, data = request.POST or None)
         valid = fs.validate()
         if valid:
-            fs = None
             comment.name = fs.name.value
             comment.email = fs.email.value
             comment.homepage = fs.homepage.value
@@ -78,19 +76,21 @@ def view_blog_post(request):
             comment.created_time = now
             comment.post_id = post.id
             session.add(comment)
+            fs = None
 
     comments = session.query(Comment).filter(Comment.post_id == post.id).order_by(desc(Comment.created_time))
 
     if (fs is None):
-        fs = FieldSet(Comment, session = session)
-        fs.configure(options = [fs.email.label(fs.email.label() + _(" (will not be shared)")), fs.content.textarea(size=(45, 10)), fs.created_time.hidden(), fs.post_id.hidden()], exclude = [fs.post])
+        fs = CommentFieldSet().bind(Comment, session = session)
+
     comment_form = fs.render()
 
     return dict(title = post.title + _(" || Fluid Nexus Blog Post"), post = post, logged_in = logged_in, comments = comments, comment_form = comment_form, post_comment_url = post_comment_url) 
 
-@view_config(route_name = "edit_users", renderer = "templates/edit_users.pt")
+@view_config(route_name = "edit_users", renderer = "templates/edit_users.pt", permission = "admin")
 def edit_users(request):
     session = DBSession()
+    logged_in = authenticated_userid(request)
     users = session.query(User).order_by(User.id).all()
 
     modifiedUsers = []
@@ -98,9 +98,9 @@ def edit_users(request):
         user.edit_url = route_url("edit_user", request, user_id = user.id)
         modifiedUsers.append(user)
 
-    return dict(users = modifiedUsers)
+    return dict(users = modifiedUsers, title = _("Edit users"), logged_in = logged_in)
 
-@view_config(route_name = "edit_user", renderer = "templates/edit_user.pt")
+@view_config(route_name = "edit_user", renderer = "templates/edit_user.pt", permission = "admin")
 def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
@@ -387,6 +387,12 @@ def new_page(request):
     fs.configure(options=[fs.content.textarea(size=(45, 10))], exclude = [fs["modified_time"], fs["user"], fs["created_time"]])
     form = fs.render()
     return dict(main = main, title = "Create new Fluid Nexus page", save_name = save_name, logged_in = logged_in, form = form)
+
+def forbidden(request):
+    """We get here if somebody tries to access a resource they do not have access to."""
+    print "GOT HERE!!!"
+    request.session.flash(_("You do not have access to the requested resource.  Either login using an account that does have access, or contact the administrators of the site."))
+    return HTTPFound(location = route_url("home", request))
 
 @view_config(route_name = "openid", renderer = "templates/openid.pt")
 def openid(request):
