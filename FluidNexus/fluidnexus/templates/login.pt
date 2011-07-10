@@ -16,7 +16,8 @@
                         <input type="submit" name="submitted" value="Log In"/>
                     </form>
                 </div>
-                <h2><a href="/register">Register for a new account</a></h2>
+                <h3><a href="/register">Register for a new account</a></h3>
+                <h3><a href="/openid">Login using your Google Account</a></h3>
             </div>
         </div>
     </tal:block>

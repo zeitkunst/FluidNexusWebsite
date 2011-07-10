@@ -32,6 +32,7 @@ def main(global_config, **settings):
 
     config.add_route('home', '/')
     config.add_route('openid', '/openid')
+    config.add_route("check_openid", pattern = "/check_openid")
     config.add_route("verify_openid", pattern = "/do_openid", view = "pyramid_openid.verify_openid")
     #config.add_view(route_name = "verify_openid", view = "pyramid_openid.verify_openid")
 
@@ -39,6 +40,7 @@ def main(global_config, **settings):
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
     config.add_route('register_user', "/register")
+    config.add_route('register_user_openid', "/register_openid")
     config.add_route("edit_users", "/admin/users")
     config.add_route("edit_user", "/admin/users/edit/{user_id}")
     config.add_route("view_user", "/users/{user_id}")

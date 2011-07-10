@@ -4,6 +4,7 @@ import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 
 from pyramid.httpexceptions import HTTPFound
+from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.security import remember
 from pyramid.security import forget
@@ -13,10 +14,17 @@ from pyramid.view import view_config
 from fluidnexus.models import DBSession, User
 from fluidnexus.security import USERS
 
+_ = TranslationStringFactory('fluidnexus')
+
 @view_config(route_name = "login", renderer = "templates/login.pt")
 def login(request):
     login_url = route_url('login', request)
     logged_in = authenticated_userid(request)
+
+    if (logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
+        return HTTPFound(location = route_url("home", request))
+
     referrer = request.url
     if (referrer == login_url):
         referrer = '/' # never use the login form itself as came_from

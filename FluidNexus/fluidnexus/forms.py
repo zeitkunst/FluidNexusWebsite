@@ -10,8 +10,27 @@ def password_match(value, field):
     if field.parent.password1.value != value:
         raise validators.ValidationError(_("Passwords do not match"))
 
+def username_different(value, field):
+    if (field.parent.model.getByUsername(value) is not None):
+        raise validators.ValidationError(_("Your username cannot be the same as one that already exists in the database."))
+
+class OpenIDUserFieldSet(FieldSet):
+    """Used to register a user with their openID."""
+
+    def __init__(self):
+        """Pre-configuration"""
+        FieldSet.__init__(self, User)
+
+        inc = [self.username.label(_("Username (can be the same as your openid)")).validate(username_different),
+               self.given_name.label(_("* Given name")),
+               self.surname.label(_("* Surname")),
+               self.homepage.label(_("Homepage (please include 'http://')"))
+              ]
+        self.configure(include = inc)
+
+
 class RegisterUserFieldSet(FieldSet):
-    """Used to edit users."""
+    """Used to register users."""
 
     def __init__(self, user = None):
         """Pre-configuration"""

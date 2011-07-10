@@ -16,6 +16,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm.exc import NoResultFound
 
 from pyramid.security import Allow
 from pyramid.security import Everyone
@@ -65,6 +66,10 @@ class User(Base):
         return DBSession.query(cls).filter(cls.username == username).first()
 
     @classmethod
+    def getByID(cls, user_id):
+        return DBSession.query(cls).filter(cls.id == user_id).first()
+
+    @classmethod
     def checkPassword(cls, username, password):
         user = cls.getByUsername(username)
         if not user:
@@ -95,14 +100,27 @@ class OpenID(Base):
     __plural__ = 'OpenIDs'
     __tablename__ = "openids"
     id = Column(Integer, primary_key = True)
-    openid = Column(Unicode, nullable = False)
-    openid_url = Column(Unicode)
+    openid_url = Column(Unicode, nullable = False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
     user = relationship(User, backref=backref('openids', order_by=id))
 
+    def __init__(self, openid_url = "", user_id = -1):
+        self.openid_url = openid_url
+        self.user_id = user_id
+
     def __repr__(self):
         return "<OpenID '%s'>" % self.openid_url
+
+    @classmethod
+    def checkOpenIDURL(cls, openid_url):
+        print "HAS OPENID URL:", openid_url
+        try:
+            user_id = DBSession.query(cls.user_id).filter(cls.openid_url == openid_url).one()[0]
+            user = User.getByID(user_id)
+            return user
+        except NoResultFound, e:
+            return False
 
 class GroupInfo(Base):
     __label__ = "GroupInfo"

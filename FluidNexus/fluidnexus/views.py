@@ -15,8 +15,8 @@ import textile
 import bcrypt
 
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, GroupInfo, Comment, Page
-from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet
+from fluidnexus.models import Post, User, Group, Comment, Page, OpenID
+from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet
 
 import time
 
@@ -153,22 +153,60 @@ def register_user(request):
             session.add(user)
             session.flush()
 
-            # Add user to nexus group
-            # TODO
-            # move to class method?  or instance method?
-            #group_info_id = session.query(GroupInfo).filter(GroupInfo.description == "nexus").one()[0]
-            #user_id = User.getID(fs.username.value)
-            #group = Group()
-            #group.group_info_id = group_info_id
-            #group.user_id = user_id
-            #session.add(group)
-
             User.addToGroup(fs.username.value, "nexus")
             request.session["username"] = fs.username.value
             headers = remember(request, User.getID(fs.username.value))
             return HTTPFound(location = came_from, headers = headers)
 
     fs = RegisterUserFieldSet().bind(User, session = session)
+    form = fs.render()
+    return dict(form = form, title = _("Register new user"), logged_in = logged_in)
+
+@view_config(route_name = "register_user_openid", renderer = "templates/register_user.pt")
+def register_user_openid(request):
+    session = DBSession()
+    matchdict = request.matchdict
+    logged_in = authenticated_userid(request)
+
+    if (logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
+        return HTTPFound(location = route_url("home", request))
+
+    fs = OpenIDUserFieldSet().bind(User, session = session)
+    fs.append(Field("username", value = request.params.get("openid_url", "")).label(_("Username (can be the same as your OpenID)")))
+    fs.append(Field("openid_url", value = request.params.get("openid_url", "")).hidden())
+
+    if 'submitted' in request.params:
+        fs = OpenIDUserFieldSet().bind(User, session = session, data = request.params or None)
+        valid = fs.validate()
+        if valid:
+            user = User()
+
+            # TODO
+            # Shouldn't have to do this, but doing it for simplicity now
+            # Should validate that the username is unique
+            user.username = fs.username.value
+            user.given_name = fs.given_name.value
+            user.surname = fs.surname.value
+            user.homepage = fs.homepage.value
+            now = time.time()
+            user.created_time = now
+            user.password = bcrypt.hashpw(str(int(now)), bcrypt.gensalt())
+            session.add(user)
+            session.flush()
+
+            User.addToGroup(fs.username.value, "nexus")
+            request.session["username"] = fs.username.value
+            user_id = User.getID(fs.username.value)
+
+            openid = OpenID(openid_url = request.params.get("openid_url", ""), user_id = user_id)
+            session.add(openid)
+
+            headers = remember(request, user_id)
+            request.session["username"] = fs.username.value
+            request.session.flash(_("You have successfully registered!"))
+            return HTTPFound(location = route_url("home", request), headers = headers)
+
     form = fs.render()
     return dict(form = form, title = _("Register new user"), logged_in = logged_in)
 
@@ -354,10 +392,22 @@ def new_page(request):
 @view_config(route_name = "openid", renderer = "templates/openid.pt")
 def openid(request):
     logged_in = authenticated_userid(request)
+
+    if (logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
+        return HTTPFound(location = route_url("home", request))
+    
     return dict(title = "OpenID login", logged_in = logged_in, message = "", login = "")
 
 # Callback for openid library
 def remember_me(context, request, result):
-    print result
-
-    return HTTPFound(location = route_url("openid", request))
+    openid_url = result["identity_url"]
+    
+    user = OpenID.checkOpenIDURL(openid_url)
+    if (user):
+        request.session["username"] = user.username
+        headers = remember(request, user.id)
+        return HTTPFound(location = route_url("home", request), headers = headers)
+    else:
+        request.session.flash(_("You now need to register after validating your OpenID"))
+        return HTTPFound(location = route_url("register_user_openid", request, _query = {"openid_url": openid_url}))
