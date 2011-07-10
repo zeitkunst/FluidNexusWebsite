@@ -25,6 +25,7 @@ requires = [
     'pyramid-beaker',
     'pycryptopp',
     'pyramid-openid',
+    'oauth2',
     ]
 
 if sys.version_info[:3] < (2,5,0):

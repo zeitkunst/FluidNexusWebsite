@@ -34,6 +34,7 @@ class RootFactory(object):
     __acl__ = [(Allow, Everyone, 'view'),
                (Allow, 'group:admin', 'admin'),
                (Allow, 'group:pages', 'edit_pages'),
+               (Allow, 'group:nexus', 'post_nexus'),
                 (Allow, 'group:blog', 'edit_blog')]
 
     def __init__(self, request):
@@ -116,7 +117,6 @@ class OpenID(Base):
 
     @classmethod
     def checkOpenIDURL(cls, openid_url):
-        print "HAS OPENID URL:", openid_url
         try:
             user_id = DBSession.query(cls.user_id).filter(cls.openid_url == openid_url).one()[0]
             user = User.getByID(user_id)
@@ -232,12 +232,65 @@ class NexusMessage(Base):
     title = Column('title', String, nullable = False)
     content = Column('content', String, nullable = False)
     message_hash = Column('hash', String(length = 64), nullable = False, unique = True) 
-    time = Column('time', Float, default = float(0.0))
+    created_time = Column('time', Float, default = float(0.0))
     attachment_path = Column('attachment_path', String, default = "")
     attachment_original_filename = Column('attachment_original_filename',       String, default = "")
     user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
     user = relationship(User, backref=backref('nexus_messages', order_by=id))
+
+    def __repr__(self):
+        return "<NexusMessage '%s'>" % self.message_hash
+
+    @classmethod
+    def getByMessageHash(cls, message_hash):
+        return DBSession.query(cls).filter(cls.message_hash == message_hash).first()
+
+    def getISOTime(self):
+        """Format the time for display."""
+        timetuple = time.gmtime(self.created_time)
+        return time.strftime("%Y-%m-%dT%H:%M:%S", timetuple)
+
+    def getFormattedTime(self):
+        return time.ctime(self.created_time)
+
+    def getFormattedContent(self):
+        return textile.textile(self.content)
+
+class ConsumerKeySecret(Base):
+    __label__ = 'ConsumerKeySecret'
+    __plural__ = 'ConsumerKeySecrets'
+    __tablename__ = "consumer_key_secrets"
+    id = Column(Integer, primary_key = True)
+    consumer_key = Column(Unicode, nullable = False)
+    consumer_secret = Column(Unicode, nullable = False)
+    status = Column(Integer, nullable = False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable = False, unique = True)
+
+    user = relationship(User, backref=backref('consumer_key_secrets', order_by=id))
+
+    NORMAL = 0
+    THROTTLED = 1
+    BLACKLISTED = 2
+
+    def __repr__(self):
+        return "<ConsumerKeySecret '%s'>" % self.consumer_key
+
+    @classmethod
+    def getByUserID(cls, user_id):
+        try:
+            return DBSession.query(cls).filter(cls.user_id == user_id).one()
+        except NoResultFound, e:
+            return False
+
+    def setNormalStatus(self):
+        self.status = self.NORMAL
+
+    def setThrottledStatus(self):
+        self.status = self.THROTTLED
+
+    def setBlacklistedStatus(self):
+        self.status = self.BLACKLISTED
 
 def initialize_sql():
     try:
@@ -325,7 +378,7 @@ def initialize_sql():
         now = time.time()
         message.title = "First Nexus message"
         message.content = "Nexus message content"
-        message.time = now
+        message.created_time = now
         message.user_id = 1
         message.message_hash = hashlib.sha256(message.title + message.content).hexdigest()
         session.add(message)

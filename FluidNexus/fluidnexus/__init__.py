@@ -54,13 +54,17 @@ def main(global_config, **settings):
     config.add_route("new_page", "/admin/page/new")
     config.add_route("edit_pages", "/admin/pages")
     config.add_route("edit_page", "/admin/pages/edit/{page_id}")
-    config.add_route("view_page", "/{page_location}")
+    #config.add_route("view_page", "/{page_location}")
 
     # NEXUS
-    config.add_route("nexus_messages", "/nexus")
+    config.add_route("view_nexus_messages", "/nexus")
 
     # API
-    #
+    config.add_route("api_request_key", "/api/01/request_key")
+    config.add_route("api_nexus_messages_json", "/api/01/nexus/messages.json")
+    config.add_route("api_nexus_messages_hash_json", "/api/01/nexus/messages/{hash}.json")
+    config.add_route("api_nexus_hashes_json", "/api/01/nexus/hashes.json")
+    config.add_route("api_nexus_hashes_hash_json", "/api/01/nexus/hashes/{hash}.json")
 
     config.add_view('fluidnexus.views.views.forbidden',
                     context='pyramid.exceptions.Forbidden')

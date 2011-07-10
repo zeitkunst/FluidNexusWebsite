@@ -19,12 +19,10 @@ fluidnexus/fainit.py
 fluidnexus/fareadme.txt
 fluidnexus/faroutes.py
 fluidnexus/forms.py
-fluidnexus/login.py
 fluidnexus/models.py
 fluidnexus/security.py
 fluidnexus/subscribers.py
 fluidnexus/tests.py
-fluidnexus/views.py
 fluidnexus/columnal/columnal-0.85/README.txt
 fluidnexus/columnal/columnal-0.85/code/demo.html
 fluidnexus/columnal/columnal-0.85/code/css/build.css
@@ -58,6 +56,7 @@ fluidnexus/static/images/FluidNexus.png
 fluidnexus/static/images/FluidNexus2.png
 fluidnexus/static/images/tagline.png
 fluidnexus/templates/admin.pt
+fluidnexus/templates/api_request_key.pt
 fluidnexus/templates/base.pt
 fluidnexus/templates/blog.pt
 fluidnexus/templates/blog_post.pt
@@ -72,6 +71,14 @@ fluidnexus/templates/login.pt
 fluidnexus/templates/mytemplate.pt
 fluidnexus/templates/new_blog_post.pt
 fluidnexus/templates/new_page.pt
+fluidnexus/templates/nexus_messages.pt
 fluidnexus/templates/openid.pt
 fluidnexus/templates/post_comments.pt
+fluidnexus/templates/register_user.pt
 fluidnexus/templates/view_page.pt
+fluidnexus/templates/view_user.pt
+fluidnexus/views/__init__.py
+fluidnexus/views/api.py
+fluidnexus/views/login.py
+fluidnexus/views/nexus.py
+fluidnexus/views/views.py
