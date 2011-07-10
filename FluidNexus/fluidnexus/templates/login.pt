@@ -1,13 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     metal:use-macro="base">
     <tal:block metal:fill-slot="content">
         <div class = "row">
             <div class = "pre_2 col_8 last">
-                <div class="login_message">
-                  <b>Login</b><br/>
-                </div>
+                <h2 i18n:translate="">Login</h2>
                 <div class="login">
                     <form action="${url}" method="post">
                         <input type="hidden" name="came_from" value="${came_from}"/>
@@ -16,8 +15,9 @@
                         <input type="submit" name="submitted" value="Log In"/>
                     </form>
                 </div>
-                <h3><a href="/register">Register for a new account</a></h3>
-                <h3><a href="/openid">Login using your Google Account</a></h3>
+                <h3><a href="/register" i18n:translate="">Register for a new account</a></h3>
+                <h3><a href="/openid" i18n:translate="">Login using your Google Account</a></h3>
+                <p i18n:translate="">You can use your Google account to login to the Fluid Nexus website instead of creating an additional account here.  We do not store any information associated with your Google Account (such as your e-mail address or your name) on the Fluid Nexus website.</p>
             </div>
         </div>
     </tal:block>

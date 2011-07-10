@@ -56,5 +56,6 @@ def login(request):
 @view_config(route_name = "logout")
 def logout(request):
     headers = forget(request)
+    request.session.flash(_("You have successfully logged out"))
     return HTTPFound(location = route_url('home', request),
                      headers = headers)

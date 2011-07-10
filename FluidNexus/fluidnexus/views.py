@@ -173,7 +173,6 @@ def register_user_openid(request):
         return HTTPFound(location = route_url("home", request))
 
     fs = OpenIDUserFieldSet().bind(User, session = session)
-    fs.append(Field("username", value = request.params.get("openid_url", "")).label(_("Username (can be the same as your OpenID)")))
     fs.append(Field("openid_url", value = request.params.get("openid_url", "")).hidden())
 
     if 'submitted' in request.params:

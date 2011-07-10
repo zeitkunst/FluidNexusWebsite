@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FluidNexus 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-07-09 21:51-0400\n"
+"POT-Creation-Date: 2011-07-10 02:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,47 +17,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: fluidnexus/forms.py:19
-msgid "* Username"
+#: fluidnexus/forms.py:11
+msgid "Passwords do not match"
 msgstr ""
 
-#: fluidnexus/forms.py:20
-msgid "* Password"
-msgstr ""
-
-#: fluidnexus/forms.py:21
-msgid "* Confirm password"
-msgstr ""
-
-#: fluidnexus/forms.py:22
-msgid "* Given name"
-msgstr ""
-
-#: fluidnexus/forms.py:23
-msgid "* Surname"
+#: fluidnexus/forms.py:15
+msgid "Your username cannot be the same as one that already exists in the database."
 msgstr ""
 
 #: fluidnexus/forms.py:24
-msgid "Homepage"
+msgid "Username (can be the same as your openid)"
 msgstr ""
 
-#: fluidnexus/views.py:23
+#: fluidnexus/forms.py:25 fluidnexus/forms.py:45 fluidnexus/forms.py:64
+msgid "* Given name"
+msgstr ""
+
+#: fluidnexus/forms.py:26 fluidnexus/forms.py:46 fluidnexus/forms.py:65
+msgid "* Surname"
+msgstr ""
+
+#: fluidnexus/forms.py:27 fluidnexus/forms.py:47 fluidnexus/forms.py:66
+msgid "Homepage (please include 'http://')"
+msgstr ""
+
+#: fluidnexus/forms.py:42 fluidnexus/forms.py:61
+msgid "Username"
+msgstr ""
+
+#: fluidnexus/forms.py:43 fluidnexus/forms.py:62
+msgid "* Password"
+msgstr ""
+
+#: fluidnexus/forms.py:44 fluidnexus/forms.py:63
+msgid "* Confirm password"
+msgstr ""
+
+#: fluidnexus/login.py:25 fluidnexus/views.py:128 fluidnexus/views.py:172
+#: fluidnexus/views.py:397
+msgid "You are already logged in and therefore cannot register for a new account."
+msgstr ""
+
+#: fluidnexus/login.py:59
+msgid "You have successfully logged out"
+msgstr ""
+
+#: fluidnexus/views.py:25
 msgid "Save"
 msgstr ""
 
-#: fluidnexus/views.py:24
+#: fluidnexus/views.py:26
 msgid "Delete"
 msgstr ""
 
-#: fluidnexus/views.py:47
+#: fluidnexus/views.py:49
 msgid "Fluid Nexus Blog posts"
 msgstr ""
 
-#: fluidnexus/views.py:84
+#: fluidnexus/views.py:86
 msgid " (will not be shared)"
 msgstr ""
 
-#: fluidnexus/views.py:87
+#: fluidnexus/views.py:89
 msgid " || Fluid Nexus Blog Post"
+msgstr ""
+
+#: fluidnexus/views.py:119
+msgid "Edit"
+msgstr ""
+
+#: fluidnexus/views.py:163 fluidnexus/views.py:211
+msgid "Register new user"
+msgstr ""
+
+#: fluidnexus/views.py:176
+msgid "Username (can be the same as your OpenID)"
+msgstr ""
+
+#: fluidnexus/views.py:207
+msgid "You have successfully registered!"
+msgstr ""
+
+#: fluidnexus/views.py:221
+msgid "Viewing "
+msgstr ""
+
+#: fluidnexus/views.py:412
+msgid "You now need to register after validating your OpenID"
+msgstr ""
+
+#: fluidnexus/templates/login.pt:9
+msgid "Login"
+msgstr ""
+
+#: fluidnexus/templates/login.pt:18
+msgid "Register for a new account"
+msgstr ""
+
+#: fluidnexus/templates/login.pt:19
+msgid "Login using your Google Account"
+msgstr ""
+
+#: fluidnexus/templates/login.pt:20
+msgid ""
+"You can use your Google account to login to the Fluid Nexus website instead "
+"of creating an additional account here. We do not store any information "
+"associated with your Google Account (such as your e-mail address or your "
+"name) on the Fluid Nexus website."
 msgstr ""
 

@@ -21,7 +21,7 @@ class OpenIDUserFieldSet(FieldSet):
         """Pre-configuration"""
         FieldSet.__init__(self, User)
 
-        inc = [self.username.label(_("Username (can be the same as your openid)")).validate(username_different),
+        inc = [self.username.label(_("Username (will be used publicly to identify you on the website)")).validate(username_different),
                self.given_name.label(_("* Given name")),
                self.surname.label(_("* Surname")),
                self.homepage.label(_("Homepage (please include 'http://')"))
