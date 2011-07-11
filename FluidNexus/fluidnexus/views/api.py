@@ -34,7 +34,7 @@ def build_request(url, method='POST'):
         'oauth_signature_method': 'HMAC-SHA1',
         'oauth_callback': 'fluidnexus://access_token/',
     }
-    consumer = oauth2.Consumer(key='key', secret='secret')
+    consumer = oauth2.Consumer(key='b9085cb942dc427c92dd', secret='1735fd5b090381dcaf57')
     params['oauth_consumer_key'] = consumer.key
     req = oauth2.Request(method=method, url=url, parameters=params)
     signature_method = oauth2.SignatureMethod_HMAC_SHA1()
@@ -116,11 +116,6 @@ def api_nexus_message_update(request):
     if ('Authorization' in request.headers):
         auth_header = {'Authorization': request.headers['Authorization']}
     
-    #req = oauth2.Request.from_request(
-    #    request.method,
-    #    request.url,
-    #    headers = auth_header,
-    #    parameters = dict([(k,v) for k,v in request.params.iteritems()]))
     consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
     token = Token.getByToken(request.params.get("oauth_token"))
     
@@ -129,12 +124,6 @@ def api_nexus_message_update(request):
         http_method = request.method, 
         http_url = request.url, 
         parameters = dict([(k, v) for k,v in request.params.iteritems()]))
-
-    print "$@(*#&)&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-
-    #if (request.logged_in != consumer.id):
-    #    request.session.flash(_("You are trying to request a token using credentials that do not belong to you."))
-    #    return HTTPForbidden(location = route_url("home", request))
 
     try:
         oauth_server.verify_request(req, consumer, token)
@@ -184,8 +173,8 @@ def api_nexus_message_update(request):
         m.created_time = message["message_time"]
         m.attachment_path = message.get("message_attachment_path", "")
         m.attachment_original_filename = message.get("message_attachment_original_filename", "")
-        m.user_id = 1
-
+        m.user_id = consumer.user.id
+        session.add(m)
 
         return {"result": True}
 
@@ -301,6 +290,7 @@ def api_authorize_token(request):
     # First check that the logged in user is the holder of this token
     token = Token.getByToken(request.params.get("oauth_token"))
     consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
+
 
     if (token):
         if (token.consumer_key_secret.user.id != request.logged_in):

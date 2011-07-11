@@ -359,6 +359,7 @@ class Token(Base):
             foundToken = DBSession.query(cls).filter(cls.token == token).one()
             foundToken.key = foundToken.token
             foundToken.secret = foundToken.token_secret
+            return foundToken
         except NoResultFound, e:
             return False
 
