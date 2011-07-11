@@ -284,6 +284,24 @@ class ConsumerKeySecret(Base):
         except NoResultFound, e:
             return False
 
+    @classmethod
+    def getByConsumerID(cls, consumer_id):
+        try:
+            return DBSession.query(cls).filter(cls.id == consumer_id).one()
+        except NoResultFound, e:
+            return False
+
+
+    @classmethod
+    def getByConsumerKey(cls, consumer_key):
+        try:
+            keySecret = DBSession.query(cls).filter(cls.consumer_key == consumer_key).one()
+            keySecret.key = keySecret.consumer_key
+            keySecret.secret = keySecret.consumer_secret
+            return keySecret
+        except NoResultFound, e:
+            return False
+
     def setNormalStatus(self):
         self.status = self.NORMAL
 
@@ -292,6 +310,64 @@ class ConsumerKeySecret(Base):
 
     def setBlacklistedStatus(self):
         self.status = self.BLACKLISTED
+
+class ConsumerNonce(Base):
+    __tablename__ = "consumer_nonces"
+
+    id = Column(Integer, primary_key = True)
+    consumer_id = Column(Integer, ForeignKey('consumer_key_secrets.id'), nullable = False)
+    nonce = Column(String, nullable = False)
+    timestamp = Column(Float, nullable = False)
+
+    consumer_key_secret = relationship(ConsumerKeySecret, backref=backref('consumer_nonces', order_by=id))
+
+    def __repr__(self):
+        return "<ConsumerNonce '%s'>" % self.nonce
+
+    @classmethod
+    def getByNonce(cls, nonce):
+        try:
+            result = DBSession.query(cls).filter(cls.nonce == nonce).one()
+            return result
+        except NoResultFound, e:
+            return False
+
+class Token(Base):
+    __tablename__ = "tokens"
+
+    DISABLED = 0
+    AUTHORIZATION = 1
+    ACCESS = 2
+
+
+    id = Column(Integer, primary_key = True)
+    token_type = Column(Integer, nullable = False)
+    consumer_id = Column(Integer, ForeignKey('consumer_key_secrets.id'), nullable = False)
+    token = Column(String, nullable = False)
+    token_secret = Column(String, nullable = False)
+    callback_url = Column(String)
+    verifier = Column(String)
+
+    consumer_key_secret = relationship(ConsumerKeySecret, backref=backref('tokens', order_by=id))
+
+    def __repr__(self):
+        return "<Token '%s'>" % self.token
+
+    @classmethod
+    def getByToken(cls, token):
+        try:
+            return DBSession.query(cls).filter(cls.token == token).one()
+        except NoResultFound, e:
+            return False
+
+    def setAuthorizationType(self):
+        self.token_type = self.AUTHORIZATION
+
+    def setAccessType(self):
+        self.token_type = self.ACCESS
+
+    def setDisabledType(self):
+        self.token_type = self.DISABLED
 
 def initialize_sql():
     try:

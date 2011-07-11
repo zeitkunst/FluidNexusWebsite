@@ -2,7 +2,7 @@ from formalchemy import forms, tables, types, Field, FieldSet, Grid, validators
 
 from pyramid.i18n import TranslationStringFactory
 
-from fluidnexus.models import Comment, User
+from fluidnexus.models import Comment, User, Token
 
 _ = TranslationStringFactory('fluidnexus_forms')
 
@@ -81,3 +81,11 @@ class CommentFieldSet(FieldSet):
               ]
         self.configure(include = inc, options = options)
 
+class AuthorizeTokenFieldSet(FieldSet):
+    """Used to present a form for authorizing a token."""
+
+    def __init__(self):
+        FieldSet.__init__(self, Token)
+
+        include = [self.token.hidden(), self.token_secret.hidden(), self.callback_url.hidden()]
+        self.configure(include = include)
