@@ -356,7 +356,9 @@ class Token(Base):
     @classmethod
     def getByToken(cls, token):
         try:
-            return DBSession.query(cls).filter(cls.token == token).one()
+            foundToken = DBSession.query(cls).filter(cls.token == token).one()
+            foundToken.key = foundToken.token
+            foundToken.secret = foundToken.token_secret
         except NoResultFound, e:
             return False
 
