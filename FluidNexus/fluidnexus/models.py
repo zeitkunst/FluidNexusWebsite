@@ -345,6 +345,7 @@ class Token(Base):
     consumer_id = Column(Integer, ForeignKey('consumer_key_secrets.id'), nullable = False)
     token = Column(String, nullable = False)
     token_secret = Column(String, nullable = False)
+    timestamp = Column(Float, nullable = False)
     callback_url = Column(String)
     verifier = Column(String)
 
@@ -357,6 +358,16 @@ class Token(Base):
     def getByToken(cls, token):
         try:
             foundToken = DBSession.query(cls).filter(cls.token == token).one()
+            foundToken.key = foundToken.token
+            foundToken.secret = foundToken.token_secret
+            return foundToken
+        except NoResultFound, e:
+            return False
+
+    @classmethod
+    def getByConsumerID(cls, consumer_id):
+        try:
+            foundToken = DBSession.query(cls).filter(cls.consumer_id == consumer_id).one()
             foundToken.key = foundToken.token
             foundToken.secret = foundToken.token_secret
             return foundToken

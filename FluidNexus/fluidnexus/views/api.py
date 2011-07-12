@@ -34,32 +34,34 @@ def build_request(url, method='POST'):
         'oauth_signature_method': 'HMAC-SHA1',
         'oauth_callback': 'fluidnexus://access_token/',
     }
-    consumer = oauth2.Consumer(key='b9085cb942dc427c92dd', secret='1735fd5b090381dcaf57')
+    consumer = oauth2.Consumer(key='33284051511725920213', secret='54302765268137657526')
     params['oauth_consumer_key'] = consumer.key
     req = oauth2.Request(method=method, url=url, parameters=params)
     signature_method = oauth2.SignatureMethod_HMAC_SHA1()
     req.sign_request(signature_method, consumer, None)
     return req
 
-# Not quite working, for some reason...
 def build_request(url, message, method="POST"):
-    params = {
-        'oauth_version': "1.0",
-        'oauth_nonce': oauth2.generate_nonce(),
-        'oauth_timestamp': str(int(time.time())),
-        'oauth_signature_method': 'HMAC-SHA1',
-        'oauth_callback': 'fluidnexus://access_token/',
-    }
-    consumer = oauth2.Consumer(key='b9085cb942dc427c92dd', secret='1735fd5b090381dcaf57')
-    params['oauth_consumer_key'] = consumer.key
-    #params.update(message)
-    token = oauth2.Token('b1735523a92a064fb6fd', 'e455b92259b6e5dc0163')
+    # TODO
+    # do we need to add in oauth_callback to be in compliance?
+    consumer = oauth2.Consumer(key='33284051511725920213', secret='54302765268137657526')
+    params = {}
+    params.update(message)
+    token = oauth2.Token('70358969944902230656', '64671085584708351586')
     req = oauth2.Request.from_consumer_and_token(consumer, token = token, http_method=method, http_url=url, parameters=params)
-    #req = oauth2.Request(method = "POST", url = url, parameters = params)
     signature_method = oauth2.SignatureMethod_HMAC_SHA1()
     req.sign_request(signature_method, consumer, token)
     return req
 """
+
+def generateRandomKey(rounds = 20):
+    s = ""
+
+    for x in xrange(0, rounds):
+        s += str(random.randint(0, 9))
+
+    return s
+
 
 # TODO
 # I shouldn't have to write the serialization code by hand...there should be some way to do this automatically in SA
@@ -128,14 +130,11 @@ def api_nexus_message_update(request):
     try:
         oauth_server.verify_request(req, consumer, token)
     except oauth2.Error, e:
-        print e
-        return simplejson.dumps({"error": e})
+        return simplejson.dumps({"error": str(e)})
     except KeyError, e:
-        print e
-        return simplejson.dumps({"error": e})
+        return simplejson.dumps({"error": str(e)})
     except Exception, e:
-        print e
-        return simplejson.dumps({"error": e})
+        return simplejson.dumps({"error": str(e)})
 
 
     if ("message" not in request.params):
@@ -219,8 +218,8 @@ def api_request_key(request):
         # generate a consumer key and secret
         randomData = hashlib.sha1(str(random.random())).hexdigest()
         keySecret = ConsumerKeySecret()
-        key = randomData[0:20]
-        secret = randomData[20:]
+        key = generateRandomKey()
+        secret = generateRandomKey()
         keySecret.consumer_key = key
         keySecret.consumer_secret = secret
         keySecret.user_id = request.logged_in
@@ -251,6 +250,17 @@ def api_request_token(request):
     try:
         oauth_server.verify_request(req, consumer, None)
 
+        # Check that this user doesn't already have an access token
+        consumerToken = Token.getByConsumerID(consumer.id)
+        if consumerToken:
+            if (consumerToken.token_type == consumerToken.ACCESS):
+                return HTTPFound(location = consumerToken.callback_url)
+            elif (consumerToken.token_type == consumerToken.AUTHORIZATION):
+                # TODO
+                # Check that the token hasn't already expired
+                token = oauth2.Token(consumerToken.token, consumerToken.token_secret)
+                return {'result': route_url('api_authorize_token', request) + '?' + token.to_string()}
+
         nonce = ConsumerNonce.getByNonce(request.params.get("oauth_nonce"))
         if (nonce):
             return simplejson.dumps({"error": "Nonce is already registered for an authorization token; please generate another request token, or wait five minutes and try again."})
@@ -262,8 +272,8 @@ def api_request_token(request):
             session.add(nonce)
 
         randomData = hashlib.sha1(str(random.random())).hexdigest()
-        key = randomData[0:20]
-        secret = randomData[20:]
+        key = generateRandomKey()
+        secret = generateRandomKey()
         token = oauth2.Token(key, secret)
         token.callback_confirmed = True
 
@@ -271,17 +281,19 @@ def api_request_token(request):
         tokenData.token = key
         tokenData.token_secret = secret
         tokenData.consumer_id = consumer.id
+        tokenData.timestamp = time.time()
         tokenData.callback_url = request.params.get("oauth_callback")
         tokenData.setAuthorizationType()
         session.add(tokenData)
-
-        return simplejson.dumps({"result": route_url("api_authorize_token", request) + "?" + token.to_string()})
+        
+        result = {'result': route_url('api_authorize_token', request) + '?' + token.to_string()}
+        return result
     except oauth2.Error, e:
-        return simplejson.dumps({"error": e})
+        return {"error": str(e)}
     except KeyError, e:
-        return simplejson.dumps({"error": e})
+        return {"error": str(e)}
     except Exception, e:
-        return simplejson.dumps({"error": e})
+        return {"error": str(e)}
 
 @view_config(route_name = "api_authorize_token", request_method = "GET", renderer = "../templates/api_authorize_token.pt")
 def api_authorize_token(request):
@@ -327,12 +339,13 @@ def api_do_authorize_token(request):
 
     # Generate a new token to replace this now non-useful authorization token
     randomData = hashlib.sha1(str(random.random())).hexdigest()
-    key = randomData[0:20]
-    secret = randomData[20:]
+    key = generateRandomKey()
+    secret = generateRandomKey()
 
     token.token = key
     token.token_secret = secret
     token.consumer_id = consumer.id
+    token.timestamp = time.time()
     callback_url = token.callback_url + "?oauth_token=%s&oauth_token_secret=%s" % (key, secret)
     token.callback_url = callback_url
     token.setAccessType()

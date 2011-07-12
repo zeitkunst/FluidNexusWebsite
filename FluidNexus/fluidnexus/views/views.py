@@ -1,7 +1,7 @@
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPForbidden
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
 from pyramid.security import remember
@@ -14,7 +14,7 @@ import textile
 import bcrypt
 
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, Comment, Page, OpenID
+from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret
 from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
 
 import time
@@ -205,11 +205,31 @@ def register_user_openid(request):
 
 @view_config(route_name = "view_user", renderer = "../templates/view_user.pt")
 def view_user(request):
+    # TODO
+    # Add in auth tokens (if exists) and access tokens (if exists)
     session = DBSession()
     matchdict = request.matchdict
+    
+    if (request.logged_in != int(matchdict["user_id"])):
+        return HTTPForbidden(_("You are not allowed to view information about a user other than yourself."))
+
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
 
-    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username)
+
+    request_key_url = ""
+    key = ""
+    secret = ""
+
+    keySecret = ConsumerKeySecret.getByUserID(request.logged_in)
+    if (keySecret):
+        key = keySecret.consumer_key
+        secret = keySecret.consumer_secret
+    else:
+        request_key_url = route_url("api_request_key", request)
+
+
+    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username, key = key, secret = secret, request_key_url = request_key_url)
+
 
 
 @view_config(route_name = "edit_blog", renderer = "../templates/edit_blog.pt", permission = "edit_blog")
