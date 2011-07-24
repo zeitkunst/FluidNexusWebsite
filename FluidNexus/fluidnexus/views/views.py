@@ -14,7 +14,7 @@ import textile
 import bcrypt
 
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret
+from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token
 from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
 
 import time
@@ -219,16 +219,23 @@ def view_user(request):
     request_key_url = ""
     key = ""
     secret = ""
+    token = ""
+    token_secret = ""
 
     keySecret = ConsumerKeySecret.getByUserID(request.logged_in)
     if (keySecret):
         key = keySecret.consumer_key
         secret = keySecret.consumer_secret
+
+        tokenData = Token.getTokenByConsumerID(keySecret.id)
+        if (tokenData):
+            token = tokenData.token
+            token_secret = tokenData.token_secret
+
     else:
         request_key_url = route_url("api_request_key", request)
 
-
-    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username, key = key, secret = secret, request_key_url = request_key_url)
+    return dict(username = user.username, homepage = user.homepage, title = _("Viewing ") + " " + user.username, key = key, secret = secret, token = token, token_secret = token_secret, request_key_url = request_key_url)
 
 
 
@@ -395,7 +402,6 @@ def new_page(request):
 
 def forbidden(request):
     """We get here if somebody tries to access a resource they do not have access to."""
-    print "GOT HERE!!!"
     request.session.flash(_("You do not have access to the requested resource.  Either login using an account that does have access, or contact the administrators of the site."))
     return HTTPFound(location = route_url("home", request))
 

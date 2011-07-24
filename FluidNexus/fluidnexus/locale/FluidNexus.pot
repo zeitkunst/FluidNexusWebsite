@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FluidNexus 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-07-10 03:39-0400\n"
+"POT-Creation-Date: 2011-07-24 16:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,63 +69,20 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: fluidnexus/login.py:24 fluidnexus/views.py:129 fluidnexus/views.py:173
-#: fluidnexus/views.py:403
-msgid "You are already logged in and therefore cannot register for a new account."
+#: fluidnexus/templates/api_authorize_token.pt:9
+msgid "Do you want to allow this application to post messages to the Nexus?"
 msgstr ""
 
-#: fluidnexus/login.py:58
-msgid "You have successfully logged out"
+#: fluidnexus/templates/api_request_key.pt:9
+msgid "Your Key and Secret"
 msgstr ""
 
-#: fluidnexus/views.py:25
-msgid "Save"
+#: fluidnexus/templates/api_request_key.pt:10
+msgid "Key: ${key}"
 msgstr ""
 
-#: fluidnexus/views.py:26
-msgid "Delete"
-msgstr ""
-
-#: fluidnexus/views.py:49
-msgid "Fluid Nexus Blog posts"
-msgstr ""
-
-#: fluidnexus/views.py:79
-msgid "Your comment was successfully posted."
-msgstr ""
-
-#: fluidnexus/views.py:89
-msgid " || Fluid Nexus Blog Post"
-msgstr ""
-
-#: fluidnexus/views.py:102
-msgid "Edit users"
-msgstr ""
-
-#: fluidnexus/views.py:120
-msgid "Edit"
-msgstr ""
-
-#: fluidnexus/views.py:164 fluidnexus/views.py:211
-msgid "Register new user"
-msgstr ""
-
-#: fluidnexus/views.py:207
-msgid "You have successfully registered!"
-msgstr ""
-
-#: fluidnexus/views.py:221
-msgid "Viewing "
-msgstr ""
-
-#: fluidnexus/views.py:395
-msgid ""
-"You do not have access to the requested resource.  Either login using an "
-"account that does have access, or contact the administrators of the site."
-msgstr ""
-
-#: fluidnexus/views.py:418
-msgid "You now need to register after validating your OpenID"
+#: fluidnexus/templates/api_request_key.pt:11
+msgid "Secret: ${secret}"
 msgstr ""
 
 #: fluidnexus/templates/login.pt:9
@@ -146,5 +103,145 @@ msgid ""
 "of creating an additional account here. We do not store any information "
 "associated with your Google Account (such as your e-mail address or your "
 "name) on the Fluid Nexus website."
+msgstr ""
+
+#: fluidnexus/templates/nexus_messages.pt:9
+msgid ""
+"<dynamic element>: Nexus messages are provided by users of the Fluid Nexus "
+"software and have not been pre-reviewed. The user listed as the one who "
+"\"pushed\" the message to the Nexus is not necessarily the one who created "
+"the message. Please take these points into account when considering the "
+"veracity of the messages posted below."
+msgstr ""
+
+#: fluidnexus/templates/nexus_messages.pt:22
+msgid " Pushed into the Nexus by ${username} at <dynamic element>. "
+msgstr ""
+
+#: fluidnexus/views/api.py:135
+msgid "No 'message' parameter found"
+msgstr ""
+
+#: fluidnexus/views/api.py:140
+msgid "No 'message_title' found in POSTed message."
+msgstr ""
+
+#: fluidnexus/views/api.py:142
+msgid "No 'message_content' found in POSTed message."
+msgstr ""
+
+#: fluidnexus/views/api.py:144
+msgid "No 'message_hash' found in POSTed message."
+msgstr ""
+
+#: fluidnexus/views/api.py:146
+msgid "No 'message_time' found in POSTed message."
+msgstr ""
+
+#: fluidnexus/views/api.py:148
+msgid "No 'message_type' found in POSTed message."
+msgstr ""
+
+#: fluidnexus/views/api.py:220
+msgid "You must be registered and logged in to request a consumer key and secret."
+msgstr ""
+
+#: fluidnexus/views/api.py:239
+msgid "Fluid Nexus Key and Secret"
+msgstr ""
+
+#: fluidnexus/views/api.py:319 fluidnexus/views/api.py:344
+msgid "Attempt to use an authorization token that does not belong to you."
+msgstr ""
+
+#: fluidnexus/views/api.py:322 fluidnexus/views/api.py:347
+msgid "Malformed authorization token parameters."
+msgstr ""
+
+#: fluidnexus/views/api.py:327
+msgid "Authorization application to post to Nexus"
+msgstr ""
+
+#: fluidnexus/views/api.py:339
+msgid "Unable to find consumer key in the database; this should never happen!"
+msgstr ""
+
+#: fluidnexus/views/api.py:369
+msgid "You must be logged in."
+msgstr ""
+
+#: fluidnexus/views/api.py:380
+msgid "Attempt to retrieve an access token that does not belong to you."
+msgstr ""
+
+#: fluidnexus/views/api.py:383
+msgid "Your token and token secret"
+msgstr ""
+
+#: fluidnexus/views/login.py:24 fluidnexus/views/views.py:122
+#: fluidnexus/views/views.py:165 fluidnexus/views/views.py:412
+msgid "You are already logged in and therefore cannot register for a new account."
+msgstr ""
+
+#: fluidnexus/views/login.py:58
+msgid "You have successfully logged out"
+msgstr ""
+
+#: fluidnexus/views/nexus.py:30
+msgid "Nexus Messages"
+msgstr ""
+
+#: fluidnexus/views/views.py:24
+msgid "Save"
+msgstr ""
+
+#: fluidnexus/views/views.py:25
+msgid "Delete"
+msgstr ""
+
+#: fluidnexus/views/views.py:46
+msgid "Fluid Nexus Blog posts"
+msgstr ""
+
+#: fluidnexus/views/views.py:75
+msgid "Your comment was successfully posted."
+msgstr ""
+
+#: fluidnexus/views/views.py:85
+msgid " || Fluid Nexus Blog Post"
+msgstr ""
+
+#: fluidnexus/views/views.py:97
+msgid "Edit users"
+msgstr ""
+
+#: fluidnexus/views/views.py:114
+msgid "Edit"
+msgstr ""
+
+#: fluidnexus/views/views.py:157 fluidnexus/views/views.py:203
+msgid "Register new user"
+msgstr ""
+
+#: fluidnexus/views/views.py:199
+msgid "You have successfully registered!"
+msgstr ""
+
+#: fluidnexus/views/views.py:214
+msgid "You are not allowed to view information about a user other than yourself."
+msgstr ""
+
+#: fluidnexus/views/views.py:238
+msgid "Viewing "
+msgstr ""
+
+#: fluidnexus/views/views.py:405
+msgid ""
+"You do not have access to the requested resource.  Either login using an "
+"account that does have access, or contact the administrators of the site."
+msgstr ""
+
+#: fluidnexus/views/views.py:427
+msgid "You now need to register after validating your OpenID"
 msgstr ""
 

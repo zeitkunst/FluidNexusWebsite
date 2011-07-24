@@ -374,6 +374,27 @@ class Token(Base):
         except NoResultFound, e:
             return False
 
+    @classmethod
+    def getByUserID(cls, user_id):
+        try:
+            foundToken = DBSession.query(cls).filter(cls.consumer_key_secret.user.id == user_id).one()
+            foundToken.key = foundToken.token
+            foundToken.secret = foundToken.token_secret
+            return foundToken
+        except NoResultFound, e:
+            return False
+
+    @classmethod
+    def getTokenByConsumerID(cls, consumer_id):
+        try:
+            foundToken = DBSession.query(cls).filter(cls.consumer_id == consumer_id).filter(cls.token_type == cls.ACCESS).one()
+            foundToken.token= foundToken.token
+            foundToken.token_secret = foundToken.token_secret
+            return foundToken
+        except NoResultFound, e:
+            return False
+
+
     def setAuthorizationType(self):
         self.token_type = self.AUTHORIZATION
 

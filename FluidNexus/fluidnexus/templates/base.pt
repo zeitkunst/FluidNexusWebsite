@@ -35,11 +35,9 @@
             <div class="col_12">
                 <ul id="navigation">
                     <li><a href="/nexus" title="Nexus">nexus</a></li>
-                    <li><a href="/concept" title="Concept">concept</a></li>
                     <li><a href="/blog" title="Blog">blog</a></li>
+                    <li><a href="/infos" title="Infos">infos</a></li>
                     <li><a href="/download" title="Download">download</a></li>
-                    <li><a href="/community" title="Community">community</a></li>
-                    <li><a href="/media" title="Media">media</a></li>
                     <li><a href="/credits" title="Credits">credits</a></li>
                 </ul>
             </div>
@@ -68,7 +66,7 @@
             <div class="col_4">
                 <p>
 		            <span tal:condition="logged_in">
-                        <a href="${request.application_url}/logout">Logout (${request.session['username']})</a>
+                        <a href="/users/${logged_in}">User info</a> || <a href="${request.application_url}/logout">Logout (${request.session['username']})</a>
 		            </span>
 		            <span tal:condition="not logged_in">
 		                <a href="${request.application_url}/login">Login</a>

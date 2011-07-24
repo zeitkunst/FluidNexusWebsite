@@ -101,6 +101,7 @@ body {
 h1, h2, h3 {
     font-weight: bold;
     font-family: "Delicious", "DejaWeb", sans-serif;
+    color: #84302d;
 }
 
 nav, header, section, article {
@@ -109,12 +110,12 @@ nav, header, section, article {
 
 a {
     color: #EB302D;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:visited {
     color: #EB302D;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
@@ -199,7 +200,8 @@ ul#navigation a:hover {
         rgb(194,194,194) 0%,
         rgb(255,255,255) 75%
     );
-
+    
+    font-size: 0.8em;
 }
 
 /* flass messages */

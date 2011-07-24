@@ -5,14 +5,24 @@
     <tal:block metal:fill-slot="content">
     <div class="row">
 	    <div class="pre_2 col_4">
-	        <h1>This is your home page!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at velit erat. Morbi hendrerit elit quis massa feugiat id adipiscing neque facilisis. Proin lectus leo, consequat id tempus sed, ultrices quis enim. Aliquam facilisis sapien at justo mollis sagittis. Mauris quis arcu dictum quam consectetur sagittis. Vivamus at quam lacinia leo porta dapibus. Praesent ultrices lacinia dolor, eu consectetur lacus congue et. Nunc elementum arcu ac augue consequat ut luctus neque interdum. Donec placerat neque interdum odio placerat dignissim. Mauris adipiscing tellus id dolor luctus sagittis. Suspendisse turpis lectus, sagittis et hendrerit sed, feugiat at tortor.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in nisl ut erat tempus consectetur ac ac ante. Curabitur condimentum sapien rhoncus odio elementum vel ultrices urna ultricies. Integer pretium luctus nisi et sodales. Nulla facilisi. Praesent adipiscing, turpis eget gravida malesuada, augue lacus pellentesque justo, nec vulputate orci nulla vel augue. Morbi dapibus magna id mi rhoncus nec ornare erat egestas. In lobortis ornare ipsum in tempor. Curabitur vulputate ligula vitae mauris consequat lacinia. Praesent nec risus eu libero hendrerit viverra.</p>
+            <div>
+	            <h1>Concept</h1>
+                <p>Some information about the concept.</p>
+            </div>
+            <div>
+                <h1>Nexus</h1>
+                <p>What the Nexus is and why we implemented it.</p>
+            </div>
 	    </div>
         <div class="col_4 last">
-            <p>Nulla arcu ante, egestas eu viverra in, ornare non tellus. Sed dapibus tortor imperdiet purus posuere sagittis et vitae quam. Vivamus imperdiet luctus vulputate. Fusce felis nisl, cursus sed pulvinar at, fringilla id tortor. Nulla vel magna mauris, sed elementum lorem. Integer sed eros lectus. Sed quam lectus, tincidunt sit amet facilisis at, gravida vitae odio. Proin mattis fringilla urna sit amet tincidunt. Nunc ut porta nibh. Proin varius elementum faucibus. Suspendisse et turpis id lectus tristique auctor. Fusce in massa libero. Proin facilisis augue eget ipsum lobortis vel aliquam erat placerat. Mauris ligula elit, interdum non lobortis ac, fringilla eget augue. Nunc interdum vulputate ullamcorper. Vivamus sit amet diam in nisi imperdiet vehicula. Nam luctus erat ultrices metus interdum quis placerat eros mattis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in nisl ut erat tempus consectetur ac ac ante. Curabitur condimentum sapien rhoncus odio elementum vel ultrices urna ultricies. Integer pretium luctus nisi et sodales. Nulla facilisi. Praesent adipiscing, turpis eget gravida malesuada, augue lacus pellentesque justo, nec vulputate orci nulla vel augue. Morbi dapibus magna id mi rhoncus nec ornare erat egestas. In lobortis ornare ipsum in tempor. Curabitur vulputate ligula vitae mauris consequat lacinia. Praesent nec risus eu libero hendrerit viverra.</p>
+            <div>
+                <h1>Download</h1>
+                <p>Some info about versions available</p>
+            </div>
+            <div>
+                <h1>connect</h1>
+                <p>identi.ca and twitter</p>
+            </div>
         </div>
     </div>
     </tal:block>

@@ -1,22 +1,19 @@
-from sqlalchemy import desc
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.exc import NoResultFound
+import base64, hashlib, os, random, time
 
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPForbidden
+from sqlalchemy import desc
+
+from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 from pyramid.i18n import TranslationStringFactory
 from pyramid.url import route_url
 from pyramid.view import view_config
 
-from formalchemy import types, Field, FieldSet, Grid
-
 import oauth2
+
+import simplejson
 
 from fluidnexus.models import DBSession
 from fluidnexus.models import User, NexusMessage, ConsumerKeySecret, Token, ConsumerNonce
-from fluidnexus.forms import AuthorizeTokenFieldSet
 
-import hashlib, random, time
-import simplejson
 
 _ = TranslationStringFactory('fluidnexus')
 
@@ -109,9 +106,6 @@ def api_nexus_messages_hash(request):
 
 @view_config(route_name = "api_nexus_message_update", renderer="json", request_method = "POST")
 def api_nexus_message_update(request):
-    """TODO
-    add oauth"""
-
     session = DBSession()
 
     auth_header = {}
@@ -170,8 +164,24 @@ def api_nexus_message_update(request):
         m.message_hash = message["message_hash"]
         m.message_type = message["message_type"]
         m.created_time = message["message_time"]
-        m.attachment_path = message.get("message_attachment_path", "")
-        m.attachment_original_filename = message.get("message_attachment_original_filename", "")
+
+        if (message.has_key("message_attachment")):
+            attachmentsDir = request.registry.settings["attachments.data_dir"]
+            attachmentDataBase64 = message["message_attachment"]
+            attachmentData = base64.b64decode(attachmentDataBase64)
+            message_attachment_path = os.path.join(attachmentsDir, message["message_hash"])
+            attachment_original_filename = message["message_attachment_original_filename"]
+
+            fullPath, extension = os.path.splitext(attachment_original_filename)
+            fp = open(message_attachment_path + extension, "wb")
+            fp.write(attachmentData)
+            fp.close()
+
+            m.attachment_original_filename = attachment_original_filename
+            m.attachment_path = message_attachment_path
+        else:
+            m.attachment_path = message.get("message_attachment_path", "")
+            m.attachment_original_filename = message.get("message_attachment_original_filename", "")
         m.user_id = consumer.user.id
         session.add(m)
 
@@ -226,7 +236,7 @@ def api_request_key(request):
         keySecret.setNormalStatus()
         session.add(keySecret)
 
-    return dict(key = key, secret = secret, title = _("Consumer Key and Secret"))
+    return dict(key = key, secret = secret, title = _("Fluid Nexus Key and Secret"))
 
 @view_config(route_name = "api_request_token", request_method = "POST", renderer = "json")
 def api_request_token(request):
@@ -346,9 +356,28 @@ def api_do_authorize_token(request):
     token.token_secret = secret
     token.consumer_id = consumer.id
     token.timestamp = time.time()
-    callback_url = token.callback_url + "?oauth_token=%s&oauth_token_secret=%s" % (key, secret)
-    token.callback_url = callback_url
     token.setAccessType()
     session.add(token)
 
-    return HTTPFound(location = callback_url)
+    return HTTPFound(location = token.callback_url)
+
+@view_config(route_name = "api_access_token", renderer = "../templates/access_token.pt")
+def api_access_token(request):
+    session = DBSession()
+
+    if (not request.logged_in):
+        request.session.flash(_("You must be logged in."))
+        return HTTPFound(location = route_url("home", request))
+
+    consumer = ConsumerKeySecret.getByUserID(request.logged_in)
+
+    if (not consumer):
+        return HTTPFound(location = route_url("api_request_key", request))
+
+    token = Token.getByConsumerID(consumer.id)
+
+    if (not token):
+        request.session.flash(_("Attempt to retrieve an access token that does not belong to you."))
+        return HTTPFound(location = route_url("home", request))
+
+    return dict(title = _("Your token and token secret"), token = token.token, token_secret = token.token_secret)

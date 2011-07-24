@@ -7,14 +7,19 @@
     	    <div class="pre_2 col_8 last">
                 <p><span i18n:translate="username">Username:</span> ${username}</p>
                 <p><span i18n:translate="homepage">Homepage:</span> <a href="${homepage}">${homepage}</a></p>
-		<tal:block tal:condition="request_key_url">
-			<h1 i18n:translate=""><a href="${request_key_url}">Request a key and secret</a></h1>
-		</tal:block>
-		<tal:block tal:condition="not request_key_url">
-		<h1 i18n:translate="">Your Key and Secret</h1>
-		<p i18n:translate="">Key: <span tal:replace="key" i18n:name="key"/></p>
-		<p i18n:translate="">Secret: <span tal:replace="secret" i18n:name="secret"/></p>
-		</tal:block>
+        		<tal:block tal:condition="request_key_url">
+        			<h1 i18n:translate=""><a href="${request_key_url}">Request a key and secret</a></h1>
+        		</tal:block>
+        		<tal:block tal:condition="not request_key_url">
+        		    <h1 i18n:translate="">Your Key and Secret</h1>
+        		    <p i18n:translate="">Key: <span tal:replace="key" i18n:name="key"/></p>
+        		    <p i18n:translate="">Secret: <span tal:replace="secret" i18n:name="secret"/></p>
+        		</tal:block>
+                <tal:block tal:condition="token">
+        		    <h1 i18n:translate="">Your Token and Token Secret</h1>
+        		    <p i18n:translate="">Token: <span tal:replace="token" i18n:name="token"/></p>
+        		    <p i18n:translate="">Token Secret: <span tal:replace="token_secret" i18n:name="token_secret"/></p>
+                </tal:block>
     	    </div>
     	</div>
     </tal:block>
