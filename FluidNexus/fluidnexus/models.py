@@ -332,6 +332,18 @@ class ConsumerNonce(Base):
         except NoResultFound, e:
             return False
 
+    @classmethod
+    def checkNonce(cls, nonce, delta = 60 * 60 * 2):
+        try:
+            result = DBSession.query(cls).filter(cls.nonce == nonce).one()
+            now = time.time()
+            if (now > (result.timestamp + delta)):
+                return False
+            else:
+                return True
+        except NoResultFound, e:
+            return False
+       
 class Token(Base):
     __tablename__ = "tokens"
 

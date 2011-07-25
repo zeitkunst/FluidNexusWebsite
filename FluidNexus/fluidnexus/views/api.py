@@ -105,14 +105,10 @@ def api_nexus_messages_hash(request):
     else:
         return {"error": "No message found for hash %s" % message_hash}
 
-@view_config(route_name = "api_nexus_message_update", renderer="json", request_method = "POST")
-def api_nexus_message_update(request):
+@view_config(route_name = "api_nexus_message_nonce", renderer="json", request_method = "POST")
+def api_nexus_message_nonce(request):
     session = DBSession()
-    print request
     auth_header = {}
-
-    matchdict = request.matchdict
-    appType = matchdict.get("appType", "")
 
     if ('Authorization' in request.headers):
         auth_header = {'Authorization': request.headers['Authorization']}
@@ -133,22 +129,43 @@ def api_nexus_message_update(request):
         http_url = request.url, 
         parameters = dict([(k, v) for k,v in req.iteritems()]))
 
-
     try:
         oauth_server.verify_request(req, consumer, token)
     except oauth2.Error, e:
-        return simplejson.dumps({"error": str(e)})
+        return {"Oauth error": str(e)}
     except KeyError, e:
-        return simplejson.dumps({"error": str(e)})
+        return {"KeyError error": str(e)}
     except Exception, e:
-        return simplejson.dumps({"error": str(e)})
+        return {"General error": str(e)}
 
+    nonce = ConsumerNonce()
+    nonce.consumer_id = consumer.id
+    nonce.timestamp = time.time()
+    nonce.nonce = generateRandomKey()
+    session.add(nonce)
+
+    return {"nonce": nonce.nonce}
+
+@view_config(route_name = "api_nexus_message_update", renderer="json", request_method = "POST")
+def api_nexus_message_update(request):
+    # TODO
+    # add signed API call to request a nonce
+    # and then in this call, check for nonce and for nonce time < 2 hours
+    session = DBSession()
 
     if ("message" not in request.params):
         return {"error": _("No 'message' parameter found")}
     else:
         message = simplejson.loads(request.params["message"])
 
+        # Get the nonce
+        nonce = message["message_nonce"]
+        # Check the nonce
+        if (not ConsumerNonce.checkNonce(nonce)):
+            return {"error": "Nonce not correct."}
+        
+        # Get the consumer key
+        consumer = ConsumerKeySecret.getByConsumerKey(message["message_key"])
         if ("message_title" not in message):
             return {"error": _("No 'message_title' found in POSTed message.")}
         elif ("message_content" not in message):
