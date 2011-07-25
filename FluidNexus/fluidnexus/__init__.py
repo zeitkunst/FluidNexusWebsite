@@ -69,7 +69,7 @@ def main(global_config, **settings):
     config.add_route("api_access_token", "/api/01/access_token")
     config.add_route("api_nexus_messages_json", "/api/01/nexus/messages.json")
     config.add_route("api_nexus_messages_hash_json", "/api/01/nexus/messages/{hash}.json")
-    config.add_route("api_nexus_message_update", "/api/01/nexus/message/{appType}/update.json") 
+    config.add_route("api_nexus_message_update", "/api/01/nexus/message/update.json") 
     config.add_route("api_nexus_hashes_json", "/api/01/nexus/hashes.json")
     config.add_route("api_nexus_hashes_hash_json", "/api/01/nexus/hashes/{hash}.json")
 
