@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+        <p i18n:translate=""><strong>Note</strong>: Nexus messages are provided by users of the Fluid Nexus software and have not been pre-reviewed.  The user listed as the one who "pushed" the message to the Nexus is not necessarily the one who created the message.  Please take these points into account when considering the veracity of the messages posted below.</p>
+		<article class="nexus_message" tal:repeat="message messages">
+    		<h1>${message.title}</h1>
+    		<div class="content" tal:replace="structure message.getFormattedContent()">
+    		</div>
+            <tal:block tal:condition="message.attachment_path">
+                <tal:block tal:switch="message.message_type">
+                    <p tal:case="0">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
+                    <p tal:case="1">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
+                    <a href="${message.massaged_attachment_path}"><img src="${message.massaged_attachment_path}" alt="${message.attachment_original_filename}" width="300" tal:case="2" /></a>
+                    <p tal:case="3">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
+                </tal:block>
+            </tal:block>
+    		<div class="time" i18n:translate="">
+    			Pushed into the Nexus by <span tal:replace="message.username" i18n:name="username" /> at <time datetime="${message.getISOTime()}"><span tal:replace="message.getFormattedTime()" i18n:name="formatted_time" /></time>.
+    		</div>
+		</article>
+	    </div>
+	</div>
+    </tal:block>
+</html>

@@ -16,3 +16,4 @@ pyramid-beaker
 pycryptopp
 pyramid-openid
 oauth2
+sqlalchemy-migrate

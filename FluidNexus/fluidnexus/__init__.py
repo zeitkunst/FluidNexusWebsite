@@ -1,12 +1,14 @@
 from pyramid.config import Configurator
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
+from pyramid.exceptions import Forbidden, NotFound
 from sqlalchemy import engine_from_config
 
 from pyramid_beaker import session_factory_from_settings
 
 from fluidnexus.models import initialize_sql, create_session
 from fluidnexus.models import FormAlchemyRootFactory
+from fluidnexus.views.views import notfound_view
 
 from fluidnexus.security import groupfinder
 
@@ -32,7 +34,6 @@ def main(global_config, **settings):
     config.add_route('openid', '/openid')
     config.add_route("check_openid", pattern = "/check_openid")
     config.add_route("verify_openid", pattern = "/do_openid", view = "pyramid_openid.verify_openid")
-    #config.add_view(route_name = "verify_openid", view = "pyramid_openid.verify_openid")
 
     # USERS/LOGIN
     config.add_route('login', '/login')
@@ -75,8 +76,6 @@ def main(global_config, **settings):
     config.add_route("api_nexus_message_update", "/api/01/nexus/message/update.json") 
 
 
-    config.add_view('fluidnexus.views.views.forbidden',
-                    context='pyramid.exceptions.Forbidden')
     config.formalchemy_admin('/admin', package="fluidnexus", view="fa.jquery.pyramid.ModelView", factory=FormAlchemyRootFactory)
     config.scan()
     return config.make_wsgi_app()

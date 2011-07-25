@@ -26,6 +26,7 @@ requires = [
     'pycryptopp',
     'pyramid-openid',
     'oauth2',
+    'sqlalchemy-migrate',
     ]
 
 if sys.version_info[:3] < (2,5,0):

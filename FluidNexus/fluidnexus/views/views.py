@@ -1,6 +1,7 @@
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 
+from pyramid.exceptions import Forbidden, NotFound
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPForbidden
 from pyramid.i18n import TranslationStringFactory
 from pyramid.security import authenticated_userid
@@ -15,7 +16,7 @@ import bcrypt
 
 from fluidnexus.models import DBSession
 from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token
-from fluidnexus.forms import UserFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
+from fluidnexus.forms import UserFieldSet, UserNoPasswordFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
 
 import time
 
@@ -96,19 +97,27 @@ def edit_users(request):
 
     return dict(users = modifiedUsers, title = _("Edit users"))
 
-@view_config(route_name = "edit_user", renderer = "../templates/edit_user.pt", permission = "admin")
+@view_config(route_name = "edit_user", renderer = "../templates/edit_user.pt")
 def edit_user(request):
     session = DBSession()
     matchdict = request.matchdict
+
+    if (request.logged_in != int(matchdict["user_id"])):
+        return HTTPForbidden(_("You are not allowed to view information about a user other than yourself."))
+
     user = session.query(User).join(User.groups).join(Group.group_info).filter(User.id == matchdict["user_id"]).one()
 
-    fs = UserFieldSet().bind(user, session = session, data = request.POST or None)
+    if (user.user_type == User.OPENID):
+        fs = UserNoPasswordFieldSet().bind(user, session = session, data = request.POST or None)
+    else:
+        fs = UserFieldSet().bind(user, session = session, data = request.POST or None)
     if 'submitted' in request.params:
         valid = fs.validate()
         if valid:
-            user.password = bcrypt.hashpw(fs.password1.value, bcrypt.gensalt())
+            if user.user_type == User.NORMAL:
+                user.password = bcrypt.hashpw(fs.password1.value, bcrypt.gensalt())
             fs.sync()
-            return HTTPFound(location = route_url("edit_users", request))
+            return HTTPFound(location = route_url("view_user", request, user_id = request.logged_in))
 
     form = fs.render()
     return dict(form = form, title = _("Edit") + " " + user.username)
@@ -144,6 +153,7 @@ def register_user(request):
             user.surname = fs.surname.value
             user.homepage = fs.homepage.value
             user.created_time =  time.time()
+            user.user_type = User.NORMAL
             session.add(user)
             session.flush()
 
@@ -181,6 +191,7 @@ def register_user_openid(request):
             user.given_name = fs.given_name.value
             user.surname = fs.surname.value
             user.homepage = fs.homepage.value
+            user.user_type = User.OPENID
             now = time.time()
             user.created_time = now
             user.password = bcrypt.hashpw(str(int(now)), bcrypt.gensalt())
@@ -400,10 +411,16 @@ def new_page(request):
     form = fs.render()
     return dict(title = "Create new Fluid Nexus page", save_name = save_name, form = form)
 
-def forbidden(request):
+@view_config(renderer = "../templates/forbidden.pt", context = Forbidden)
+def forbidden_view(request):
     """We get here if somebody tries to access a resource they do not have access to."""
     request.session.flash(_("You do not have access to the requested resource.  Either login using an account that does have access, or contact the administrators of the site."))
-    return HTTPFound(location = route_url("home", request))
+    return dict(title = _("403 Forbidden"), forbidden = request.exception)
+    #return HTTPFound(location = route_url("home", request))
+
+@view_config(renderer = "../templates/notfound.pt", context = NotFound)
+def notfound_view(request):
+    return dict(title = _("404 Not Found"), notfound = request.exception.args[0])
 
 @view_config(route_name = "openid", renderer = "../templates/openid.pt")
 def openid(request):
@@ -412,7 +429,7 @@ def openid(request):
         request.session.flash(_("You are already logged in and therefore cannot register for a new account."))
         return HTTPFound(location = route_url("home", request))
     
-    return dict(title = "OpenID login", message = "", login = "")
+    return dict(title = _("OpenID login"), login = "") 
 
 # Callback for openid library
 def remember_me(context, request, result):

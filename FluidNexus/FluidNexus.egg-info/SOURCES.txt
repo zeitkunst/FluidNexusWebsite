@@ -43,6 +43,13 @@ fluidnexus/static/pylons.css
 fluidnexus/static/pyramid-small.png
 fluidnexus/static/pyramid.png
 fluidnexus/static/transparent.gif
+fluidnexus/static/attachments/0d1edea3300915498a866e507dfc1a0f71f6c1fd3681129ffa921d3db05ee389.jpg
+fluidnexus/static/attachments/29b61f43b2cf75a778ce20be1fb41021fddea065cec4f698fe8406ffefd80715.jpg
+fluidnexus/static/attachments/2ebc5cea7d8a83bc1b630ae65b10a942bd8db27051ad51c777b693149c887cb6.jpg
+fluidnexus/static/attachments/76e6089abb5dbcfcfba3db5082dc7a7e012722a0ab0101af6c750ab4a5de3c2e.jpg
+fluidnexus/static/attachments/b26a2444957b8aec224d31a0da96dbc5fb5d394c5915777129b94e9cf424882c.jpg
+fluidnexus/static/attachments/d860fa8c5b304c0b249716d40be6566ac058990d673117d057356651b9df2ebe.jpg
+fluidnexus/static/attachments/f78a33ef3731885767cdd060244227cd8eee2ed0a1e379482c50b45802a1eeff.jpg
 fluidnexus/static/css/build.css
 fluidnexus/static/css/columnal.css
 fluidnexus/static/css/custom.css
@@ -55,7 +62,9 @@ fluidnexus/static/css/smallerscreen.css
 fluidnexus/static/images/FluidNexus.png
 fluidnexus/static/images/FluidNexus2.png
 fluidnexus/static/images/tagline.png
+fluidnexus/templates/access_token.pt
 fluidnexus/templates/admin.pt
+fluidnexus/templates/api_authorize_token.pt
 fluidnexus/templates/api_request_key.pt
 fluidnexus/templates/base.pt
 fluidnexus/templates/blog.pt

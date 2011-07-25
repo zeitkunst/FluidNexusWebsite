@@ -60,6 +60,10 @@ class User(Base):
     surname = Column(Unicode)
     homepage = Column(Unicode)
     created_time = Column(Float)
+    user_type = Column(Integer)
+
+    NORMAL = 0
+    OPENID = 1
 
     def __repr__(self):
         return "<User '%s'>" % self.username

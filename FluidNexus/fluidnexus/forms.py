@@ -67,6 +67,20 @@ class UserFieldSet(FieldSet):
               ]
         self.configure(include = inc)
 
+class UserNoPasswordFieldSet(FieldSet):
+    """Used to edit users."""
+
+    def __init__(self, user = None):
+        """Pre-configuration"""
+        FieldSet.__init__(self, User)
+
+        inc = [self.username.readonly().label(_("Username")),
+               self.given_name.label(_("* Given name")),
+               self.surname.label(_("* Surname")),
+               self.homepage.label(_("Homepage (please include 'http://')"))
+              ]
+        self.configure(include = inc)
+
 class CommentFieldSet(FieldSet):
     """Used to present a basic comment form."""
 

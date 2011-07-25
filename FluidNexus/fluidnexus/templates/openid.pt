@@ -7,7 +7,6 @@
             <div class = "pre_2 col_8 last">
                 <div class="login_message">
                   <b>Login using your Google ID</b><br/>
-                  <span tal:replace="message"/>
                 </div>
                 <div class="login">
                     <form action="/do_openid" method="post">

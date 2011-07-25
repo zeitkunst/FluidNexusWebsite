@@ -347,7 +347,6 @@ def api_request_token(request):
         if (appType == "android"):
             return Response(token.to_string())
         elif (appType == "desktop"):
-            print "GOT HERE!!!!!!!!!!!!!!!!!!!"
             result = {'result': route_url('api_authorize_token', request, appType = appType) + '?' + token.to_string()}
             return Response(simplejson.dumps(result))
     except oauth2.Error, e:
@@ -364,7 +363,9 @@ def api_authorize_token(request):
     matchdict = request.matchdict
     appType = matchdict.get("appType", "")
 
+    print "HERE!!!!"
     # First check that the logged in user is the holder of this token
+    print "PARAM: ", request.params.get("oauth_token")
     token = Token.getByToken(request.params.get("oauth_token"))
     consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
 

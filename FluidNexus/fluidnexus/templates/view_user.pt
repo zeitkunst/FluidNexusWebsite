@@ -7,6 +7,7 @@
     	    <div class="pre_2 col_8 last">
                 <p><span i18n:translate="username">Username:</span> ${username}</p>
                 <p><span i18n:translate="homepage">Homepage:</span> <a href="${homepage}">${homepage}</a></p>
+                <p><a href="/admin/users/edit/${logged_in}">Edit User Information</a></p>
         		<tal:block tal:condition="request_key_url">
         			<h1 i18n:translate=""><a href="${request_key_url}">Request a key and secret</a></h1>
         		</tal:block>
