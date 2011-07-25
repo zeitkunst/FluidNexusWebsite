@@ -4,6 +4,7 @@ from sqlalchemy import desc
 
 from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 from pyramid.i18n import TranslationStringFactory
+from pyramid.response import Response
 from pyramid.url import route_url
 from pyramid.view import view_config
 
@@ -107,19 +108,31 @@ def api_nexus_messages_hash(request):
 @view_config(route_name = "api_nexus_message_update", renderer="json", request_method = "POST")
 def api_nexus_message_update(request):
     session = DBSession()
-
+    print request
     auth_header = {}
+
+    matchdict = request.matchdict
+    appType = matchdict.get("appType", "")
+
     if ('Authorization' in request.headers):
         auth_header = {'Authorization': request.headers['Authorization']}
-    
-    consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
-    token = Token.getByToken(request.params.get("oauth_token"))
-    
+   
+    # make temp request to get our header parameters
+    req = oauth2.Request.from_request(
+        request.method,
+        request.url,
+        headers = auth_header,
+        parameters = dict([(k,v) for k,v in request.params.iteritems()]))
+
+    consumer = ConsumerKeySecret.getByConsumerKey(req.get("oauth_consumer_key"))
+    token = Token.getByToken(req.get("oauth_token"))
+
     req = oauth2.Request.from_consumer_and_token(consumer, 
         token = token, 
         http_method = request.method, 
         http_url = request.url, 
-        parameters = dict([(k, v) for k,v in request.params.iteritems()]))
+        parameters = dict([(k, v) for k,v in req.iteritems()]))
+
 
     try:
         oauth_server.verify_request(req, consumer, token)
@@ -238,10 +251,14 @@ def api_request_key(request):
 
     return dict(key = key, secret = secret, title = _("Fluid Nexus Key and Secret"))
 
-@view_config(route_name = "api_request_token", request_method = "POST", renderer = "json")
+@view_config(route_name = "api_request_token", request_method = "POST")
 def api_request_token(request):
+    print request
     session = DBSession()
     auth_header = {}
+    matchdict = request.matchdict
+    appType = matchdict.get("appType", False)
+
     if ('Authorization' in request.headers):
         auth_header = {'Authorization': request.headers['Authorization']}
     
@@ -251,7 +268,7 @@ def api_request_token(request):
         headers = auth_header,
         parameters = dict([(k,v) for k,v in request.params.iteritems()]))
 
-    consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
+    consumer = ConsumerKeySecret.getByConsumerKey(req.get("oauth_consumer_key"))
 
     #if (request.logged_in != consumer.id):
     #    request.session.flash(_("You are trying to request a token using credentials that do not belong to you."))
@@ -269,16 +286,19 @@ def api_request_token(request):
                 # TODO
                 # Check that the token hasn't already expired
                 token = oauth2.Token(consumerToken.token, consumerToken.token_secret)
-                return {'result': route_url('api_authorize_token', request) + '?' + token.to_string()}
+                if (appType == "android"):
+                    return Response(token.to_string())
+                else:
+                    return Response(simplejson.dumps({'result': route_url('api_authorize_token', request, appType = appType) + '?' + token.to_string()}))
 
-        nonce = ConsumerNonce.getByNonce(request.params.get("oauth_nonce"))
+        nonce = ConsumerNonce.getByNonce(req.get("oauth_nonce"))
         if (nonce):
             return simplejson.dumps({"error": "Nonce is already registered for an authorization token; please generate another request token, or wait five minutes and try again."})
         else:
             nonce = ConsumerNonce()
             nonce.consumer_id = consumer.id
-            nonce.timestamp = request.params.get("oauth_timestamp")
-            nonce.nonce = request.params.get("oauth_nonce")
+            nonce.timestamp = req.get("oauth_timestamp")
+            nonce.nonce = req.get("oauth_nonce")
             session.add(nonce)
 
         randomData = hashlib.sha1(str(random.random())).hexdigest()
@@ -292,22 +312,29 @@ def api_request_token(request):
         tokenData.token_secret = secret
         tokenData.consumer_id = consumer.id
         tokenData.timestamp = time.time()
-        tokenData.callback_url = request.params.get("oauth_callback")
+        tokenData.callback_url = req.get("oauth_callback")
         tokenData.setAuthorizationType()
         session.add(tokenData)
-        
-        result = {'result': route_url('api_authorize_token', request) + '?' + token.to_string()}
-        return result
+
+        if (appType == "android"):
+            return Response(token.to_string())
+        elif (appType == "desktop"):
+            print "GOT HERE!!!!!!!!!!!!!!!!!!!"
+            result = {'result': route_url('api_authorize_token', request, appType = appType) + '?' + token.to_string()}
+            return Response(simplejson.dumps(result))
     except oauth2.Error, e:
-        return {"error": str(e)}
+        return simplejson.dumps({"oauth2 error": str(e)})
     except KeyError, e:
-        return {"error": str(e)}
+        return Response(simplejson.dumps({"keyerror": str(e)}))
     except Exception, e:
-        return {"error": str(e)}
+        return simplejson.dumps({"general exception error": str(e)})
 
 @view_config(route_name = "api_authorize_token", request_method = "GET", renderer = "../templates/api_authorize_token.pt")
 def api_authorize_token(request):
     session = DBSession()
+
+    matchdict = request.matchdict
+    appType = matchdict.get("appType", "")
 
     # First check that the logged in user is the holder of this token
     token = Token.getByToken(request.params.get("oauth_token"))
@@ -324,11 +351,14 @@ def api_authorize_token(request):
 
     #fs = AuthorizeTokenFieldSet().bind(token, session = session, data = request.POST or None)
 
-    return dict(title = _("Authorization application to post to Nexus"), token = token.token, token_secret = token.token_secret, callback_url = token.callback_url)
+    return dict(title = _("Authorization application to post to Nexus"), token = token.token, token_secret = token.token_secret, callback_url = token.callback_url, appType = appType)
 
 @view_config(route_name = "api_do_authorize_token", request_method = "POST")
 def api_do_authorize_token(request):
     session = DBSession()
+
+    matchdict = request.matchdict
+    appType = matchdict.get("appType", "")
 
     # First check that the logged in user is the holder of this token
     given_token = request.params.get("token")
@@ -357,6 +387,9 @@ def api_do_authorize_token(request):
     token.consumer_id = consumer.id
     token.timestamp = time.time()
     token.setAccessType()
+
+    if (appType == "android"):
+        token.callback_url = token.callback_url + "?oauth_token=%s&oauth_token_secret=%s" % (token.token, token.token_secret)
     session.add(token)
 
     return HTTPFound(location = token.callback_url)

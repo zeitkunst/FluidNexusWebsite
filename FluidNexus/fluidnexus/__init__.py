@@ -61,13 +61,15 @@ def main(global_config, **settings):
 
     # API
     config.add_route("api_request_key", "/api/01/request_key")
-    config.add_route("api_request_token", "/api/01/request_token")
-    config.add_route("api_authorize_token", "/api/01/authorize_token")
-    config.add_route("api_do_authorize_token", "/api/01/do_authorize_token")
+    config.add_route("api_request_token", "/api/01/request_token/{appType}")
+    config.add_route("api_authorize_token", "/api/01/authorize_token/{appType}")
+    config.add_route("api_do_authorize_token", "/api/01/do_authorize_token/{appType}")
+    #config.add_route("api_authorize_token_android", "/api/01/authorize_token_android")
+    #config.add_route("api_do_authorize_token_android", "/api/01/do_authorize_token_android")
     config.add_route("api_access_token", "/api/01/access_token")
     config.add_route("api_nexus_messages_json", "/api/01/nexus/messages.json")
     config.add_route("api_nexus_messages_hash_json", "/api/01/nexus/messages/{hash}.json")
-    config.add_route("api_nexus_message_update", "/api/01/nexus/message/update.json") 
+    config.add_route("api_nexus_message_update", "/api/01/nexus/message/{appType}/update.json") 
     config.add_route("api_nexus_hashes_json", "/api/01/nexus/hashes.json")
     config.add_route("api_nexus_hashes_hash_json", "/api/01/nexus/hashes/{hash}.json")
 
