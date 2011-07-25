@@ -195,16 +195,27 @@ def api_nexus_message_update(request):
         m.message_type = message["message_type"]
         m.created_time = message["message_time"]
 
-        if (message.has_key("message_attachment")):
+        if (request.params.has_key("message_attachment")):
+            attachment = request.params.get("message_attachment")
+
+            if not hasattr(attachment, 'file'):
+                raise TypeError("Not a valid file field")
+
             attachmentsDir = request.registry.settings["attachments.data_dir"]
-            attachmentDataBase64 = message["message_attachment"]
-            attachmentData = base64.b64decode(attachmentDataBase64)
+
+            #attachmentDataBase64 = message["message_attachment"]
+            #attachmentData = base64.b64decode(attachmentDataBase64)
             message_attachment_path = os.path.join(attachmentsDir, message["message_hash"])
             attachment_original_filename = message["message_attachment_original_filename"]
 
             fullPath, extension = os.path.splitext(attachment_original_filename)
             fp = open(message_attachment_path + extension, "wb")
-            fp.write(attachmentData)
+            while True:
+                data = attachment.file.read(8192)
+                if not data:
+                    break
+
+                fp.write(data)
             fp.close()
 
             m.attachment_original_filename = attachment_original_filename
