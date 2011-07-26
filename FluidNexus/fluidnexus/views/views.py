@@ -324,12 +324,27 @@ def edit_blog_post(request):
     form = fs.render()
     return dict(form = form, title = post.title, edit_blog_post_url = edit_blog_post_url)
 
+@view_config(route_name = "infos", renderer = "../templates/infos.pt")
+def infos(request):
+    """Infos page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Infos"))
+
+
 @view_config(route_name = "infos_concept", renderer = "../templates/concept.pt")
 def concept(request):
     """Concept page."""
     session = DBSession()
 
     return dict(title = _("Fluid Nexus Concept"))
+
+@view_config(route_name = "infos_manual", renderer = "../templates/manual.pt")
+def manual(request):
+    """Manual page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Manual"))
 
 
 @view_config(route_name = "credits", renderer = "../templates/credits.pt")

@@ -60,7 +60,9 @@ def main(global_config, **settings):
     # SITE PAGES
     config.add_route("credits", "/credits")
     config.add_route("download", "/download")
+    config.add_route("infos", "/infos")
     config.add_route("infos_concept", "/infos/concept")
+    config.add_route("infos_manual", "/infos/manual")
 
 
     # NEXUS

@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_4">
+            <div>
+                <h1>Infos</h1>
+                <h2><a href="/infos/concept">Concept</a></h2>
+                <h2><a href="/infos/manual">Manual</a></h2>
+                <h2><a href="/infos/screenshots">Screenshots</a></h2>
+                <h2><a href="/infos/videos">Videos</a></h2>
+            </div>
+	    </div>
+        <div class="col_4 last">
+            <div>
+                <p>an image to go here</p>
+            </div>
+        </div>
+    </div>
+    </tal:block>
+</html>
