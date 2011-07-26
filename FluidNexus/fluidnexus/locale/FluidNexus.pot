@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FluidNexus 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2011-07-24 16:05-0400\n"
+"POT-Creation-Date: 2011-07-25 23:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,60 +17,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: fluidnexus/forms.py:11
+#: fluidnexus/forms.py:13
+msgid "Number was not entered as 314159"
+msgstr ""
+
+#: fluidnexus/forms.py:17
 msgid "Passwords do not match"
 msgstr ""
 
-#: fluidnexus/forms.py:15
+#: fluidnexus/forms.py:21
 msgid "Your username cannot be the same as one that already exists in the database."
 msgstr ""
 
-#: fluidnexus/forms.py:24
+#: fluidnexus/forms.py:32
 msgid "Username (will be used publicly to identify you on the website)"
 msgstr ""
 
-#: fluidnexus/forms.py:25 fluidnexus/forms.py:45 fluidnexus/forms.py:64
-msgid "* Given name"
+#: fluidnexus/forms.py:33 fluidnexus/forms.py:55
+msgid "* Given name (will not be displayed)"
 msgstr ""
 
-#: fluidnexus/forms.py:26 fluidnexus/forms.py:46 fluidnexus/forms.py:65
-msgid "* Surname"
+#: fluidnexus/forms.py:34 fluidnexus/forms.py:56
+msgid "* Surname (will not be displayed)"
 msgstr ""
 
-#: fluidnexus/forms.py:27 fluidnexus/forms.py:47 fluidnexus/forms.py:66
-msgid "Homepage (please include 'http://')"
-msgstr ""
-
-#: fluidnexus/forms.py:42 fluidnexus/forms.py:61
-msgid "Username"
-msgstr ""
-
-#: fluidnexus/forms.py:43 fluidnexus/forms.py:62
-msgid "* Password"
-msgstr ""
-
-#: fluidnexus/forms.py:44 fluidnexus/forms.py:63
-msgid "* Confirm password"
-msgstr ""
-
-#: fluidnexus/forms.py:77
-msgid "Name"
-msgstr ""
-
-#: fluidnexus/forms.py:78
-msgid "E-mail (will not be shared)"
-msgstr ""
-
-#: fluidnexus/forms.py:79
+#: fluidnexus/forms.py:35 fluidnexus/forms.py:106
 msgid "Homepage"
 msgstr ""
 
-#: fluidnexus/forms.py:80
+#: fluidnexus/forms.py:36 fluidnexus/forms.py:58 fluidnexus/forms.py:108
+msgid "Please enter the following number: 314159"
+msgstr ""
+
+#: fluidnexus/forms.py:52 fluidnexus/forms.py:72 fluidnexus/forms.py:88
+msgid "Username"
+msgstr ""
+
+#: fluidnexus/forms.py:53 fluidnexus/forms.py:73
+msgid "* Password"
+msgstr ""
+
+#: fluidnexus/forms.py:54 fluidnexus/forms.py:74
+msgid "* Confirm password"
+msgstr ""
+
+#: fluidnexus/forms.py:57 fluidnexus/forms.py:77
+msgid "Homepage (may be displayed)"
+msgstr ""
+
+#: fluidnexus/forms.py:75
+msgid "* Given name"
+msgstr ""
+
+#: fluidnexus/forms.py:76
+msgid "* Surname"
+msgstr ""
+
+#: fluidnexus/forms.py:89
+msgid "* Given name (required, will not be displayed)"
+msgstr ""
+
+#: fluidnexus/forms.py:90
+msgid "* Surname (required, will not be displayed)"
+msgstr ""
+
+#: fluidnexus/forms.py:91
+msgid "Homepage (will be displayed)"
+msgstr ""
+
+#: fluidnexus/forms.py:104
+msgid "Name"
+msgstr ""
+
+#: fluidnexus/forms.py:105
+msgid "E-mail (will not be shared)"
+msgstr ""
+
+#: fluidnexus/forms.py:107
 msgid "Comment"
 msgstr ""
 
-#: fluidnexus/templates/api_authorize_token.pt:9
-msgid "Do you want to allow this application to post messages to the Nexus?"
+#: fluidnexus/templates/api_authorize_token.pt:11
+msgid "Do you want to allow the android application to post messages to the Nexus?"
+msgstr ""
+
+#: fluidnexus/templates/api_authorize_token.pt:19
+msgid "Do you want to allow the desktop application to post messages to the Nexus?"
 msgstr ""
 
 #: fluidnexus/templates/api_request_key.pt:9
@@ -83,6 +115,53 @@ msgstr ""
 
 #: fluidnexus/templates/api_request_key.pt:11
 msgid "Secret: ${secret}"
+msgstr ""
+
+#: fluidnexus/templates/blog_post.pt:14
+msgid " Posted by ${username} at <dynamic element>. "
+msgstr ""
+
+#: fluidnexus/templates/blog_post.pt:24
+msgid " <dynamic element> <dynamic element> <dynamic element> "
+msgstr ""
+
+#: fluidnexus/templates/credits.pt:10
+msgid ""
+"The initial version of Fluid Nexus for Series 60 Nokia phones running Python "
+"was written in conjunction with Bruno Vianna, Luis Ayuso; design help by "
+"Mónica Sánchez; and the support of <dynamic element> during the 2° Encuentro "
+"Inclusiva-net: redes digitales y espacio fisico."
+msgstr ""
+
+#: fluidnexus/templates/credits.pt:12
+msgid "Social media icons by <dynamic element> and released under <dynamic element>."
+msgstr ""
+
+#: fluidnexus/templates/home.pt:13
+msgid ""
+"Fluid Nexus is an application for Android phones and desktop computers that "
+"exchanges messages without the need for centralized mobile networks. Messages"
+" hop from one device to another, being transferred by short-rante networking "
+"technologies like bluetooth, as well as the via the movement of people from "
+"one location to another. <dynamic element>"
+msgstr ""
+
+#: fluidnexus/templates/home.pt:19
+msgid ""
+"The Nexus is the location for public messages uploaded by uses of the Fluid "
+"Nexus software. The stream provides a real-time view of text, images, audio, "
+"and video that Fluid Nexus users think should be seen by the general public. "
+"<dynamic element>"
+msgstr ""
+
+#: fluidnexus/templates/home.pt:27
+msgid ""
+"Fluid Nexus is available for Android phones and computers running Windows or "
+"Linux."
+msgstr ""
+
+#: fluidnexus/templates/home.pt:33 fluidnexus/templates/home.pt:34
+msgid "<dynamic element>&nbsp;&nbsp;<dynamic element>"
 msgstr ""
 
 #: fluidnexus/templates/login.pt:9
@@ -105,7 +184,7 @@ msgid ""
 "name) on the Fluid Nexus website."
 msgstr ""
 
-#: fluidnexus/templates/nexus_messages.pt:9
+#: fluidnexus/templates/nexus_messages.pt:13
 msgid ""
 "<dynamic element>: Nexus messages are provided by users of the Fluid Nexus "
 "software and have not been pre-reviewed. The user listed as the one who "
@@ -114,72 +193,72 @@ msgid ""
 "veracity of the messages posted below."
 msgstr ""
 
-#: fluidnexus/templates/nexus_messages.pt:22
-msgid " Pushed into the Nexus by ${username} at <dynamic element>. "
+#: fluidnexus/templates/nexus_messages.pt:26
+msgid " Pushed into the Nexus by ${username} on <dynamic element>. "
 msgstr ""
 
-#: fluidnexus/views/api.py:135
+#: fluidnexus/views/api.py:157
 msgid "No 'message' parameter found"
 msgstr ""
 
-#: fluidnexus/views/api.py:140
+#: fluidnexus/views/api.py:170
 msgid "No 'message_title' found in POSTed message."
 msgstr ""
 
-#: fluidnexus/views/api.py:142
+#: fluidnexus/views/api.py:172
 msgid "No 'message_content' found in POSTed message."
 msgstr ""
 
-#: fluidnexus/views/api.py:144
+#: fluidnexus/views/api.py:174
 msgid "No 'message_hash' found in POSTed message."
 msgstr ""
 
-#: fluidnexus/views/api.py:146
+#: fluidnexus/views/api.py:176
 msgid "No 'message_time' found in POSTed message."
 msgstr ""
 
-#: fluidnexus/views/api.py:148
+#: fluidnexus/views/api.py:178
 msgid "No 'message_type' found in POSTed message."
 msgstr ""
 
-#: fluidnexus/views/api.py:220
+#: fluidnexus/views/api.py:261
 msgid "You must be registered and logged in to request a consumer key and secret."
 msgstr ""
 
-#: fluidnexus/views/api.py:239
+#: fluidnexus/views/api.py:280
 msgid "Fluid Nexus Key and Secret"
 msgstr ""
 
-#: fluidnexus/views/api.py:319 fluidnexus/views/api.py:344
+#: fluidnexus/views/api.py:375 fluidnexus/views/api.py:403
 msgid "Attempt to use an authorization token that does not belong to you."
 msgstr ""
 
-#: fluidnexus/views/api.py:322 fluidnexus/views/api.py:347
+#: fluidnexus/views/api.py:378 fluidnexus/views/api.py:406
 msgid "Malformed authorization token parameters."
 msgstr ""
 
-#: fluidnexus/views/api.py:327
+#: fluidnexus/views/api.py:383
 msgid "Authorization application to post to Nexus"
 msgstr ""
 
-#: fluidnexus/views/api.py:339
+#: fluidnexus/views/api.py:398
 msgid "Unable to find consumer key in the database; this should never happen!"
 msgstr ""
 
-#: fluidnexus/views/api.py:369
+#: fluidnexus/views/api.py:431
 msgid "You must be logged in."
 msgstr ""
 
-#: fluidnexus/views/api.py:380
+#: fluidnexus/views/api.py:442
 msgid "Attempt to retrieve an access token that does not belong to you."
 msgstr ""
 
-#: fluidnexus/views/api.py:383
+#: fluidnexus/views/api.py:445
 msgid "Your token and token secret"
 msgstr ""
 
-#: fluidnexus/views/login.py:24 fluidnexus/views/views.py:122
-#: fluidnexus/views/views.py:165 fluidnexus/views/views.py:412
+#: fluidnexus/views/login.py:24 fluidnexus/views/views.py:131
+#: fluidnexus/views/views.py:175 fluidnexus/views/views.py:436
 msgid "You are already logged in and therefore cannot register for a new account."
 msgstr ""
 
@@ -191,57 +270,77 @@ msgstr ""
 msgid "Nexus Messages"
 msgstr ""
 
-#: fluidnexus/views/views.py:24
+#: fluidnexus/views/views.py:25
 msgid "Save"
 msgstr ""
 
-#: fluidnexus/views/views.py:25
+#: fluidnexus/views/views.py:26
 msgid "Delete"
 msgstr ""
 
-#: fluidnexus/views/views.py:46
+#: fluidnexus/views/views.py:47
 msgid "Fluid Nexus Blog posts"
 msgstr ""
 
-#: fluidnexus/views/views.py:75
+#: fluidnexus/views/views.py:76
 msgid "Your comment was successfully posted."
 msgstr ""
 
-#: fluidnexus/views/views.py:85
+#: fluidnexus/views/views.py:86
 msgid " || Fluid Nexus Blog Post"
 msgstr ""
 
-#: fluidnexus/views/views.py:97
+#: fluidnexus/views/views.py:98
 msgid "Edit users"
 msgstr ""
 
-#: fluidnexus/views/views.py:114
-msgid "Edit"
-msgstr ""
-
-#: fluidnexus/views/views.py:157 fluidnexus/views/views.py:203
-msgid "Register new user"
-msgstr ""
-
-#: fluidnexus/views/views.py:199
-msgid "You have successfully registered!"
-msgstr ""
-
-#: fluidnexus/views/views.py:214
+#: fluidnexus/views/views.py:106 fluidnexus/views/views.py:225
 msgid "You are not allowed to view information about a user other than yourself."
 msgstr ""
 
-#: fluidnexus/views/views.py:238
+#: fluidnexus/views/views.py:123
+msgid "Edit"
+msgstr ""
+
+#: fluidnexus/views/views.py:167 fluidnexus/views/views.py:214
+msgid "Register new user"
+msgstr ""
+
+#: fluidnexus/views/views.py:210
+msgid "You have successfully registered!"
+msgstr ""
+
+#: fluidnexus/views/views.py:249
 msgid "Viewing "
 msgstr ""
 
-#: fluidnexus/views/views.py:405
+#: fluidnexus/views/views.py:331
+msgid "Fluid Nexus Credits"
+msgstr ""
+
+#: fluidnexus/views/views.py:424
 msgid ""
 "You do not have access to the requested resource.  Either login using an "
 "account that does have access, or contact the administrators of the site."
 msgstr ""
 
-#: fluidnexus/views/views.py:427
+#: fluidnexus/views/views.py:425
+msgid "403 Forbidden"
+msgstr ""
+
+#: fluidnexus/views/views.py:430
+msgid "404 Not Found"
+msgstr ""
+
+#: fluidnexus/views/views.py:439
+msgid "OpenID login"
+msgstr ""
+
+#: fluidnexus/views/views.py:449
+msgid "Successfully logged in!"
+msgstr ""
+
+#: fluidnexus/views/views.py:452
 msgid "You now need to register after validating your OpenID"
 msgstr ""
 

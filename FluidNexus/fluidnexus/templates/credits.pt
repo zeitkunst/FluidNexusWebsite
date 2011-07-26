@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+            <h2>Initial Version Credits</h2>
+            <p i18n:translate="">The initial version of Fluid Nexus for Series 60 Nokia phones running Python was written in conjunction with Bruno Vianna, Luis Ayuso; design help by Mónica Sánchez; and the support of <a href="http://medialab-prado.es">Medialab Prado</a> during the 2° Encuentro Inclusiva-net: redes digitales y espacio fisico.</p>
+            <h2>Website Credits</h2>
+            <p i18n:translate="">Social media icons by <a href="http://www.softicons.com/free-icons/designers/paul-robert-lloyd">Paul Robert Lloyd</a> and released under <a href="http://creativecommons.org/licenses/by-sa/2.0/uk/">CC Attribution-Share Alike 2.0 UK </a>.</p>
+        </div>
+    </div>
+    </tal:block>
+</html>

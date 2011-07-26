@@ -323,6 +323,21 @@ def edit_blog_post(request):
     form = fs.render()
     return dict(form = form, title = post.title, edit_blog_post_url = edit_blog_post_url)
 
+@view_config(route_name = "infos_concept", renderer = "../templates/concept.pt")
+def concept(request):
+    """Concept page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Concept"))
+
+
+@view_config(route_name = "credits", renderer = "../templates/credits.pt")
+def credits(request):
+    """Credits page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Credits"))
+
 @view_config(route_name = "view_page", renderer = "../templates/view_page.pt")
 def view_page(request):
     """View a given page."""
@@ -439,6 +454,7 @@ def remember_me(context, request, result):
     if (user):
         request.session["username"] = user.username
         headers = remember(request, user.id)
+        request.session.flash(_("Successfully logged in!"))
         return HTTPFound(location = route_url("home", request), headers = headers)
     else:
         request.session.flash(_("You now need to register after validating your OpenID"))

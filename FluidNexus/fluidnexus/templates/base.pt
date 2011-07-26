@@ -3,7 +3,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); images_static_url request.static_url('fluidnexus:static/images'); logged_in request.logged_in">
+    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); images_static_url request.static_url('fluidnexus:static/images'); pdfs_static_url request.static_url('fluidnexus:static/pdfs'); logged_in request.logged_in">
 <head>
     <title>${title}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -47,19 +47,18 @@
 
 
     <div id="content" class="container test">
-        <div class="pre_2 col_8 last">
-            <div id="flash_messages" tal:condition="request.session.peek_flash()">
-                <p class="flash_message" tal:repeat="message request.session.pop_flash()">
-                    ${message}
-                </p>
-            </div>
-        </div>
-        <tal:block metal:define-slot="content">
-        </tal:block>
-    </div>
-
-    <div id="footer" class="container test">
         <div class="row">
+            <div class="pre_2 col_8 last">
+                <div id="flash_messages" tal:condition="request.session.peek_flash()">
+                    <p class="flash_message" tal:repeat="message request.session.pop_flash()">
+                        ${message}
+                    </p>
+                </div>
+            </div>
+            <tal:block metal:define-slot="content">
+            </tal:block>
+        </div>
+        <div class="footer row">
             <div class="pre_2 col_4">
                 &nbsp;
             </div>
@@ -76,6 +75,10 @@
             </div>
             <div class="col_2 last">&nbsp;</div>
         </div>
+
+    </div>
+
+    <div id="footer" class="container test">
     </div>
 </body>
 </html>

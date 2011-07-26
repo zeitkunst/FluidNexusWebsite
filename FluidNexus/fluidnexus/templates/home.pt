@@ -1,27 +1,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="base">
     <tal:block metal:fill-slot="content">
     <div class="row">
 	    <div class="pre_2 col_4">
             <div>
-	            <h1>Concept</h1>
-                <p>Some information about the concept.</p>
+                <div id="concept_front">
+                    <h1><img src="${images_static_url}/concept_front.png" alt="Concept"/></h1>
+                </div>
+                <p i18n:translate="">Fluid Nexus is an application for Android phones and desktop computers that exchanges messages without the need for centralized mobile networks.  Messages hop from one device to another, being transferred by short-range networking technologies like bluetooth, as well as the via the movement of people from one location to another.  <a href="/infos/concept">Read More</a></p>
             </div>
             <div>
-                <h1>Nexus</h1>
-                <p>What the Nexus is and why we implemented it.</p>
+                <div id="nexus_front">
+                    <h1><img src="${images_static_url}/nexus_front.png" alt="Nexus"/></h1>
+                </div>
+                <p i18n:translate="">The Nexus is the location for public messages uploaded by uses of the Fluid Nexus software.  The stream provides a real-time view of text, images, audio, and video that Fluid Nexus users think should be seen by the general public.  <a href="/nexus">View the Nexus</a></p>
             </div>
 	    </div>
         <div class="col_4 last">
             <div>
-                <h1>Download</h1>
-                <p>Some info about versions available</p>
+                <div id="download_front">
+                    <h1><img src="${images_static_url}/download_front.png" alt="Download"/></h1>
+                </div>
+                <p i18n:translate="">Fluid Nexus is available for Android phones and computers running Windows or Linux.</p>
             </div>
             <div>
-                <h1>connect</h1>
-                <p>identi.ca and twitter</p>
+                <div id="connect_front">
+                    <h1><img src="${images_static_url}/connect_front.png" alt="Connect"/></h1>
+                </div>
+                <h2 i18n:translate=""><img src="${images_static_url}/identica.png" alt="identi.ca"/>&nbsp;&nbsp;<a href="http://identi.ca/fluidnexus">identi.ca</a></h2>
+                <h2 i18n:translate=""><img src="${images_static_url}/twitter.png" alt="twitter"/>&nbsp;&nbsp;<a href="http://twitter.com/FluidNexus">twitter</a></h2>
             </div>
         </div>
     </div>

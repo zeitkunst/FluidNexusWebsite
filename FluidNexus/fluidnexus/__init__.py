@@ -57,6 +57,11 @@ def main(global_config, **settings):
     config.add_route("edit_page", "/admin/pages/edit/{page_id}")
     #config.add_route("view_page", "/{page_location}")
 
+    # SITE PAGES
+    config.add_route("credits", "/credits")
+    config.add_route("infos_concept", "/infos/concept")
+
+
     # NEXUS
     config.add_route("view_nexus_messages", "/nexus")
 

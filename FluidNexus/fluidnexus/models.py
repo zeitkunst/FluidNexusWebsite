@@ -228,6 +228,14 @@ class Comment(Base):
 
         return "<Comment '%s'>" % self.content
 
+    def getISOTime(self):
+        """Format the time for display."""
+        timetuple = time.gmtime(self.created_time)
+        return time.strftime("%Y-%m-%dT%H:%M:%S", timetuple)
+
+    def getFormattedTime(self):
+        return time.ctime(self.created_time)
+
 class NexusMessage(Base):
     __tablename__ = "nexus_messages"
 

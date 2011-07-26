@@ -6,6 +6,12 @@ from fluidnexus.models import Comment, User, Token
 
 _ = TranslationStringFactory('fluidnexus_forms')
 
+def captcha_match(value, field):
+    print "VALUE ", value
+    print "VALUE TYPE ", type(value)
+    if ((value != "314159") or (value == "")):
+        raise validators.ValidationError(_("Number was not entered as 314159"))
+
 def password_match(value, field):
     if field.parent.password1.value != value:
         raise validators.ValidationError(_("Passwords do not match"))
@@ -21,10 +27,13 @@ class OpenIDUserFieldSet(FieldSet):
         """Pre-configuration"""
         FieldSet.__init__(self, User)
 
+        self.append(Field('captcha'))
+
         inc = [self.username.label(_("Username (will be used publicly to identify you on the website)")).validate(username_different),
-               self.given_name.label(_("* Given name")),
-               self.surname.label(_("* Surname")),
-               self.homepage.label(_("Homepage (please include 'http://')"))
+               self.given_name.label(_("* Given name (will not be displayed)")),
+               self.surname.label(_("* Surname (will not be displayed)")),
+               self.homepage.label(_("Homepage")),
+               self.captcha.label(_("Please enter the following number: 314159")).required().validate(captcha_match)
               ]
         self.configure(include = inc)
 
@@ -38,13 +47,15 @@ class RegisterUserFieldSet(FieldSet):
 
         self.append(Field('password1'))
         self.append(Field('password2'))
+        self.append(Field('captcha'))
 
         inc = [self.username.label(_("Username")),
                self.password1.password().label(_("* Password")),
                self.password2.password().label(_("* Confirm password")).validate(password_match),
-               self.given_name.label(_("* Given name")),
-               self.surname.label(_("* Surname")),
-               self.homepage.label(_("Homepage (please include 'http://')"))
+               self.given_name.label(_("* Given name (will not be displayed)")),
+               self.surname.label(_("* Surname (will not be displayed)")),
+               self.homepage.label(_("Homepage (may be displayed)")),
+               self.captcha.label(_("Please enter the following number: 314159")).required().validate(captcha_match)
               ]
         self.configure(include = inc)
 
@@ -63,7 +74,7 @@ class UserFieldSet(FieldSet):
                self.password2.password().label(_("* Confirm password")).validate(password_match),
                self.given_name.label(_("* Given name")),
                self.surname.label(_("* Surname")),
-               self.homepage.label(_("Homepage (please include 'http://')"))
+               self.homepage.label(_("Homepage (may be displayed)"))
               ]
         self.configure(include = inc)
 
@@ -75,9 +86,9 @@ class UserNoPasswordFieldSet(FieldSet):
         FieldSet.__init__(self, User)
 
         inc = [self.username.readonly().label(_("Username")),
-               self.given_name.label(_("* Given name")),
-               self.surname.label(_("* Surname")),
-               self.homepage.label(_("Homepage (please include 'http://')"))
+               self.given_name.label(_("* Given name (required, will not be displayed)")),
+               self.surname.label(_("* Surname (required, will not be displayed)")),
+               self.homepage.label(_("Homepage (will be displayed)"))
               ]
         self.configure(include = inc)
 
@@ -87,11 +98,14 @@ class CommentFieldSet(FieldSet):
     def __init__(self):
         FieldSet.__init__(self, Comment)
 
+        self.append(Field('captcha'))
+
         options = [self.content.textarea(size = (45,20))]
         inc = [self.name.label(_("Name")),
                self.email.label(_("E-mail (will not be shared)")),
                self.homepage.label(_("Homepage")),
-               self.content.label(_("Comment")).required()
+               self.content.label(_("Comment")).required(),
+               self.captcha.label(_("Please enter the following number: 314159")).required().validate(captcha_match)
               ]
         self.configure(include = inc, options = options)
 

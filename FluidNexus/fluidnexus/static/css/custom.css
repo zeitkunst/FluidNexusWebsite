@@ -96,6 +96,7 @@ Desktop version layout - place your custom code here */
 body {
     font-family: "DejaWeb", Verdana, "sans-serif";
     font-size: 1.1em;
+
 }
 
 h1, h2, h3 {
@@ -106,6 +107,11 @@ h1, h2, h3 {
 
 nav, header, section, article {
     display: block;
+}
+
+img {
+    margin: 0em;
+    padding: 0em;
 }
 
 a {
@@ -124,22 +130,14 @@ a:hover {
 }
 
 #main_header {
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, rgb(71,71,71)),
-        color-stop(0.51, rgb(194,194,194)),
-        color-stop(0.76, rgb(235,235,235))
-    );
-
-    background-image: -moz-linear-gradient(
-        center bottom,
-        rgb(71,71,71) 0%,
-        rgb(194,194,194) 51%,
-        rgb(235,235,235) 76%
-    );
-
+    background: rgb(206,220,231); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(206,220,231,1) 0%, rgba(100,100,100,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(206,220,231,1)), color-stop(100%,rgba(100,100,100,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(100,100,100,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(100,100,100,1) 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(100,100,100,1) 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#646464',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, rgba(206,220,231,1) 0%,rgba(100,100,100,1) 100%); /* W3C */
 }
 
 #header_image {
@@ -172,35 +170,70 @@ ul#navigation a {
     font-size: 1.5em;
     font-family: "Delicious", "sans-serif";
     font-weight: bold;
-
+    /* Gradient from http://www.colorzilla.com/gradient-editor/ */
+    background: rgb(248,80,50); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 50%, rgba(234,16,16,1) 51%, rgba(234,25,25,1) 71%, rgba(235,48,45,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(248,80,50,1)), color-stop(50%,rgba(241,111,92,1)), color-stop(51%,rgba(234,16,16,1)), color-stop(71%,rgba(234,25,25,1)), color-stop(100%,rgba(235,48,45,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(234,16,16,1) 51%,rgba(234,25,25,1) 71%,rgba(235,48,45,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(234,16,16,1) 51%,rgba(234,25,25,1) 71%,rgba(235,48,45,1) 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(234,16,16,1) 51%,rgba(234,25,25,1) 71%,rgba(235,48,45,1) 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#eb302d',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(234,16,16,1) 51%,rgba(234,25,25,1) 71%,rgba(235,48,45,1) 100%); /* W3C */
 }
 
 ul#navigation a:hover {
     color: #eee;
     text-decoration: none;
     background-color: #84302d;
+    background: rgb(221,195,197); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(221,195,197,1) 0%, rgba(206,74,74,1) 50%, rgba(131,47,44,1) 51%, rgba(178,85,82,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,195,197,1)), color-stop(50%,rgba(206,74,74,1)), color-stop(51%,rgba(131,47,44,1)), color-stop(100%,rgba(178,85,82,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(221,195,197,1) 0%,rgba(206,74,74,1) 50%,rgba(131,47,44,1) 51%,rgba(178,85,82,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(221,195,197,1) 0%,rgba(206,74,74,1) 50%,rgba(131,47,44,1) 51%,rgba(178,85,82,1) 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, rgba(221,195,197,1) 0%,rgba(206,74,74,1) 50%,rgba(131,47,44,1) 51%,rgba(178,85,82,1) 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddc3c5', endColorstr='#b25552',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, rgba(221,195,197,1) 0%,rgba(206,74,74,1) 50%,rgba(131,47,44,1) 51%,rgba(178,85,82,1) 100%); /* W3C */
 }
 
 #content {
-    margin-top: 1em;
+    padding-top: 1em;
+    background: rgb(204,204,204); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(204,204,204,1) 0%, rgba(238,238,238,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,204,204,1)), color-stop(100%,rgba(238,238,238,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, rgba(204,204,204,1) 0%,rgba(238,238,238,1) 100%); /* W3C */
+}
+
+#nexus_front {
+
+}
+
+.comment {
+    margin-bottom: 2em;
+    clear: both;
+}
+
+.comment_author {
+    font-weight: bold;
+}
+
+.comment_time {
+    width: 6em;
+    float: left;
+    font-size: 0.8em;
+    background-color: #eee;
+    border: 1px solid black;
+    padding: 4px;
+    margin-right: 1em;
+    margin-bottom: 2em;
+    font-weight: bold;
 }
 
 #footer {
     margin-top: 1em;
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.0, rgb(194,194,194)),
-        color-stop(0.75, rgb(235,235,235))
-    );
-
-    background-image: -moz-linear-gradient(
-        center bottom,
-        rgb(194,194,194) 0%,
-        rgb(255,255,255) 75%
-    );
-    
     font-size: 0.8em;
 }
 

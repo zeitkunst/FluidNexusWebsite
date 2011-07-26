@@ -6,6 +6,10 @@
     <tal:block metal:fill-slot="content">
     <div class="row">
 	    <div class="pre_2 col_8 last">
+
+                <div id="nexus_front">
+                    <h1><img src="${images_static_url}/nexus_front.png" alt="Nexus"/></h1>
+                </div>
         <p i18n:translate=""><strong>Note</strong>: Nexus messages are provided by users of the Fluid Nexus software and have not been pre-reviewed.  The user listed as the one who "pushed" the message to the Nexus is not necessarily the one who created the message.  Please take these points into account when considering the veracity of the messages posted below.</p>
 		<article class="nexus_message" tal:repeat="message messages">
     		<h1>${message.title}</h1>
@@ -20,7 +24,7 @@
                 </tal:block>
             </tal:block>
     		<div class="time" i18n:translate="">
-    			Pushed into the Nexus by <span tal:replace="message.username" i18n:name="username" /> at <time datetime="${message.getISOTime()}"><span tal:replace="message.getFormattedTime()" i18n:name="formatted_time" /></time>.
+    			Pushed into the Nexus by <span tal:replace="message.username" i18n:name="username" /> on <time datetime="${message.getISOTime()}"><span tal:replace="message.getFormattedTime()" i18n:name="formatted_time" /></time>.
     		</div>
 		</article>
 	    </div>

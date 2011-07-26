@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     metal:use-macro="base">
 
     <tal:block metal:fill-slot="content">
@@ -20,8 +21,11 @@
             <div class="pre_2 col_8 last">
          		<h2>Comments</h2>
         		<div class="comments">
-        			<div class="comment" tal:repeat="comment comments">
-        				<p>By ${comment.name}</p>
+        			<div class="comment" i18n:translate="" tal:repeat="comment comments">
+                        <div class="comment_time">
+                            <time datetime="${comment.getISOTime()}"><span tal:replace="comment.getFormattedTime()" i18n:name="formatted_comment_time" /></time>
+                        </div>
+                        <p>By <span class="comment_author">${comment.name}</span></p>
         				<div>
         					${comment.content}
         				</div>
