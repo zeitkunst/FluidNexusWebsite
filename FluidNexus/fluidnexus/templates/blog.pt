@@ -8,15 +8,18 @@
             <div id="nexus_front">
                 <h1><img src="${images_static_url}/blog.png" alt="blog"/></h1>
             </div>
-
-		<article class="post" tal:repeat="post posts">
-    		<h1><a href="${post.post_url}">${post.title}</a></h1>
-    		<div class="content" tal:replace="structure post.getFormattedContent()">
-    		</div>
-    		<div class="time" i18n:translate="">
-    			Posted by <span tal:replace="post.username" i18n:name="username" /> at <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
-    		</div>
-		</article>
+            <div id="blog_posts">
+        		<article class="post" tal:repeat="post posts">
+                    <h1 class="post_title"><a href="${post.post_url}">${post.title}</a></h1>
+                    <div class="post_content">
+                		<div class="content" tal:replace="structure post.getFormattedContent()">
+                		</div>
+                    </div>
+            		<div class="blog_post_time" i18n:translate="">
+                        Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username"/></span> on <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
+            		</div>
+        		</article>
+            </div>
 	    </div>
 	</div>
     </tal:block>

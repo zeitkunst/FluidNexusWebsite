@@ -268,7 +268,8 @@ def edit_blog(request):
     #g = Grid(Post, posts)
     #g.configure(options = [g["title"].readonly()], exclude = [g["modified_time"], g["user"], g["created_time"], g["content"]])
     #form = g.render()
-    return dict(posts = modifiedPosts, new_blog_post_url = new_blog_post_url)
+    print "HERE!!!"
+    return dict(title = _("Edit blog posts"), posts = modifiedPosts, new_blog_post_url = new_blog_post_url)
 
 @view_config(route_name = "new_blog_post", renderer = "../templates/new_blog_post.pt", permission = "edit_blog")
 def new_blog_post(request):
@@ -292,7 +293,7 @@ def new_blog_post(request):
     fs = FieldSet(Post, session = session)
     fs.configure(options=[fs.content.textarea(size=(45, 10))], exclude = [fs["modified_time"], fs["user"], fs["comments"], fs["created_time"]])
     form = fs.render()
-    return dict(form = form, new_blog_post_url = new_blog_post_url)
+    return dict(title = _("New Fluid Nexus Blog Post"), form = form, new_blog_post_url = new_blog_post_url)
 
 @view_config(route_name = "edit_blog_post", renderer = "../templates/edit_blog_post.pt", permission = "edit_blog")
 def edit_blog_post(request):
@@ -334,9 +335,15 @@ def concept(request):
 @view_config(route_name = "credits", renderer = "../templates/credits.pt")
 def credits(request):
     """Credits page."""
-    session = DBSession()
 
     return dict(title = _("Fluid Nexus Credits"))
+
+@view_config(route_name = "download", renderer = "../templates/download.pt")
+def download(request):
+    """Download page."""
+
+    return dict(title = _("Fluid Nexus Download"))
+
 
 @view_config(route_name = "view_page", renderer = "../templates/view_page.pt")
 def view_page(request):

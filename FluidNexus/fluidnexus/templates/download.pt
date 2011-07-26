@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+
+            <div id="download_front">
+                <h1><img src="${images_static_url}/download_front.png" alt="Download"/></h1>
+            </div>
+            <h2 i18n:translate="">Android</h2>
+            <h2 i18n:translate="">Windows/Linux</h2>
+            <div>
+                <h2 i18n:translate="">Nokia Series 60</h2>
+                <p i18n:translate="">The Nokia Series 60 version is based on an older version of the Fluid Nexus protocol and is not compatable with the current Android and Windows/Linux applications.  We provide the link to the source code for historical interest and potential use by those who only have access to Series 60 devices.</p>
+                <p i18n:translate="">If there are developers wanting to help us port the Series 60 code to the current version of the protocol, please contact us.  The main sticking point is ensuring that the Google Protocol Buffer python library works on Series 60.</p>
+            </div>
+            <h1>Source Code...</h1>
+            <p i18n:translate="">... is available on github.</p>
+            <h2><a href="https://github.com/zeitkunst/FluidNexusAndroid">Android client</a></h2>
+            <h2><a href="https://github.com/zeitkunst/FluidNexus">Desktop/Laptop client for Windows/Linux</a></h2>
+        </div>
+    </div>
+    </tal:block>
+</html>

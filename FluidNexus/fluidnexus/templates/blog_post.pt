@@ -8,11 +8,13 @@
         <div class="row">
     	    <div class="pre_2 col_8 last">
     		<article class="post">
-        		<h1>${post.title}</h1>
-        		<div class="content" tal:replace="structure post.getFormattedContent()">
-        		</div>
-        		<div class="time" i18n:translate="">
-        			Posted by <span tal:replace="post.username" i18n:name="username" /> at <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
+                <h1 class="post_title">${post.title}</h1>
+                <div class="post_content">
+            		<div class="content" tal:replace="structure post.getFormattedContent()">
+            		</div>
+                </div>
+        		<div class="blog_post_time" i18n:translate="">
+                    Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username" /></span> at <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
         		</div>
     		</article>
     	    </div>
@@ -22,13 +24,13 @@
          		<h2>Comments</h2>
         		<div class="comments">
         			<div class="comment" i18n:translate="" tal:repeat="comment comments">
-                        <div class="comment_time">
-                            <time datetime="${comment.getISOTime()}"><span tal:replace="comment.getFormattedTime()" i18n:name="formatted_comment_time" /></time>
-                        </div>
-                        <p>By <span class="comment_author">${comment.name}</span></p>
-        				<div>
+        				<div class="comment_content">
         					${comment.content}
         				</div>
+                        <div class="comment_time">
+                            By <span class="comment_author">${comment.name}</span> on <time datetime="${comment.getISOTime()}"><span tal:replace="comment.getFormattedTime()" i18n:name="formatted_comment_time" /></time>
+                        </div>
+
         			</div>
         		</div>
             </div>

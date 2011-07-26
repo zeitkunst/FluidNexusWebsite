@@ -24,7 +24,7 @@
                 <div id="download_front">
                     <h1><img src="${images_static_url}/download_front.png" alt="Download"/></h1>
                 </div>
-                <p i18n:translate="">Fluid Nexus is available for Android phones and computers running Windows or Linux.</p>
+                <p i18n:translate="">Fluid Nexus is available for Android phones and computers running Windows or Linux.  <a href="/download">More info</a></p>
             </div>
             <div>
                 <div id="connect_front">
