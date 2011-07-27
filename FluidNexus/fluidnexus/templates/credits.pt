@@ -14,6 +14,7 @@
             <p i18n:translate="">The initial version of Fluid Nexus for Series 60 Nokia phones running Python was written in conjunction with Bruno Vianna, Luis Ayuso; design help by Mónica Sánchez; and the support of <a href="http://medialab-prado.es">Medialab Prado</a> during the 2° Encuentro Inclusiva-net: redes digitales y espacio fisico.</p>
             <h2>Website Credits</h2>
             <p i18n:translate="">Social media icons by <a href="http://www.softicons.com/free-icons/designers/paul-robert-lloyd">Paul Robert Lloyd</a> and released under <a href="http://creativecommons.org/licenses/by-sa/2.0/uk/">CC Attribution-Share Alike 2.0 UK </a>.  Android icon by <a href="http://tempest.deviantart.com/">Tempest</a> and released under Creative Commons Attribution Non-commercial (by-nc).</p>
+            <p>TODO: add fonts, lightbox, jquery, pyramid, etc</p>
         </div>
     </div>
     </tal:block>

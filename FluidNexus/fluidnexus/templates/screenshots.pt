@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+            <h1>Desktop Screenshots</h1>
+            <div class="lightbox">
+                <a href="${images_static_url}/desktop_main_interface.png"><img src="${images_static_url}/thumbs/desktop_main_interface.png" alt="desktop main interface"/></a>
+                <a href="${images_static_url}/desktop_new_message.png "><img src="${images_static_url}/thumbs/desktop_new_message.png" alt="desktop new message"/></a>
+                <a href="${images_static_url}/desktop_new_message_complete.png "><img src="${images_static_url}/thumbs/desktop_new_message_complete.png" alt="desktop new message complete"/></a>
+                <a href="${images_static_url}/desktop_preferences.png"><img src="${images_static_url}/thumbs/desktop_preferences.png" alt="desktop preferences"/></a>
+                <a href="${images_static_url}/desktop_preferences_nexus.png"><img src="${images_static_url}/thumbs/desktop_preferences_nexus.png" alt="desktop preferences nexus"/></a>
+            </div>
+        </div>
+    </div>
+    </tal:block>
+</html>

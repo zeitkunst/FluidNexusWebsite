@@ -408,6 +408,13 @@ ul#navigation a:hover {
     border-bottom-left-radius: 10px;
 }
 
+.lightbox a {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 1em;
+}
+
 #footer {
     margin-top: 1em;
     font-size: 0.8em;

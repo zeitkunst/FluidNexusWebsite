@@ -346,6 +346,13 @@ def manual(request):
 
     return dict(title = _("Fluid Nexus Manual"))
 
+@view_config(route_name = "infos_screenshots", renderer = "../templates/screenshots.pt")
+def screenshots(request):
+    """Screenshots page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Screenshots"))
+
 
 @view_config(route_name = "credits", renderer = "../templates/credits.pt")
 def credits(request):

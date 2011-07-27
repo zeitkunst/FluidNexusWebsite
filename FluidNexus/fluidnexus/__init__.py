@@ -63,6 +63,7 @@ def main(global_config, **settings):
     config.add_route("infos", "/infos")
     config.add_route("infos_concept", "/infos/concept")
     config.add_route("infos_manual", "/infos/manual")
+    config.add_route("infos_screenshots", "/infos/screenshots")
 
 
     # NEXUS

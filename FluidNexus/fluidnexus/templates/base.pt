@@ -3,13 +3,21 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); images_static_url request.static_url('fluidnexus:static/images'); pdfs_static_url request.static_url('fluidnexus:static/pdfs'); logged_in request.logged_in">
+    tal:define="testing False; css_static_url request.static_url('fluidnexus:static/css'); scripts_static_url request.static_url('fluidnexus:static/scripts'); images_static_url request.static_url('fluidnexus:static/images'); pdfs_static_url request.static_url('fluidnexus:static/pdfs'); logged_in request.logged_in">
 <head>
     <title>${title}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <meta name="keywords" content="python web application" />
     <meta name="description" content="pyramid web application" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="${scripts_static_url}/jquery.min.js"></script>
+    <script type="text/javascript" src="${scripts_static_url}/jquery.lightbox-0.5.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.lightbox a').lightBox(); // Select all links in object with gallery ID
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="${css_static_url}/jquery.lightbox-0.5.css" media="screen" />
     <link rel="stylesheet" href="${css_static_url}/columnal.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="${css_static_url}/custom.css" type="text/css" media="screen" />
 <!-- Page build tools - only needed while creating a site, remove when          launching - Gray box colors and page debugging tools -->
