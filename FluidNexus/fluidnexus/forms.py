@@ -47,11 +47,11 @@ class RegisterUserFieldSet(FieldSet):
         self.append(Field('password2'))
         self.append(Field('captcha'))
 
-        inc = [self.username.label(_("Username")),
-               self.password1.password().label(_("* Password")),
-               self.password2.password().label(_("* Confirm password")).validate(password_match),
-               self.given_name.label(_("* Given name (will not be displayed)")),
-               self.surname.label(_("* Surname (will not be displayed)")),
+        inc = [self.username.label(_("* Username")).required().validate(username_different),
+               self.password1.password().label(_("* Password")).required(),
+               self.password2.password().label(_("* Confirm password")).required().validate(password_match),
+               self.given_name.label(_("* Given name (will not be displayed)")).required(),
+               self.surname.label(_("* Surname (will not be displayed)")).required(),
                self.homepage.label(_("Homepage (may be displayed)")),
                self.captcha.label(_("Please enter the following number: 314159")).required().validate(captcha_match)
               ]

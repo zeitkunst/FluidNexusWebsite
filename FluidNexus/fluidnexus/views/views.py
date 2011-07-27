@@ -138,6 +138,8 @@ def register_user(request):
     
     came_from = request.params.get('came_from', referrer)
 
+    fs = None
+
     if 'submitted' in request.params:
         fs = RegisterUserFieldSet().bind(User, session = session, data = request.params or None)
         valid = fs.validate()
@@ -160,9 +162,11 @@ def register_user(request):
             User.addToGroup(fs.username.value, "nexus")
             request.session["username"] = fs.username.value
             headers = remember(request, User.getID(fs.username.value))
-            return HTTPFound(location = came_from, headers = headers)
+            request.session.flash(_("You have successfully created a new account!"))
+            return HTTPFound(location = route_url("home", request), headers = headers)
 
-    fs = RegisterUserFieldSet().bind(User, session = session)
+    if (fs is None):
+        fs = RegisterUserFieldSet().bind(User, session = session)
     form = fs.render()
     return dict(form = form, title = _("Register new user"))
 
