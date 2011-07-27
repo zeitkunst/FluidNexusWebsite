@@ -281,7 +281,6 @@ def api_request_key(request):
 
 @view_config(route_name = "api_request_token", request_method = "POST")
 def api_request_token(request):
-    print request
     session = DBSession()
     auth_header = {}
     matchdict = request.matchdict
@@ -363,9 +362,7 @@ def api_authorize_token(request):
     matchdict = request.matchdict
     appType = matchdict.get("appType", "")
 
-    print "HERE!!!!"
     # First check that the logged in user is the holder of this token
-    print "PARAM: ", request.params.get("oauth_token")
     token = Token.getByToken(request.params.get("oauth_token"))
     consumer = ConsumerKeySecret.getByConsumerKey(request.params.get("oauth_consumer_key"))
 

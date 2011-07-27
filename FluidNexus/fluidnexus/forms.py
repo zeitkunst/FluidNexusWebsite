@@ -7,8 +7,6 @@ from fluidnexus.models import Comment, User, Token
 _ = TranslationStringFactory('fluidnexus_forms')
 
 def captcha_match(value, field):
-    print "VALUE ", value
-    print "VALUE TYPE ", type(value)
     if ((value != "314159") or (value == "")):
         raise validators.ValidationError(_("Number was not entered as 314159"))
 

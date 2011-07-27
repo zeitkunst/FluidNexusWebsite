@@ -268,13 +268,11 @@ def edit_blog(request):
     #g = Grid(Post, posts)
     #g.configure(options = [g["title"].readonly()], exclude = [g["modified_time"], g["user"], g["created_time"], g["content"]])
     #form = g.render()
-    print "HERE!!!"
     return dict(title = _("Edit blog posts"), posts = modifiedPosts, new_blog_post_url = new_blog_post_url)
 
 @view_config(route_name = "new_blog_post", renderer = "../templates/new_blog_post.pt", permission = "edit_blog")
 def new_blog_post(request):
     session = DBSession()
-    print authenticated_userid(request)
 
     if 'submitted' in request.params:
         post = Post()
