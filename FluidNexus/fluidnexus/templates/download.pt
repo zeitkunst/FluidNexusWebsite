@@ -11,7 +11,9 @@
                 <h1><img src="${images_static_url}/download_front.png" alt="Download"/></h1>
             </div>
             <h2 i18n:translate="">Android</h2>
+            <p>A beta version is available on the <a href="https://market.android.com/details?id=net.fluidnexus.FluidNexus">Android Market</a>.</p>
             <h2 i18n:translate="">Windows/Linux</h2>
+            <p>The application is available for download from <a href="http://pypi.python.org/pypi/fluid_nexus">pypi</a> or via <code>easy_install fluid_nexus</code>.  We will be working on installation packages for Windows and Linux.</p>
             <div>
                 <h2 i18n:translate="">Nokia Series 60</h2>
                 <p i18n:translate="">The Nokia Series 60 version is based on an older version of the Fluid Nexus protocol and is not compatable with the current Android and Windows/Linux applications.  We provide the link to the source code for historical interest and potential use by those who only have access to Series 60 devices.</p>

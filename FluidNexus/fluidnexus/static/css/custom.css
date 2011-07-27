@@ -238,6 +238,10 @@ img {
     padding: 0em;
 }
 
+code {
+    font-family: "Courier", "Courier New", monospace;
+}
+
 a {
     color: #EB302D;
     text-decoration: underline;
