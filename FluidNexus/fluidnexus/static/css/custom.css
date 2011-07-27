@@ -7,11 +7,11 @@ Desktop version layout - place your custom code here */
 /* Delicious fonts by Jos Buivenga (exljbris) -> www.exljbris.com */
 @font-face {
     font-family: 'Delicious';
-    src: url('fonts/delicious-bold-webfont.eot');
-    src: url('fonts/delicious-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/delicious-bold-webfont.woff') format('woff'),
-         url('fonts/delicious-bold-webfont.ttf') format('truetype'),
-         url('fonts/delicious-bold-webfont.svg#DeliciousBold') format('svg');
+    src: url('/static/css/fonts/delicious-bold-webfont.eot');
+    src: url('/static/css/fonts/delicious-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/delicious-bold-webfont.woff') format('woff'),
+         url('/static/css/fonts/delicious-bold-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/delicious-bold-webfont.svg#DeliciousBold') format('svg');
     font-weight: bold;
     font-style: normal;
 
@@ -19,11 +19,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Delicious';
-    src: url('fonts/delicious-bolditalic-webfont.eot');
-    src: url('fonts/delicious-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/delicious-bolditalic-webfont.woff') format('woff'),
-         url('fonts/delicious-bolditalic-webfont.ttf') format('truetype'),
-         url('fonts/delicious-bolditalic-webfont.svg#DeliciousBoldItalic') format('svg');
+    src: url('/static/css/fonts/delicious-bolditalic-webfont.eot');
+    src: url('/static/css/fonts/delicious-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/delicious-bolditalic-webfont.woff') format('woff'),
+         url('/static/css/fonts/delicious-bolditalic-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/delicious-bolditalic-webfont.svg#DeliciousBoldItalic') format('svg');
     font-weight: bold;
     font-style: italic;
 
@@ -31,11 +31,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Delicious';
-    src: url('fonts/delicious-italic-webfont.eot');
-    src: url('fonts/delicious-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/delicious-italic-webfont.woff') format('woff'),
-         url('fonts/delicious-italic-webfont.ttf') format('truetype'),
-         url('fonts/delicious-italic-webfont.svg#DeliciousItalic') format('svg');
+    src: url('/static/css/fonts/delicious-italic-webfont.eot');
+    src: url('/static/css/fonts/delicious-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/delicious-italic-webfont.woff') format('woff'),
+         url('/static/css/fonts/delicious-italic-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/delicious-italic-webfont.svg#DeliciousItalic') format('svg');
     font-weight: normal;
     font-style: italic;
 
@@ -43,11 +43,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Delicious';
-    src: url('fonts/delicious-roman-webfont.eot');
-    src: url('fonts/delicious-roman-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/delicious-roman-webfont.woff') format('woff'),
-         url('fonts/delicious-roman-webfont.ttf') format('truetype'),
-         url('fonts/delicious-roman-webfont.svg#DeliciousRoman') format('svg');
+    src: url('/static/css/fonts/delicious-roman-webfont.eot');
+    src: url('/static/css/fonts/delicious-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/delicious-roman-webfont.woff') format('woff'),
+         url('/static/css/fonts/delicious-roman-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/delicious-roman-webfont.svg#DeliciousRoman') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -55,11 +55,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'DeliciousSmallCapsRegular';
-    src: url('fonts/delicious-smallcaps-webfont.eot');
-    src: url('fonts/delicious-smallcaps-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/delicious-smallcaps-webfont.woff') format('woff'),
-         url('fonts/delicious-smallcaps-webfont.ttf') format('truetype'),
-         url('fonts/delicious-smallcaps-webfont.svg#DeliciousSmallCapsRegular') format('svg');
+    src: url('/static/css/fonts/delicious-smallcaps-webfont.eot');
+    src: url('/static/css/fonts/delicious-smallcaps-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/delicious-smallcaps-webfont.woff') format('woff'),
+         url('/static/css/fonts/delicious-smallcaps-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/delicious-smallcaps-webfont.svg#DeliciousSmallCapsRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -67,33 +67,33 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'DeliciousHeavyRegular';
-    src: url('fonts/delicious-heavy-webfont.eot');
-    src: url('fonts/delicious-heavy-webfont.eot?#iefix') format('embedded-opentype'),
-    url('fonts/delicious-heavy-webfont.woff') format('woff'),
-    url('fonts/delicious-heavy-webfont.ttf') format('truetype'),
-    url('fonts/delicious-heavy-webfont.svg#DeliciousHeavyRegular') format('svg');
+    src: url('/static/css/fonts/delicious-heavy-webfont.eot');
+    src: url('/static/css/fonts/delicious-heavy-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/static/css/fonts/delicious-heavy-webfont.woff') format('woff'),
+    url('/static/css/fonts/delicious-heavy-webfont.ttf') format('truetype'),
+    url('/static/css/fonts/delicious-heavy-webfont.svg#DeliciousHeavyRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
 	font-family: 'DejaWeb';
-	src: url('fonts/dejaweb-webfont.eot');
-	src: local('DejaWeb'), url('fonts/dejaweb-webfont.woff') format('woff'), url('fonts/dejaweb-webfont.ttf') format('truetype'), url('fonts/dejaweb-webfont.svg#webfontVuTWy87b') format('svg');
+	src: url('/static/css/fonts/dejaweb-webfont.eot');
+	src: local('DejaWeb'), url('/static/css/fonts/dejaweb-webfont.woff') format('woff'), url('/static/css/fonts/dejaweb-webfont.ttf') format('truetype'), url('/static/css/fonts/dejaweb-webfont.svg#webfontVuTWy87b') format('svg');
 }
 
 @font-face {
 	font-family: 'DejaWeb';
     font-weight: bold;
-	src: url('fonts/dejaweb-bold-webfont.eot');
-	src: local('DejaWeb Bold'), local('DejaWeb-Bold'), url('fonts/dejaweb-bold-webfont.woff') format('woff'), url('fonts/dejaweb-bold-webfont.ttf') format('truetype'), url('fonts/dejaweb-bold-webfont.svg#webfontPfPqo0rw') format('svg');
+	src: url('/static/css/fonts/dejaweb-bold-webfont.eot');
+	src: local('DejaWeb Bold'), local('DejaWeb-Bold'), url('/static/css/fonts/dejaweb-bold-webfont.woff') format('woff'), url('/static/css/fonts/dejaweb-bold-webfont.ttf') format('truetype'), url('/static/css/fonts/dejaweb-bold-webfont.svg#webfontPfPqo0rw') format('svg');
 }
 
 @font-face {
 	font-family: 'DejaWeb';
     font-style: italic;
-	src: url('fonts/dejaweb-italic-webfont.eot');
-	src: local('DejaWeb Italic'), local('DejaWeb Italic'), url('fonts/dejaweb-italic-webfont.woff') format('woff'), url('fonts/dejaweb-italic-webfont.ttf') format('truetype'), url('fonts/dejaweb-italic-webfont.svg#webfontLQ5v0P1l') format('svg');
+	src: url('/static/css/fonts/dejaweb-italic-webfont.eot');
+	src: local('DejaWeb Italic'), local('DejaWeb Italic'), url('/static/css/fonts/dejaweb-italic-webfont.woff') format('woff'), url('/static/css/fonts/dejaweb-italic-webfont.ttf') format('truetype'), url('/static/css/fonts/dejaweb-italic-webfont.svg#webfontLQ5v0P1l') format('svg');
 }
 
 
@@ -102,18 +102,18 @@ Desktop version layout - place your custom code here */
 	font-family: 'DejaWeb';
     font-weight: bold;
     font-style: italic;
-	src: url('fonts/dejaweb-bolditalic-webfont.eot');
-	src: local('DejaWeb Bold Italic'), local('DejaWeb-BoldItalic'), url('fonts/dejaweb-bolditalic-webfont.woff') format('woff'), url('fonts/dejaweb-bolditalic-webfont.ttf') format('truetype'), url('fonts/dejaweb-bolditalic-webfont.svg#webfontQKiA3fPP') format('svg');
+	src: url('/static/css/fonts/dejaweb-bolditalic-webfont.eot');
+	src: local('DejaWeb Bold Italic'), local('DejaWeb-BoldItalic'), url('/static/css/fonts/dejaweb-bolditalic-webfont.woff') format('woff'), url('/static/css/fonts/dejaweb-bolditalic-webfont.ttf') format('truetype'), url('/static/css/fonts/dejaweb-bolditalic-webfont.svg#webfontQKiA3fPP') format('svg');
 }
 
 /* Cantarell font by Dave Crossland: http://abattis.org/cantarell/ */
 @font-face {
     font-family: 'Cantarell';
-    src: url('fonts/Cantarell-Regular-webfont.eot');
-    src: url('fonts/Cantarell-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Cantarell-Regular-webfont.woff') format('woff'),
-         url('fonts/Cantarell-Regular-webfont.ttf') format('truetype'),
-         url('fonts/Cantarell-Regular-webfont.svg#CantarellRegular') format('svg');
+    src: url('/static/css/fonts/Cantarell-Regular-webfont.eot');
+    src: url('/static/css/fonts/Cantarell-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/Cantarell-Regular-webfont.woff') format('woff'),
+         url('/static/css/fonts/Cantarell-Regular-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/Cantarell-Regular-webfont.svg#CantarellRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -121,11 +121,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Cantarell';
-    src: url('fonts/Cantarell-Oblique-webfont.eot');
-    src: url('fonts/Cantarell-Oblique-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Cantarell-Oblique-webfont.woff') format('woff'),
-         url('fonts/Cantarell-Oblique-webfont.ttf') format('truetype'),
-         url('fonts/Cantarell-Oblique-webfont.svg#CantarellOblique') format('svg');
+    src: url('/static/css/fonts/Cantarell-Oblique-webfont.eot');
+    src: url('/static/css/fonts/Cantarell-Oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/Cantarell-Oblique-webfont.woff') format('woff'),
+         url('/static/css/fonts/Cantarell-Oblique-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/Cantarell-Oblique-webfont.svg#CantarellOblique') format('svg');
     font-weight: normal;
     font-style: italic;
 
@@ -133,11 +133,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Cantarell';
-    src: url('fonts/Cantarell-Bold-webfont.eot');
-    src: url('fonts/Cantarell-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Cantarell-Bold-webfont.woff') format('woff'),
-         url('fonts/Cantarell-Bold-webfont.ttf') format('truetype'),
-         url('fonts/Cantarell-Bold-webfont.svg#CantarellBold') format('svg');
+    src: url('/static/css/fonts/Cantarell-Bold-webfont.eot');
+    src: url('/static/css/fonts/Cantarell-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/Cantarell-Bold-webfont.woff') format('woff'),
+         url('/static/css/fonts/Cantarell-Bold-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/Cantarell-Bold-webfont.svg#CantarellBold') format('svg');
     font-weight: bold;
     font-style: normal;
 
@@ -145,11 +145,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'Cantarell';
-    src: url('fonts/Cantarell-BoldOblique-webfont.eot');
-    src: url('fonts/Cantarell-BoldOblique-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Cantarell-BoldOblique-webfont.woff') format('woff'),
-         url('fonts/Cantarell-BoldOblique-webfont.ttf') format('truetype'),
-         url('fonts/Cantarell-BoldOblique-webfont.svg#CantarellBoldOblique') format('svg');
+    src: url('/static/css/fonts/Cantarell-BoldOblique-webfont.eot');
+    src: url('/static/css/fonts/Cantarell-BoldOblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/Cantarell-BoldOblique-webfont.woff') format('woff'),
+         url('/static/css/fonts/Cantarell-BoldOblique-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/Cantarell-BoldOblique-webfont.svg#CantarellBoldOblique') format('svg');
     font-weight: bold;
     font-style: italic;
 
@@ -158,11 +158,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'PerspectiveSans';
-    src: url('fonts/persans-webfont.eot');
-    src: url('fonts/persans-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/persans-webfont.woff') format('woff'),
-         url('fonts/persans-webfont.ttf') format('truetype'),
-         url('fonts/persans-webfont.svg#PerspectiveSansRegular') format('svg');
+    src: url('/static/css/fonts/persans-webfont.eot');
+    src: url('/static/css/fonts/persans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/persans-webfont.woff') format('woff'),
+         url('/static/css/fonts/persans-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/persans-webfont.svg#PerspectiveSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -170,11 +170,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'PerspectiveSans';
-    src: url('fonts/persansi-webfont.eot');
-    src: url('fonts/persansi-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/persansi-webfont.woff') format('woff'),
-         url('fonts/persansi-webfont.ttf') format('truetype'),
-         url('fonts/persansi-webfont.svg#PerspectiveSansItalic') format('svg');
+    src: url('/static/css/fonts/persansi-webfont.eot');
+    src: url('/static/css/fonts/persansi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/persansi-webfont.woff') format('woff'),
+         url('/static/css/fonts/persansi-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/persansi-webfont.svg#PerspectiveSansItalic') format('svg');
     font-weight: normal;
     font-style: italic;
 
@@ -182,11 +182,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'PerspectiveSans';
-    src: url('fonts/persansb-webfont.eot');
-    src: url('fonts/persansb-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/persansb-webfont.woff') format('woff'),
-         url('fonts/persansb-webfont.ttf') format('truetype'),
-         url('fonts/persansb-webfont.svg#PerspectiveSansBold') format('svg');
+    src: url('/static/css/fonts/persansb-webfont.eot');
+    src: url('/static/css/fonts/persansb-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/persansb-webfont.woff') format('woff'),
+         url('/static/css/fonts/persansb-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/persansb-webfont.svg#PerspectiveSansBold') format('svg');
     font-weight: bold;
     font-style: normal;
 
@@ -194,11 +194,11 @@ Desktop version layout - place your custom code here */
 
 @font-face {
     font-family: 'PerspectiveSans';
-    src: url('fonts/persanbi-webfont.eot');
-    src: url('fonts/persanbi-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/persanbi-webfont.woff') format('woff'),
-         url('fonts/persanbi-webfont.ttf') format('truetype'),
-         url('fonts/persanbi-webfont.svg#PerspectiveSansBoldItalic') format('svg');
+    src: url('/static/css/fonts/persanbi-webfont.eot');
+    src: url('/static/css/fonts/persanbi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/css/fonts/persanbi-webfont.woff') format('woff'),
+         url('/static/css/fonts/persanbi-webfont.ttf') format('truetype'),
+         url('/static/css/fonts/persanbi-webfont.svg#PerspectiveSansBoldItalic') format('svg');
     font-weight: bold;
     font-style: italic;
 
