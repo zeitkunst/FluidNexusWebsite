@@ -7,7 +7,7 @@
             <div class = "pre_2 col_8 last">
                 <div class="fobidden">
                     <h1>403 Forbidden</h1>
-                    ${fobidden}
+                    ${forbidden}
                 </div>
             </div>
         </div>
