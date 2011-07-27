@@ -4,9 +4,6 @@ Fluid Nexus Manual
 
 .. ------------------------------------
 .. TODO
-..
-.. - just a test
-.. - another test
 
 .. contents::
 .. sectnum::
@@ -101,7 +98,31 @@ The following icons are used throughout the manual and in the applications thems
 Security
 ========
 
-To appear.
+Identifying Information
+-----------------------
+
+Data is stored unencrypted in a local sqlite database.  It is best that you     take care of encryption yourself, such as by using ecryptfs home directories or LUKS encrypted devices on Linux.  For Android we plan on implementing `SQLCipher <https://guardianproject.info/code/sqlcipher/>`_ in the near future.
+
+Data is sent over Bluetooth_ without any transport layer encryption.  This is    something we plan on implementing in the future.
+
+Data is sent over link-local wifi using zeroconf for service discovery without  any transport layer encryption.  This is something we plan on implementing in   the future.
+
+While we do not save any identifying information, it is possible that you may inadvertently identify yourself through something you write or share using Fluid Nexus.  Please take this into account when using the software.  On Android, we suggest the use of `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ to anonymize any photos that you decide to share.
+
+Data Sharing
+------------
+
+Bluetooth
++++++++++
+
+On Android, devices must be paired before any data sharing can occur.  This should happen in a safe location prior to an event.  Because of this need for pairing it is less likely that those unknown to you will be able to access Fluid Nexus messages *when you are using the Bluetooth_ network modality alone*; however, it is still possible that someone can sniff your Bluetooth traffic and thus see what messages are being sent.
+
+On the Desktop, **TODO**
+
+Zeroconf
+++++++++
+
+On Android and the Desktop, devices will share messages with *any other device running Fluid Nexus*.  This means that others, whom you do not know, will be able to receive Fluid Nexus message (but Fluid Nexus Messages alone) from your device.  This is by design, as Fluid Nexus is a broadcast flooding protocol, meant to spread messages as far and as wide as possible.  Please take care to remove identifying information if you deem this to be a risk.
 
 Using Fluid Nexus
 =================
@@ -267,8 +288,8 @@ Both the Android and the Desktop applications have preferences that allow you to
 
 The "Network" section provides checkboxes to enable or disable particular network modalities.  Fluid Nexus is opportunistic and tries to use whatever modality is available to spread messages.  Multiple modalities can run in parallel without problems.  At the moment we have implemented three modalities:
 
-* Bluetooth: connects to nearby devices running Fluid Nexus.  On Android, attempts to connect to paired Bluetooth devices only.
-* Zeroconf: uses the zeroconf protocol to discover nearby devices running Fluid Nexus and therefore transfer data over wireless or wired networks.  This can occur even if you do not have an Internet connection, as data passes only "link-local", meaning behind a single router.
+* Bluetooth_: connects to nearby devices running Fluid Nexus.  On Android, attempts to connect to paired Bluetooth devices only.
+* Zeroconf_: uses the zeroconf protocol to discover nearby devices running Fluid Nexus and therefore transfer data over wireless or wired networks.  This can occur even if you do not have an Internet connection, as data passes only "link-local", meaning behind a single router.
 * Nexus: tries to connect to the Internet to push messages marked as public to the Nexus.
 
 .. figure:: images/android_preferences.png
@@ -285,7 +306,7 @@ The "Network" section provides checkboxes to enable or disable particular networ
 
 Ad-Hoc Wifi is still under development.
 
-For each of the network modalities (with the exception of "Nexus") you also have the possibility of setting the "Scan Frequency"; this is the amount of time between successive scans for nearby devices.  Lower values mean more frequent scans.  On Android, low values for the Bluetooth Scan Frequency will *severely* impact battery life.
+For each of the network modalities (with the exception of "Nexus") you also have the possibility of setting the "Scan Frequency"; this is the amount of time between successive scans for nearby devices.  Lower values mean more frequent scans.  On Android, low values for the Bluetooth_ Scan Frequency will *severely* impact battery life.
 
 .. figure:: images/android_preferences_bluetooth_scan_frequency.png
     :alt: android bluetooth scan frequency
@@ -370,10 +391,18 @@ Fluid Nexus uses protocol buffers to share data.  The following documents our me
 
 Note that no directly identifying information is either sent in the message nor saved in the database.  The only way identifying information might be saved is via anything placed in the message itself.  Also note that there are no limitations on the length of the message.
 
+The application uses a SHA1 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of `distributed hash table <https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table>`_ with the goal of replicating the entire table amongst all devices.
+
+Network Modalities
+------------------
+
+Fluid Nexus currently works using Bluetooth_ and Zeroconf_ service discovery, with Ad-Hoc Wifi to be developed.  Android requires Bluetooth devices to be paired before any data sharing can occur.  On the Desktop, sharing between *discoverable* Linux devices does not require pairing beforehand.  (Windows is to be determined.)  Zeroconf does not require any pairing and thus messages will be shared between any device running Fluid Nexus and discoverable using Zeroconf service discovery.
 
 .. -----------------------------
 .. FOOTER
 .. -----------------------------
 
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
+.. _Zeroconf: http://fluidnexus.net/favicon.ico
+.. _Bluetooth: https://secure.wikimedia.org/wikipedia/en/wiki/Bluetooth
 .. _Transnetworks and the Fluid Nexus Project: http://fluidnexus.net/static/pdfs/DCM2009Submitted.pdf

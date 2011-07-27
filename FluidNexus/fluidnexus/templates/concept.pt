@@ -11,7 +11,7 @@
                 <h1><img src="${images_static_url}/concept_front.png" alt="Concept"/></h1>
             </div>
             <p i18n:translate="">Fluid Nexus is an application for mobile phones and desktop devices that is primarily designed to enable activists to send messages and data amongst themselves independent of a centralized network. The idea is to provide a means of communication between people when the centralized network has been shut down, either by the government during a time of unrest, or by nature due to a massive disaster. During such times the use of the centralized network for voice or SMS is not possible. Yet, if we can use the fact that people still must move about the world, then we can use ideas from sneaker-nets to turn people into carriers of data. Given enough people, we can create fluid, temporary, ad-hoc networks that pass messages one person at a time, spreading out as a contagion and eventually reaching members of the group. This enables surreptitious communication via daily activity and relies on a fluid view of reality. Additionally, Fluid Nexus can be used as a hyperlocal message board, loosely attached to physical locations.</p>
-            <p i18n:translate="">For more information, see <a href="${pdfs_static_url}/DCM2009Submitted.pdf" i18n:name="dcmsubmitted">this paper</a> to be published in Fall 2011 in the proceedings of dis/connecting/media 2009.</p>
+            <p i18n:translate="">For more information, see the paper <a href="${pdfs_static_url}/DCM2009Submitted.pdf" i18n:name="dcmsubmitted">"Transnetworks and the Fluid Nexus Project"</a>, to be published in Fall 2011 in the proceedings of dis/connecting/media 2009.</p>
         </div>
     </div>
     </tal:block>
