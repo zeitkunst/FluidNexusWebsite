@@ -6,13 +6,27 @@
     <tal:block metal:fill-slot="content">
     <div class="row">
 	    <div class="pre_2 col_8 last">
-            <h1>Desktop Screenshots</h1>
-            <div class="lightbox">
-                <a title="Desktop main interface" href="${images_static_url}/desktop_main_interface.png"><img src="${images_static_url}/thumbs/desktop_main_interface.png" alt="desktop main interface"/></a>
-                <a href="${images_static_url}/desktop_new_message.png" title="Desktop new message"><img src="${images_static_url}/thumbs/desktop_new_message.png" alt="desktop new message"/></a>
-                <a href="${images_static_url}/desktop_new_message_complete.png " title="Completed new message on the desktop"><img src="${images_static_url}/thumbs/desktop_new_message_complete.png" alt="desktop new message complete"/></a>
-                <a href="${images_static_url}/desktop_preferences.png" title="Desktop preferences"><img src="${images_static_url}/thumbs/desktop_preferences.png" alt="desktop preferences"/></a>
-                <a href="${images_static_url}/desktop_preferences_nexus.png" title="Desktop Nexus preferences"><img src="${images_static_url}/thumbs/desktop_preferences_nexus.png" alt="desktop preferences nexus"/></a>
+            <div class="screenshots">
+                <h1>Android Screenshots</h1>
+                <div class="lightbox">
+                    <a href="${images_static_url}/android_main_interface.png" title="Android interface"><img src="${images_static_url}/thumbs/android_main_interface.png" alt="android interface"/></a>
+                    <a href="${images_static_url}/android_view_message.png" title="View message on Android"><img src="${images_static_url}/thumbs/android_view_message.png" alt="android view message"/></a>
+                    <a href="${images_static_url}/android_new_message.png" alt="New message activity on Android"><img src="${images_static_url}/thumbs/android_new_message.png" alt="android new message"/></a>
+                    <a href="${images_static_url}/android_new_message_attachment_type.png" title="Choose new message attachment type"><img src="${images_static_url}/thumbs/android_new_message_attachment_type.png" alt="android new message attachment type"/></a>
+                    <a href="${images_static_url}/android_new_message_complete.png" title="Completed new message"><img src="${images_static_url}/thumbs/android_new_message_complete.png" alt="android new message complete"/></a>
+                    <a href="${images_static_url}/android_menu.png" title="Android menu"><img src="${images_static_url}/thumbs/android_menu.png" alt="android menu"/></a>
+                    <a href="${images_static_url}/android_preferences.png" title="Android preferences"><img src="${images_static_url}/thumbs/android_preferences.png" alt="android preferences"/></a>
+                </div>
+            </div>
+            <div class="screenshots">
+                <h1>Desktop Screenshots</h1>
+                <div class="lightbox">
+                    <a title="Desktop main interface" href="${images_static_url}/desktop_main_interface.png"><img src="${images_static_url}/thumbs/desktop_main_interface.png" alt="desktop main interface"/></a>
+                    <a href="${images_static_url}/desktop_new_message.png" title="Desktop new message"><img src="${images_static_url}/thumbs/desktop_new_message.png" alt="desktop new message"/></a>
+                    <a href="${images_static_url}/desktop_new_message_complete.png " title="Completed new message on the desktop"><img src="${images_static_url}/thumbs/desktop_new_message_complete.png" alt="desktop new message complete"/></a>
+                    <a href="${images_static_url}/desktop_preferences.png" title="Desktop preferences"><img src="${images_static_url}/thumbs/desktop_preferences.png" alt="desktop preferences"/></a>
+                    <a href="${images_static_url}/desktop_preferences_nexus.png" title="Desktop Nexus preferences"><img src="${images_static_url}/thumbs/desktop_preferences_nexus.png" alt="desktop preferences nexus"/></a>
+                </div>
             </div>
         </div>
     </div>

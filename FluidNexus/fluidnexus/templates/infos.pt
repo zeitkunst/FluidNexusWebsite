@@ -10,13 +10,14 @@
                 <h1>Infos</h1>
                 <h2><a href="/infos/concept">Concept</a></h2>
                 <h2><a href="/infos/manual">Manual</a></h2>
+                <h2><a href="/infos/faq">FAQ</a></h2>
                 <h2><a href="/infos/screenshots">Screenshots</a></h2>
                 <h2><a href="/infos/videos">Videos</a></h2>
             </div>
 	    </div>
         <div class="col_4 last">
             <div>
-                <p>an image to go here</p>
+                <p><img src="${images_static_url}/infos_image.png" alt="infos image"/></p>
             </div>
         </div>
     </div>

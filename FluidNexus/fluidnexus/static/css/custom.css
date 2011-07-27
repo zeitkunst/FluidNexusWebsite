@@ -3,6 +3,8 @@ _______________________________
 Desktop version layout - place your custom code here */
 
 /* FONTS */
+
+/* Delicious fonts by Jos Buivenga (exljbris) -> www.exljbris.com */
 @font-face {
     font-family: 'Delicious';
     src: url('fonts/delicious-bold-webfont.eot');
@@ -104,7 +106,7 @@ Desktop version layout - place your custom code here */
 	src: local('DejaWeb Bold Italic'), local('DejaWeb-BoldItalic'), url('fonts/dejaweb-bolditalic-webfont.woff') format('woff'), url('fonts/dejaweb-bolditalic-webfont.ttf') format('truetype'), url('fonts/dejaweb-bolditalic-webfont.svg#webfontQKiA3fPP') format('svg');
 }
 
-
+/* Cantarell font by Dave Crossland: http://abattis.org/cantarell/ */
 @font-face {
     font-family: 'Cantarell';
     src: url('fonts/Cantarell-Regular-webfont.eot');
@@ -332,7 +334,9 @@ ul#navigation a:hover {
 #nexus_front {
 
 }
-
+#download_front p {
+    text-align: center;
+}
 
 .nexus_author, .blog_author, .comment_author {
     font-weight: bold;
@@ -408,9 +412,13 @@ ul#navigation a:hover {
     border-bottom-left-radius: 10px;
 }
 
+.screenshots {
+    clear: both;
+}
+
 .lightbox a {
     width: 200px;
-    height: 200px;
+    height: 250px;
     float: left;
     margin: 1em;
 }
