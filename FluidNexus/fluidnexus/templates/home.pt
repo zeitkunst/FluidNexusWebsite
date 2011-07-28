@@ -35,6 +35,12 @@
                 <h2 i18n:translate=""><img src="${images_static_url}/identica.png" alt="identi.ca"/>&nbsp;&nbsp;<a href="http://identi.ca/fluidnexus">identi.ca</a></h2>
                 <h2 i18n:translate=""><img src="${images_static_url}/twitter.png" alt="twitter"/>&nbsp;&nbsp;<a href="http://twitter.com/FluidNexus">twitter</a></h2>
             </div>
+            <div>
+                <div id="donate">
+                    <h1>Donate</h1>
+                    <p>You can donate to our bitcoin address: 18GD6vMjmXthGhDNDhNMEoEthoGkUXkQR3.  Even a fraction of a coin helps us know that our work is appreciated.  Thanks!</p>
+                </div>
+            </div>
         </div>
     </div>
     </tal:block>
