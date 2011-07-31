@@ -286,6 +286,9 @@ Preferences
 
 Both the Android and the Desktop applications have preferences that allow you to control how the applications behave.
 
+Network
++++++++
+
 The "Network" section provides checkboxes to enable or disable particular network modalities.  Fluid Nexus is opportunistic and tries to use whatever modality is available to spread messages.  Multiple modalities can run in parallel without problems.  At the moment we have implemented three modalities:
 
 * Bluetooth_: connects to nearby devices running Fluid Nexus.  On Android, attempts to connect to paired Bluetooth devices only.
@@ -306,6 +309,9 @@ The "Network" section provides checkboxes to enable or disable particular networ
 
 Ad-Hoc Wifi is still under development.
 
+Scan Frequency
+++++++++++++++
+
 For each of the network modalities (with the exception of "Nexus") you also have the possibility of setting the "Scan Frequency"; this is the amount of time between successive scans for nearby devices.  Lower values mean more frequent scans.  On Android, low values for the Bluetooth_ Scan Frequency will *severely* impact battery life.
 
 .. figure:: images/android_preferences_bluetooth_scan_frequency.png
@@ -319,6 +325,9 @@ For each of the network modalities (with the exception of "Nexus") you also have
     :width: 400px
 
     Desktop bluetooth scan frequency
+
+Nexus
++++++
 
 Finally, the "Nexus" section allows you to set your key and secret for posting to the Nexus.  To set this up, first register for an account at http://fluidnexus.net (by either creating a new account there or by logging in using your Google Account).  Then, on your user page click "Request  a key and secret".  Enter these 20-digit numbers into the corresponding boxes in your Android or Desktop application.
 

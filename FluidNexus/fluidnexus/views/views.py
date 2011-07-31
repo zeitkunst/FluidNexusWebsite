@@ -17,6 +17,7 @@ import bcrypt
 from fluidnexus.models import DBSession
 from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token
 from fluidnexus.forms import UserFieldSet, UserNoPasswordFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
+from pager import Pager
 
 import time
 
@@ -25,14 +26,13 @@ _ = TranslationStringFactory('fluidnexus')
 save_name = _("Save")
 delete_name = _("Delete")
 
-@view_config(route_name = "home", renderer = "../templates/home.pt")
-def home(request):
-    return dict(title = "Fluid Nexus")
 
-@view_config(route_name = "view_blog", renderer = "../templates/blog.pt")
-def view_blog(request):
+def doViewBlog(request = None, page_num = 1, limit = 10):
     session = DBSession()
-    posts = session.query(Post).join(User).order_by(desc(Post.modified_time)).all()
+
+
+    p = Pager(session.query(Post).join(User).order_by(desc(Post.created_time)), page_num, limit)
+    posts = p.results
 
     # TODO
     # horribly inefficient; probably a much better way of doing things, perhaps in the template itself?
@@ -44,7 +44,37 @@ def view_blog(request):
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
         modifiedPosts.append(post)
 
-    return dict(title = _("Fluid Nexus Blog posts"), posts = modifiedPosts)
+    if (page_num < p.pages):
+        next_page = page_num + 1
+    else:
+        next_page = 0
+
+    if (page_num > 1):
+        previous_page = page_num - 1
+    else:
+        previous_page = 0
+
+    return dict(title = _("Nexus Messages"), posts = modifiedPosts, pages = p.pages, page_num = page_num, previous_page = previous_page, next_page = next_page)
+
+@view_config(route_name = "home", renderer = "../templates/home.pt")
+def home(request):
+    return dict(title = "Fluid Nexus")
+
+@view_config(route_name = "view_blog", renderer = "../templates/blog.pt")
+def view_blog(request):
+    session = DBSession()
+
+    matchdict = request.matchdict
+    page_num = matchdict["page_num"]
+
+    return doViewBlog(request, page_num = int(page_num))
+
+@view_config(route_name = "view_blog_nopagenum", renderer = "../templates/blog.pt")
+def view_blog_nopagenum(request):
+    session = DBSession()
+
+    return doViewBlog(request, page_num = 1)
+
 
 @view_config(route_name = "view_blog_post", renderer = "../templates/blog_post.pt")
 def view_blog_post(request):
@@ -341,6 +371,21 @@ def concept(request):
 
     return dict(title = _("Fluid Nexus Concept"))
 
+@view_config(route_name = "infos_faq", renderer = "../templates/faq.pt")
+def faq(request):
+    """FAQ page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus FAQ"))
+
+@view_config(route_name = "infos_videos", renderer = "../templates/videos.pt")
+def videos(request):
+    """Videos page."""
+    session = DBSession()
+
+    return dict(title = _("Fluid Nexus Videos"))
+
+
 @view_config(route_name = "infos_manual", renderer = "../templates/manual.pt")
 def manual(request):
     """Manual page."""
@@ -354,6 +399,13 @@ def screenshots(request):
     session = DBSession()
 
     return dict(title = _("Fluid Nexus Screenshots"))
+
+@view_config(route_name = "infos_nexus", renderer = "../templates/nexus.pt")
+def nexus(request):
+    """Nexus info page."""
+    session = DBSession()
+
+    return dict(title = _("Nexus Information"))
 
 
 @view_config(route_name = "credits", renderer = "../templates/credits.pt")

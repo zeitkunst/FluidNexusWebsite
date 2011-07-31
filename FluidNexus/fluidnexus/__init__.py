@@ -45,7 +45,8 @@ def main(global_config, **settings):
     config.add_route("view_user", "/users/{user_id}")
 
     # BLOG POSTS
-    config.add_route("view_blog", "/blog")
+    config.add_route("view_blog", "/blog/{page_num}")
+    config.add_route("view_blog_nopagenum", "/blog")
     config.add_route("view_blog_post", "/blog/{post_id}")
     config.add_route("edit_blog", "/admin/blog") 
     config.add_route("edit_blog_post", "/admin/blog/edit/{post_id}")
@@ -64,10 +65,14 @@ def main(global_config, **settings):
     config.add_route("infos_concept", "/infos/concept")
     config.add_route("infos_manual", "/infos/manual")
     config.add_route("infos_screenshots", "/infos/screenshots")
+    config.add_route("infos_nexus", "/infos/nexus")
+    config.add_route("infos_faq", "/infos/faq")
+    config.add_route("infos_videos", "/infos/videos")
 
 
     # NEXUS
-    config.add_route("view_nexus_messages", "/nexus")
+    config.add_route("view_nexus_messages", "/nexus/{page_num}")
+    config.add_route("view_nexus_messages_nopagenum", "/nexus")
 
     # API
     config.add_route("api_request_key", "/api/01/request_key")

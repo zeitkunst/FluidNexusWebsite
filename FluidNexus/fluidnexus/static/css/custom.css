@@ -238,6 +238,10 @@ img {
     padding: 0em;
 }
 
+ol {
+    list-style-type: decimal;
+}
+
 code {
     font-family: "Courier", "Courier New", monospace;
 }
@@ -428,7 +432,9 @@ ul#navigation a:hover {
 }
 
 #footer {
+    border-top: 1px solid #000;
     margin-top: 1em;
+    padding-top: 1em;
     font-size: 0.8em;
 }
 

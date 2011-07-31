@@ -6,15 +6,9 @@
     <tal:block metal:fill-slot="content">
     <div class="row">
 	    <div class="pre_2 col_8 last">
-
-<div class="document" id="fluid-nexus-manual">
-<h1 class="title">Fluid Nexus Manual</h1>
-
+            <h1>Fluid Nexus Manual</h1>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!-- TODO -->
-<!--  -->
-<!-- - just a test -->
-<!-- - another test -->
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="auto-toc simple">
@@ -39,12 +33,17 @@
 <li><a class="reference internal" href="#using-fluid-nexus" id="id15">5&nbsp;&nbsp;&nbsp;Using Fluid Nexus</a><ul class="auto-toc">
 <li><a class="reference internal" href="#creating-a-new-message" id="id16">5.1&nbsp;&nbsp;&nbsp;Creating a new message</a></li>
 <li><a class="reference internal" href="#editing-messages" id="id17">5.2&nbsp;&nbsp;&nbsp;Editing Messages</a></li>
-<li><a class="reference internal" href="#preferences" id="id18">5.3&nbsp;&nbsp;&nbsp;Preferences</a></li>
+<li><a class="reference internal" href="#preferences" id="id18">5.3&nbsp;&nbsp;&nbsp;Preferences</a><ul class="auto-toc">
+<li><a class="reference internal" href="#network" id="id19">5.3.1&nbsp;&nbsp;&nbsp;Network</a></li>
+<li><a class="reference internal" href="#scan-frequency" id="id20">5.3.2&nbsp;&nbsp;&nbsp;Scan Frequency</a></li>
+<li><a class="reference internal" href="#nexus" id="id21">5.3.3&nbsp;&nbsp;&nbsp;Nexus</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#technical-information" id="id19">6&nbsp;&nbsp;&nbsp;Technical Information</a><ul class="auto-toc">
-<li><a class="reference internal" href="#protocol-buffer-implementation" id="id20">6.1&nbsp;&nbsp;&nbsp;Protocol Buffer implementation</a></li>
-<li><a class="reference internal" href="#network-modalities" id="id21">6.2&nbsp;&nbsp;&nbsp;Network Modalities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technical-information" id="id22">6&nbsp;&nbsp;&nbsp;Technical Information</a><ul class="auto-toc">
+<li><a class="reference internal" href="#protocol-buffer-implementation" id="id23">6.1&nbsp;&nbsp;&nbsp;Protocol Buffer implementation</a></li>
+<li><a class="reference internal" href="#network-modalities" id="id24">6.2&nbsp;&nbsp;&nbsp;Network Modalities</a></li>
 </ul>
 </li>
 </ul>
@@ -220,6 +219,8 @@
 <div class="section" id="preferences">
 <h2><a class="toc-backref" href="#id18">5.3&nbsp;&nbsp;&nbsp;Preferences</a></h2>
 <p>Both the Android and the Desktop applications have preferences that allow you to control how the applications behave.</p>
+<div class="section" id="network">
+<h3><a class="toc-backref" href="#id19">5.3.1&nbsp;&nbsp;&nbsp;Network</a></h3>
 <p>The &quot;Network&quot; section provides checkboxes to enable or disable particular network modalities.  Fluid Nexus is opportunistic and tries to use whatever modality is available to spread messages.  Multiple modalities can run in parallel without problems.  At the moment we have implemented three modalities:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Bluetooth">Bluetooth</a>: connects to nearby devices running Fluid Nexus.  On Android, attempts to connect to paired Bluetooth devices only.</li>
@@ -235,6 +236,9 @@
 <p class="caption">Desktop preferences screen</p>
 </div>
 <p>Ad-Hoc Wifi is still under development.</p>
+</div>
+<div class="section" id="scan-frequency">
+<h3><a class="toc-backref" href="#id20">5.3.2&nbsp;&nbsp;&nbsp;Scan Frequency</a></h3>
 <p>For each of the network modalities (with the exception of &quot;Nexus&quot;) you also have the possibility of setting the &quot;Scan Frequency&quot;; this is the amount of time between successive scans for nearby devices.  Lower values mean more frequent scans.  On Android, low values for the <a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Bluetooth">Bluetooth</a> Scan Frequency will <em>severely</em> impact battery life.</p>
 <div class="figure">
 <img alt="android bluetooth scan frequency" src="${images_static_url}/android_preferences_bluetooth_scan_frequency.png" style="width: 400px;" />
@@ -244,6 +248,9 @@
 <img alt="desktop bluetooth scan frequency" src="${images_static_url}/desktop_preferences_bluetooth_scan_frequency.png" style="width: 400px;" />
 <p class="caption">Desktop bluetooth scan frequency</p>
 </div>
+</div>
+<div class="section" id="nexus">
+<h3><a class="toc-backref" href="#id21">5.3.3&nbsp;&nbsp;&nbsp;Nexus</a></h3>
 <p>Finally, the &quot;Nexus&quot; section allows you to set your key and secret for posting to the Nexus.  To set this up, first register for an account at <a class="reference external" href="http://fluidnexus.net">http://fluidnexus.net</a> (by either creating a new account there or by logging in using your Google Account).  Then, on your user page click &quot;Request  a key and secret&quot;.  Enter these 20-digit numbers into the corresponding boxes in your Android or Desktop application.</p>
 <div class="figure">
 <img alt="android nexus preferences" src="${images_static_url}/android_preferences_nexus.png" style="width: 400px;" />
@@ -265,10 +272,11 @@
 <p>You will be forwarded to the Fluid Nexus website; you must be logged in in order to proceed.  Once you have granted authorization to the application (Android or Desktop) to post to the Nexus, you need to setup the Token and Token Secret.  On Android, these are filled in automatically for you; on the Desktop, you need to copy and paste these values from the website into the corresponding boxes.</p>
 </div>
 </div>
+</div>
 <div class="section" id="technical-information">
-<h1><a class="toc-backref" href="#id19">6&nbsp;&nbsp;&nbsp;Technical Information</a></h1>
+<h1><a class="toc-backref" href="#id22">6&nbsp;&nbsp;&nbsp;Technical Information</a></h1>
 <div class="section" id="protocol-buffer-implementation">
-<h2><a class="toc-backref" href="#id20">6.1&nbsp;&nbsp;&nbsp;Protocol Buffer implementation</a></h2>
+<h2><a class="toc-backref" href="#id23">6.1&nbsp;&nbsp;&nbsp;Protocol Buffer implementation</a></h2>
 <p>Fluid Nexus uses protocol buffers to share data.  The following documents our message format:</p>
 <pre class="literal-block">
 message FluidNexusHashes {
@@ -306,18 +314,12 @@ message FluidNexusMessages {
 <p>The application uses a SHA1 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of <a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table">distributed hash table</a> with the goal of replicating the entire table amongst all devices.</p>
 </div>
 <div class="section" id="network-modalities">
-<h2><a class="toc-backref" href="#id21">6.2&nbsp;&nbsp;&nbsp;Network Modalities</a></h2>
+<h2><a class="toc-backref" href="#id24">6.2&nbsp;&nbsp;&nbsp;Network Modalities</a></h2>
 <p>Fluid Nexus currently works using <a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Bluetooth">Bluetooth</a> and <a class="reference external" href="http://fluidnexus.net/favicon.ico">Zeroconf</a> service discovery, with Ad-Hoc Wifi to be developed.  Android requires Bluetooth devices to be paired before any data sharing can occur.  On the Desktop, sharing between <em>discoverable</em> Linux devices does not require pairing beforehand.  (Windows is to be determined.)  Zeroconf does not require any pairing and thus messages will be shared between any device running Fluid Nexus and discoverable using Zeroconf service discovery.</p>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!-- FOOTER -->
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 </div>
-</div>
-</div>
-<div class="footer">
-<hr class="footer" />
-Document generated from <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> plaintext markup source
-on 2011-07-26 at 21:40:07.
 </div>
         </div>
     </div>

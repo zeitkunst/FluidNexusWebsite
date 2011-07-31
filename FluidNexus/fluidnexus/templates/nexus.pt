@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    metal:use-macro="base">
+    <tal:block metal:fill-slot="content">
+    <div class="row">
+	    <div class="pre_2 col_8 last">
+
+            <div id="nexus_front">
+                <h1><img src="${images_static_url}/nexus_front.png" alt="Concept"/></h1>
+            </div>
+            <p i18n:translate="">The Nexus is the stream of public messages uploaded by Fluid Nexus users.  When using the software certain messages can be marked as "public" to be automatically uploaded to the Fluid Nexus website when an Internet connection is available.  This enables text, images, audio, and video to be spread to a wider audience than simply those using the software alone.  The initiator of a message is the only one who has the ability to mark a message as "public", but anyone using the software can upload it to the site if it has not been uploaded already.</p>
+            <h2 i18n:translate="">Veracity of Messages</h2>
+            <p i18n:translate="">Nexus messages are provided by users of the Fluid Nexus software and have not been pre-reviewed. The user listed as the one who "pushed" the message to the Nexus is not necessarily the one who created the message. Please take these points into account when considering the veracity of the messages posted.</p>
+            <h2 i18n:translate="">Uploading to the Nexus</h2>
+            <p i18n:translate="">In order to prevent spamming of the Nexus, users must be authenticated.  While the number of steps seems large, it is necessary to keep the Nexus from being overwhelmed by spam.  Please follow the steps below to generate the appropriate keys:</p>
+            <ol>
+                <li i18n:translate=""><a href="/login">Create an account</a> on the Fluid Nexus website.  You can either create an account specific to this site by <a href="/register">registering</a>, or, instead, login using your <a href="/openid">Google Account</a>.  In the latter case, we will thus keep no login information, such as your password or e-mail address, on the site.  You will still have to create a username by which you will be referenced on the site.</li>
+                <li i18n:translate="">Once you have registered and logged in, go to the "User Info" page at the bottom of any page of the site.</li>
+                <li i18n:translate="">Once on that page, click on the link "Request a Key and Secret".</li>
+                <li i18n:translate="">You will be forwarded to a page with two (2) twenty (20) digit numbers to enter into your client software.  Please follow the <a href="/infos/manual#nexus">corresponding section in the manual</a> to complete the remaining steps.</li>
+            </ol>
+        </div>
+    </div>
+    </tal:block>
+</html>

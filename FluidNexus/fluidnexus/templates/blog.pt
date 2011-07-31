@@ -8,6 +8,10 @@
             <div id="nexus_front">
                 <h1><img src="${images_static_url}/blog.png" alt="blog"/></h1>
             </div>
+            <div class="pager">
+                <p><tal:block condition="previous_page"><a href="/nexus/${previous_page}">Previous</a></tal:block> Page ${page_num} of ${pages}.  <tal:block condition="next_page"><a href="/nexus/${next_page}">Next</a></tal:block></p>
+            </div>
+
             <div id="blog_posts">
         		<article class="post" tal:repeat="post posts">
                     <h1 class="post_title"><a href="${post.post_url}">${post.title}</a></h1>
@@ -20,6 +24,10 @@
             		</div>
         		</article>
             </div>
+            <div class="pager">
+                <p><tal:block condition="previous_page"><a href="/nexus/${previous_page}">Previous</a></tal:block> Page ${page_num} of ${pages}.  <tal:block condition="next_page"><a href="/nexus/${next_page}">Next</a></tal:block></p>
+            </div>
+
 	    </div>
 	</div>
     </tal:block>
