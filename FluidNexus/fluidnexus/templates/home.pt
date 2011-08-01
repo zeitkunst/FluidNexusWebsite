@@ -17,7 +17,7 @@
                 <div id="nexus_front">
                     <h1><img src="${images_static_url}/nexus_front.png" alt="Nexus"/></h1>
                 </div>
-                <p i18n:translate="">The Nexus is the location for public messages uploaded by uses of the Fluid Nexus software.  The stream provides a real-time view of text, images, audio, and video that Fluid Nexus users think should be seen by the general public.  <a href="/nexus">View the Nexus</a></p>
+                <p i18n:translate="">The Nexus is the location for public messages uploaded by users of the Fluid Nexus software.  The stream provides a real-time view of text, images, audio, and video that Fluid Nexus users think should be seen by the general public.  <a href="/nexus">View the Nexus</a></p>
             </div>
 	    </div>
         <div class="col_4 last">

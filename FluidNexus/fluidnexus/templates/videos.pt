@@ -10,7 +10,7 @@
             <div>
                 <h1 i18n:translate="">Videos</h1>
             </div>
-            <p i18n:translate="">Some Videos</p>
+            <p i18n:translate="">Videos to come shortly.</p>
         </div>
     </div>
     </tal:block>

@@ -10,7 +10,21 @@
             <div>
                 <h1 i18n:translate="">Frequently Asked Questions</h1>
             </div>
-            <p i18n:translate="">Some FAQs</p>
+            <h2 i18n:translate="">What networking technologies does Fluid Nexus use?</h2>
+            <p i18n:translate="">At the moment Fluid Nexus uses Bluetooth and link-local wifi.  Bluetooth works on the order of 10 meters and was primarily designed as a point-to-point local wireless protocol.  On Android the Bluetooth support is somewhat subpar but we have worked around as many of the issues as we could.</p>
+            <p i18n:translate="">Link-local wifi refers to a local wifi connection before it has passed from one router to another.  In other words, if you had a home wireless router, link-local wifi would refer to the possible connections between any of the machines directly connected to your wireless router.  Fluid Nexus uses the <a href="http://en.wikipedia.org/wiki/Zeroconf">zeroconf</a> protocol (known as Bonjour on OS X) to automatically discover other devices running the software.</p>
+            <p i18n:translate="">While it may seem counter-intuitive to use a wifi technology in software that purports to not need access to the Internet, it has to be noted that wifi is not predicated on Internet access.  Indeed, even if there would be no direct Internet access, devices connected to the same link-local wifi router could still form a network amongst themselves.  And if access to the internet was removed for whatever reason, people could still open their wifi routers to enable others to share information using software such as Fluid Nexus.</p>
+            <p i18n:translate="">Everything just said regarding link-local wifi is also applicable if you are connected via ethernet.</p>
+            <p i18n:translate="">We are planning on implementing an ad-hoc wifi feature in the near future, thus obviating the need to connect to an existing wifi network.  <a href="http://code.google.com/p/android/issues/detail?id=82">Unnecessary limitations</a> in most Android implementations are making this more difficult than it should be.</p>
+            <h2 i18n:translate="">Why does my Android phone require pairing to another device?</h2>
+            <p i18n:translate="">Unfortunately the Android OS requires pairing before any Bluetooth data connection can be made.  This is beyond our control, sorry.</p>
+            <h2 i18n:translate="">Why can't other devices see my Android phone using Bluetooth?</h2>
+            <p i18n:translate="">Unfortunately Android has an annoying "feature" that limits discoverability to only 120s or 300s at a time.  This is ostensibly for security purposes.  This is a <a href="http://code.google.com/p/android/issues/detail?id=6348">known bug</a> that is theoretically fixed in later versions of the OS.  There is nothing we can do about this other than popping up an authorization windows every 120s&mdash;which is something we don't want to do.  In order to make data sharing over Bluetooth as smooth as possible, then, ensure that any Desktop devices you have running the software are set to be discoverable.</p>
+            <p i18n:translate="">Nevertheless, once an Android phone has paired with another device, it will always be able to connect to it (assuming its in range), regardless of its discoverability.</p>
+            <h2 i18n:translate="">Can't malicious users of Fluid Nexus spread counter information?</h2>
+            <p i18n:translate="">Indeed they can!  Yet this is nothing new.  Activist groups continually have to sift through potentially planted information by informants, infiltrators, etc.  Internet users must decide for themselves regarding the veracity of news posted to services such as Twitter or the New York Times.  We have decided to let this be worked out in use through decisions by the users, rather than enforcing any particular technological approach.  Depending on feedback additional features may or may not be added to address this.</p>
+            <h2 i18n:translate=""></h2>
+            <p i18n:translate=""></p>
         </div>
     </div>
     </tal:block>
