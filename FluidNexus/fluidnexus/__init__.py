@@ -47,7 +47,7 @@ def main(global_config, **settings):
     # BLOG POSTS
     config.add_route("view_blog", "/blog/{page_num}")
     config.add_route("view_blog_nopagenum", "/blog")
-    config.add_route("view_blog_post", "/blog/{post_id}")
+    config.add_route("view_blog_post", "/blog/post/{post_id}")
     config.add_route("edit_blog", "/admin/blog") 
     config.add_route("edit_blog_post", "/admin/blog/edit/{post_id}")
     config.add_route("new_blog_post", "/admin/blog/new")
