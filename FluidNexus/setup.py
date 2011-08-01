@@ -27,6 +27,7 @@ requires = [
     'pyramid-openid',
     'oauth2',
     'sqlalchemy-migrate',
+    'cherrypy',
     ]
 
 if sys.version_info[:3] < (2,5,0):
