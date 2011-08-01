@@ -37,7 +37,7 @@ def login(request):
         login = request.params['login']
         password = request.params['password']
 
-        if (User.checkPassword(login, password)):
+        if (User.checkPassword(login, password) and (User.checkTypeByUsername(login) != User.FORGOT_PASSWORD)):
             request.session["username"] = login
             headers = remember(request, User.getID(login))
             return HTTPFound(location = came_from, headers = headers)

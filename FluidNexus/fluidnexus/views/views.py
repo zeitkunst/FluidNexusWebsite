@@ -1,6 +1,8 @@
 # standard imports
 import datetime
+import hashlib
 from operator import itemgetter, attrgetter
+import random
 import time
 
 # Other module imports
@@ -24,8 +26,8 @@ from formalchemy import types, Field, FieldSet, Grid
 
 # My imports
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token, NexusMessage
-from fluidnexus.forms import UserFieldSet, UserNoPasswordFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
+from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token, NexusMessage, ForgotPassword
+from fluidnexus.forms import UserFieldSet, UserNoPasswordFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet, ForgotPasswordFieldSet, ResetPasswordFieldSet
 from pager import Pager
 
 
@@ -192,6 +194,7 @@ def register_user(request):
             user.given_name = fs.given_name.value
             user.surname = fs.surname.value
             user.homepage = fs.homepage.value
+            user.email = fs.email.value
             user.created_time =  time.time()
             user.user_type = User.NORMAL
             session.add(user)
@@ -254,6 +257,124 @@ def register_user_openid(request):
 
     form = fs.render()
     return dict(form = form, title = _("Register new user"))
+
+@view_config(route_name = "reset_password", renderer = "../templates/reset_password.pt")
+def reset_password(request):
+    session = DBSession()
+    matchdict = request.matchdict
+    token = matchdict["token"]
+
+    forgotPassword = ForgotPassword.getByToken(token)
+    if (not forgotPassword):
+        request.session.flash(_("Reset password token not found in database."))
+        return HTTPFound(location = route_url("home", request))
+
+    if (request.logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot reset a password."))
+        return HTTPFound(location = route_url("home", request))
+
+    login_url = route_url('login', request)
+    referrer = request.url
+    if (referrer == login_url):
+        referrer = '/' # never use the login form itself as came_from
+    
+    came_from = request.params.get('came_from', referrer)
+
+    user = User.getByID(forgotPassword.user.id)
+
+    fs = None
+    
+    if 'submitted' in request.params:
+        fs = ResetPasswordFieldSet().bind(User, session = session, data = request.params or None)
+        valid = fs.validate()
+        if valid:
+            user = User.getByID(request.params["user_id"])
+            password = bcrypt.hashpw(fs.password1.value, bcrypt.gensalt())
+            user.password = password
+            user.user_type = User.NORMAL
+            session.add(user)
+            session.flush()
+
+            session.query(ForgotPassword).filter(ForgotPassword.user_id == user.id).delete()
+
+            request.session["username"] = user.username
+            headers = remember(request, user.id)
+            request.session.flash(_("You have successfully updated your password!"))
+            return HTTPFound(location = route_url("home", request), headers = headers)
+
+    if (fs is None):
+        fs = ResetPasswordFieldSet().bind(User, session = session)
+    form = fs.render()
+    return dict(form = form, user_id = user.id, title = _("Forgot your password?"))
+
+@view_config(route_name = "forgot_password", renderer = "../templates/forgot_password.pt")
+def forgot_password(request):
+    session = DBSession()
+    matchdict = request.matchdict
+
+    if (request.logged_in):
+        request.session.flash(_("You are already logged in and therefore cannot request a new password."))
+        return HTTPFound(location = route_url("home", request))
+
+    login_url = route_url('login', request)
+    referrer = request.url
+    if (referrer == login_url):
+        referrer = '/' # never use the login form itself as came_from
+    
+    came_from = request.params.get('came_from', referrer)
+
+    fs = None
+
+    if 'submitted' in request.params:
+        fs = ForgotPasswordFieldSet().bind(User, session = session, data = request.params or None)
+        valid = fs.validate()
+        if valid:
+            user = User.getByEmail(fs.email.value)
+
+            token = str(time.time())
+
+            # Generate salt
+            for x in xrange(0, 10):
+                token += str(random.randint(0, 100))
+            token = hashlib.sha256(token).hexdigest()
+
+            fp = ForgotPassword(token = token)
+            fp.user_id = user.id
+            session.add(fp)
+
+            user.user_type = User.FORGOT_PASSWORD
+            session.add(user)
+
+            # Import smtplib for the actual sending function
+            import smtplib
+            
+            # Import the email modules we'll need
+            from email.mime.text import MIMEText
+
+            text = """Please go to the following link to reset your password:
+
+http://fluidnexus.net/reset_password/%s
+
+If you have any questions please reply to this e-mail.
+
+Best,
+
+fluidnexus.net""" % token
+            msg = MIMEText(text)
+            msg["Subject"] = "Forgotten password for %s" % (user.email)
+            msg["From"] = "fluidnexux@fluidnexus.net"
+            msg["To"] = user.email
+            s = smtplib.SMTP("localhost")
+            s.sendmail("fluidnexus@fluidNexus.net", [user.email], msg.as_string())
+            s.quit()
+
+            request.session.flash(_("Please check your e-mail for the link to reset your password."))
+            return HTTPFound(location = route_url("home", request))
+
+    if (fs is None):
+        fs = ForgotPasswordFieldSet().bind(User, session = session)
+    form = fs.render()
+    return dict(form = form, title = _("Forgot your password?"))
 
 
 @view_config(route_name = "view_user", renderer = "../templates/view_user.pt")

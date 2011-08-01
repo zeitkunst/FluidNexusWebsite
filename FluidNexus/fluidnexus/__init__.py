@@ -39,6 +39,8 @@ def main(global_config, **settings):
     # USERS/LOGIN
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
+    config.add_route('forgot_password', '/forgot_password')
+    config.add_route('reset_password', '/reset_password/{token}')
     config.add_route('register_user', "/register")
     config.add_route('register_user_openid', "/register_openid")
     config.add_route("edit_users", "/admin/users")

@@ -18,6 +18,10 @@ def username_different(value, field):
     if (field.parent.model.getByUsername(value) is not None):
         raise validators.ValidationError(_("Your username cannot be the same as one that already exists in the database."))
 
+def email_match(value, field):
+    if (field.parent.model.getByEmail(value) is False):
+        raise validators.ValidationError(_("The e-mail was not found in the database."))
+
 class OpenIDUserFieldSet(FieldSet):
     """Used to register a user with their openID."""
 
@@ -50,6 +54,7 @@ class RegisterUserFieldSet(FieldSet):
         inc = [self.username.label(_("* Username (will be used to publicly identify you on the site)")).required().validate(username_different),
                self.password1.password().label(_("* Password")).required(),
                self.password2.password().label(_("* Confirm password")).required().validate(password_match),
+               self.email.label(_("* E-mail address (will not be displayed, required only for password recovery")).required(),
                self.given_name.label(_("* Given name (will not be displayed)")).required(),
                self.surname.label(_("* Surname (will not be displayed)")).required(),
                self.homepage.label(_("Homepage (may be displayed)")),
@@ -106,6 +111,34 @@ class CommentFieldSet(FieldSet):
                self.captcha.label(_("Please enter the following number: 314159")).required().validate(captcha_match)
               ]
         self.configure(include = inc, options = options)
+
+class ForgotPasswordFieldSet(FieldSet):
+    """Used to deal with forgotten passwords."""
+
+    def __init__(self, user = None):
+        """Pre-configuration"""
+        FieldSet.__init__(self, User)
+
+        inc = [self.email.label(_("* E-mail address you provided when registering")).required().validate(email_match),
+              ]
+        self.configure(include = inc)
+
+class ResetPasswordFieldSet(FieldSet):
+    """Used to deal with forgotten passwords."""
+
+    def __init__(self, user = None):
+        """Pre-configuration"""
+        FieldSet.__init__(self, User)
+
+        self.append(Field('password1'))
+        self.append(Field('password2'))
+
+        inc = [
+            self.password1.password().label(_("* Password")),
+            self.password2.password().label(_("* Confirm password")).validate(password_match),
+        ]
+        self.configure(include = inc)
+
 
 class AuthorizeTokenFieldSet(FieldSet):
     """Used to present a form for authorizing a token."""

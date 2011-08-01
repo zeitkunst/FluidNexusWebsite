@@ -18,6 +18,7 @@
                 <h3><a href="/register" i18n:translate="">Register for a new account</a></h3>
                 <h3><a href="/openid" i18n:translate="">Login using your Google Account</a></h3>
                 <p i18n:translate="">You can use your Google account to login to the Fluid Nexus website instead of creating an additional account here.  We do not store any information associated with your Google Account (such as your e-mail address or your name) on the Fluid Nexus website.</p>
+                <h3><a href="/forgot_password" i18n:translate="">Forgot your password?</a></h3>
             </div>
         </div>
     </tal:block>

@@ -61,9 +61,11 @@ class User(Base):
     homepage = Column(Unicode)
     created_time = Column(Float)
     user_type = Column(Integer)
+    email = Column(Unicode, default = u"")
 
     NORMAL = 0
     OPENID = 1
+    FORGOT_PASSWORD = 2
 
     def __repr__(self):
         return "<User '%s'>" % self.username
@@ -90,6 +92,22 @@ class User(Base):
             return False
 
     @classmethod
+    def checkTypeByUsername(cls, username):
+        user = cls.getByUsername(username)
+        if not user:
+            return False
+        else:
+            return user.user_type
+
+    @classmethod
+    def getByEmail(cls, email):
+        try:
+            email = DBSession.query(cls).filter(cls.email == email).one()
+            return email
+        except NoResultFound, e:
+            return False
+
+    @classmethod
     def getID(cls, username):
         return DBSession.query(cls.id).filter(cls.username == username).one()[0]
 
@@ -101,6 +119,37 @@ class User(Base):
         group.group_info_id = group_info_id
         group.user_id = user_id
         DBSession.add(group)
+
+class ForgotPassword(Base):
+    __label__ = "ForgotPassword"
+    __plural__ = "ForgottenPasswors"
+    __tablename__ = "forgotten_passwords"
+
+    id = Column(Integer, primary_key = True)
+    token = Column(Unicode, nullable = False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
+
+    user = relationship(User, backref=backref('forgotten_passwords', order_by=id))
+
+    def __repr__(self):
+        return "<ForgottenPasswords '%s', '%s'>" % (self.user.username, self.token)
+
+    def __init__(self, token = ""):
+        self.token = token
+
+    @classmethod
+    def getByUserID(cls, user_id):
+        try:
+            return DBSession.query(cls).filter(cls.user_id == user_id).one()
+        except NoResultFound, e:
+            return False
+
+    @classmethod
+    def getByToken(cls, token):
+        try:
+            return DBSession.query(cls).filter(cls.token == token).one()
+        except NoResultFound, e:
+            return False
 
 class OpenID(Base):
     __label__ = 'OpenID'
