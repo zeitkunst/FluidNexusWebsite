@@ -10,6 +10,8 @@
     <meta name="keywords" content="python web application" />
     <meta name="description" content="pyramid web application" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="Fluid Nexus RSS feed" href="/feed/rss" />
+
     <script type="text/javascript" src="${scripts_static_url}/jquery.min.js"></script>
     <script type="text/javascript" src="${scripts_static_url}/jquery.lightbox-0.5.min.js"></script>
     <script type="text/javascript">

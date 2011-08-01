@@ -34,6 +34,7 @@ def main(global_config, **settings):
     config.add_route('openid', '/openid')
     config.add_route("check_openid", pattern = "/check_openid")
     config.add_route("verify_openid", pattern = "/do_openid", view = "pyramid_openid.verify_openid")
+    config.add_route('rss', '/feed/rss')
 
     # USERS/LOGIN
     config.add_route('login', '/login')

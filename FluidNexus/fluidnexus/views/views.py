@@ -1,9 +1,20 @@
+# standard imports
+import datetime
+from operator import itemgetter, attrgetter
+import time
+
+# Other module imports
+import textile
+import bcrypt
+import PyRSS2Gen
+
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 
 from pyramid.exceptions import Forbidden, NotFound
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPForbidden
 from pyramid.i18n import TranslationStringFactory
+from pyramid.response import Response
 from pyramid.security import authenticated_userid
 from pyramid.security import remember
 from pyramid.url import route_url
@@ -11,15 +22,12 @@ from pyramid.view import view_config
 
 from formalchemy import types, Field, FieldSet, Grid
 
-import textile
-import bcrypt
-
+# My imports
 from fluidnexus.models import DBSession
-from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token
+from fluidnexus.models import Post, User, Group, Comment, Page, OpenID, ConsumerKeySecret, Token, NexusMessage
 from fluidnexus.forms import UserFieldSet, UserNoPasswordFieldSet, RegisterUserFieldSet, OpenIDUserFieldSet, CommentFieldSet
 from pager import Pager
 
-import time
 
 _ = TranslationStringFactory('fluidnexus')
 
@@ -542,3 +550,58 @@ def remember_me(context, request, result):
     else:
         request.session.flash(_("You now need to register after validating your OpenID"))
         return HTTPFound(location = route_url("register_user_openid", request, _query = {"openid_url": openid_url}))
+
+
+@view_config(route_name = "rss")
+def rss(request):
+    num_posts = 10
+    num_nexus = 10
+    session = DBSession()
+
+    posts = session.query(Post).join(User).order_by(desc(Post.created_time)).limit(num_posts)
+    nexus = session.query(NexusMessage).join(User).order_by(desc(NexusMessage.created_time)).limit(num_nexus)
+
+    items = []
+
+    # add a link to each item
+    newPosts = []
+    for post in posts:
+        link = "http://fluidnexus.net/blog/post/" + str(post.id)
+        setattr(post, "link", link)
+        setattr(post, "guid", link)
+        setattr(post, "categories", ["blog"])
+        newPosts.append(post)
+    [items.append(post) for post in newPosts]
+
+    newNexus = []
+    for message in nexus:
+        link = "http://fluidnexus.net/nexus"
+        setattr(message, "link", link)
+        setattr(message, "guid", message.message_hash)
+        setattr(message, "categories", ["nexus"])
+        newNexus.append(message)
+    [items.append(message) for message in newNexus]
+
+    items = sorted(items, key=attrgetter("created_time"), reverse = True)    
+
+    rssItems = []
+
+    for item in items:
+        rssItem = PyRSS2Gen.RSSItem(title = item.title,
+            description = item.content,
+            pubDate = datetime.datetime.fromtimestamp(item.created_time),
+            link = item.link,
+            guid = PyRSS2Gen.Guid(item.guid),
+            categories = item.categories,
+            author = item.user.username)
+        rssItems.append(rssItem)
+
+    rss = PyRSS2Gen.RSS2(
+        title = "Fluid Nexus RSS Feed",
+        link = "http://fluidnexus.net/feed/rss",
+        description = "RSS feed of Nexus and Blog posts from Fluid Nexus",
+        lastBuildDate = datetime.datetime.utcnow(),
+        items = rssItems
+    )
+
+    return Response(rss.to_xml(encoding = "utf-8"), content_type="application/rss+xml")

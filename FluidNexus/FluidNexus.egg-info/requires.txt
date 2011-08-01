@@ -17,3 +17,5 @@ pycryptopp
 pyramid-openid
 oauth2
 sqlalchemy-migrate
+cherrypy
+pyrss2gen

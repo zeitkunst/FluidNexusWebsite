@@ -28,6 +28,7 @@ requires = [
     'oauth2',
     'sqlalchemy-migrate',
     'cherrypy',
+    'pyrss2gen',
     ]
 
 if sys.version_info[:3] < (2,5,0):
