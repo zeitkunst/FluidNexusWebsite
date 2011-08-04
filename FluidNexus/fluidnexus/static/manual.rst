@@ -21,19 +21,9 @@ Meta
 Authors
 -------
 
-- Nicholas Knouf <nknouf@zeitkunst.org>
+- Nicholas Knouf <nknouf [[at]] zeitkunst {{dot}} org>
 
-Acknowledgements
-----------------
-
-Some here.
-
-Purpose
--------
-
-Some purpose here.
-
-Suggestsions, Errata, and Translations
+Suggestions, Errata, and Translations
 --------------------------------------
 
 All are welcome.  Please contact the author.
@@ -42,9 +32,15 @@ All are welcome.  Please contact the author.
 Introduction
 ============
 
-Fluid Nexus is an application for mobile phones and desktop devices that is primarily designed to enable activists to send messages and data amongst themselves independent of a centralized network. The idea is to provide a means of communication between people when the centralized network has been shut down, either by the government during a time of unrest, or by nature due to a massive disaster. During such times the use of the centralized network for voice or SMS is not possible. Yet, if we can use the fact that people still must move about the world, then we can use ideas from sneaker-nets to turn people into carriers of data. Given enough people, we can create fluid, temporary, ad-hoc networks that pass messages one person at a time, spreading out as a contagion and eventually reaching members of the group. This enables surreptitious communication via daily activity and relies on a fluid view of reality. Additionally, Fluid Nexus can be used as a hyperlocal message board, loosely attached to physical locations.
+Fluid Nexus is an intervention into staid practices surrounding networks. In the second decade of the twenty-first century, networks continue to be defined by their stable topology, their ability to be captured in an image or graph. Peer-to-peer technologies have promised new arrangements absent centralized control, but they still rely on stationary devices. Mobile phones bring movement and motion but nevertheless remain wedded to conventional network providers.
 
-For more information, see "`Transnetworks and the Fluid Nexus Project`_" to be published in Fall 2011 in the proceedings of dis/connecting/media 2009.
+Networks do not need to be understood as stable entities with well-traversed paths. Instead, we can combine peer-to-peer with movement to use machines and humans as equal parts of an information transfer infrastructure. Fluid, temporary, ad-hoc networks can be created and destroyed as necessary, passing information from one person to another, spreading out as a contagion and eventually reaching everyone using the service. People become mobile nodes in the network (known in computer science as a `sneaker net <http://en.wikipedia.org/wiki/Sneakernet>`_) while their devices take care of transferring data from one device to another.
+
+Since information in Fluid Nexus does not travel through any centralized networks it cannot be saved by any Internet intermediary, potentially revealing identifiable information. Nor can any intermediary decide to censor a particular message. These facts make Fluid Nexus an important tool for activists. Access to the data stored by Fluid Nexus requires a search warrant---or another device running the software. Indeed it is this "broadcast" nature of Fluid Nexus that makes it such a potent tool. In the long-run, anyone else running the software will eventually have every message sent by any other user, making it nigh impossible to censor any single message. No identifying information regarding the sender is attached to a message---the sender is in control of what he or she wishes to reveal. And in conjunction with other software such as `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ identities can be further obfuscated as desired or necessary.
+
+Yet sometimes it is important for information to reach a broader audience, and at this time that requires going through the Internet. To facilitate this we've created the `Nexus <http://fluidnexus.net/nexus>`_, a place for certain types of messages which are marked as "public" to be automatically uploaded by any Fluid Nexus user to this website. Again, the control of whether a message can be uploaded or not is left in the fingertips of the sender. The Nexus can become a place to distribute necessary bits of text, audio, images, and video to a wider audience.
+
+For more information regarding our theoretical motivations, see "`Transnetworks and the Fluid Nexus Project`_" to be published in Fall 2011 in the proceedings of dis/connecting/media 2009.
 
 Terminology & Icons
 ===================
@@ -117,7 +113,7 @@ Bluetooth
 
 On Android, devices must be paired before any data sharing can occur.  This should happen in a safe location prior to an event.  Because of this need for pairing it is less likely that those unknown to you will be able to access Fluid Nexus messages *when you are using the Bluetooth_ network modality alone*; however, it is still possible that someone can sniff your Bluetooth traffic and thus see what messages are being sent.
 
-On the Desktop, **TODO**
+On the Desktop in our testing we have not needed to pair devices ahead of time to share data amongst Linux and Windows clients.  Reports from other uses would be welcome.
 
 Zeroconf
 ++++++++
@@ -308,6 +304,11 @@ The "Network" section provides checkboxes to enable or disable particular networ
     Desktop preferences screen
 
 Ad-Hoc Wifi is still under development.
+
+Bluetooth
++++++++++
+
+For the Android version you have the additional option to only connect to previously paired or "bonded" devices.  This will skip the device discovery step.  While saving battery life, connecting to bonded devices also adds a small layer of security by only sharing data between devices that you already know about.
 
 Scan Frequency
 ++++++++++++++
