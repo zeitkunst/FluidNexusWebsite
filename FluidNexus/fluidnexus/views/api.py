@@ -183,7 +183,7 @@ def api_nexus_message_update(request):
         elif ("message_type" not in message):
             return {"error": _("No 'message_type' found in POSTed message.")}
 
-        computed_hash = hashlib.sha256(message["message_title"] + message["message_content"]).hexdigest()
+        computed_hash = hashlib.sha256(unicode(message["message_title"]).encode("utf-8") + unicode(message["message_content"]).encode("utf-8")).hexdigest()
 
         if (computed_hash != message["message_hash"]):
             return {"error": _("The computed hash (%s) does not match the hash sent with the POST (%s)." % (computed_hash, message["message_hash"]))}
