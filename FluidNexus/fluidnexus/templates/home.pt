@@ -11,7 +11,7 @@
                     <h1><img src="${images_static_url}/concept_front.png" alt="Concept"/></h1>
                     <p><img src="${images_static_url}/concept_front_image.png" alt="hop image"/></p>
                 </div>
-                <p i18n:translate="">Fluid Nexus is an application for Android phones and desktop computers that exchanges messages without the need for centralized mobile networks.  Messages hop from one device to another, being transferred by short-range networking technologies like bluetooth, as well as the via the movement of people from one location to another.  <a href="/infos/concept">Read More</a></p>
+                <p i18n:translate="">Fluid Nexus is an application for Android phones and desktop computers that exchanges messages without the need for centralized mobile networks.  Messages hop from one device to another, being transferred by short-range networking technologies like bluetooth, as well as via the movement of people from one location to another.  <a href="/infos/concept">Read More</a></p>
             </div>
             <div>
                 <div id="nexus_front">

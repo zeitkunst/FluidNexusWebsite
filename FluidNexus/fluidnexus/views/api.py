@@ -121,7 +121,13 @@ def api_nexus_message_nonce(request):
         parameters = dict([(k,v) for k,v in request.params.iteritems()]))
 
     consumer = ConsumerKeySecret.getByConsumerKey(req.get("oauth_consumer_key"))
+
+    if (consumer is False):
+        return {"Error": "No record for the key and secret found."}
+
     token = Token.getByToken(req.get("oauth_token"))
+    if (token is False):
+        return {"Error": "No record for the token key and token secret found."}
 
     req = oauth2.Request.from_consumer_and_token(consumer, 
         token = token, 
@@ -349,11 +355,11 @@ def api_request_token(request):
             result = {'result': route_url('api_authorize_token', request, appType = appType) + '?' + token.to_string()}
             return Response(simplejson.dumps(result))
     except oauth2.Error, e:
-        return simplejson.dumps({"oauth2 error": str(e)})
+        return Response(simplejson.dumps({"oauth2 error": str(e)}))
     except KeyError, e:
         return Response(simplejson.dumps({"keyerror": str(e)}))
     except Exception, e:
-        return simplejson.dumps({"general exception error": str(e)})
+        return Response(simplejson.dumps({"general exception error": str(e)}))
 
 @view_config(route_name = "api_authorize_token", request_method = "GET", renderer = "../templates/api_authorize_token.pt")
 def api_authorize_token(request):

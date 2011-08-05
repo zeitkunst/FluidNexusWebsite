@@ -92,6 +92,20 @@ class User(Base):
             return False
 
     @classmethod
+    def checkEmail(cls, username, email):
+        user = cls.getByUsername(username)
+        if not user:
+            return False
+
+        hashed_email = DBSession.query(User.email).filter(User.username == username).one()[0]
+
+        if (bcrypt.hashpw(email, hashed_email) == hashed_email):
+            return user
+        else:
+            return False
+
+
+    @classmethod
     def checkTypeByUsername(cls, username):
         user = cls.getByUsername(username)
         if not user:

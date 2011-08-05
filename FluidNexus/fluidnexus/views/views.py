@@ -194,7 +194,8 @@ def register_user(request):
             user.given_name = fs.given_name.value
             user.surname = fs.surname.value
             user.homepage = fs.homepage.value
-            user.email = fs.email.value
+            #user.email = fs.email.value
+            user.email = bcrypt.hashpw(fs.email.value, bcrypt.gensalt())
             user.created_time =  time.time()
             user.user_type = User.NORMAL
             session.add(user)
@@ -327,31 +328,35 @@ def forgot_password(request):
 
     if 'submitted' in request.params:
         fs = ForgotPasswordFieldSet().bind(User, session = session, data = request.params or None)
-        valid = fs.validate()
-        if valid:
-            user = User.getByEmail(fs.email.value)
+        valid_user = User.checkEmail(fs.username.value, fs.email.value)
 
-            token = str(time.time())
+        if (not valid_user):
+            request.session.flash(_("E-mail and password combination do not match."))
+            return HTTPFound(location = route_url("home", request))
 
-            # Generate salt
-            for x in xrange(0, 10):
-                token += str(random.randint(0, 100))
-            token = hashlib.sha256(token).hexdigest()
+        #user = User.getByEmail(fs.email.value)
 
-            fp = ForgotPassword(token = token)
-            fp.user_id = user.id
-            session.add(fp)
+        token = str(time.time())
 
-            user.user_type = User.FORGOT_PASSWORD
-            session.add(user)
+        # Generate salt
+        for x in xrange(0, 10):
+            token += str(random.randint(0, 100))
+        token = hashlib.sha256(token).hexdigest()
 
-            # Import smtplib for the actual sending function
-            import smtplib
-            
-            # Import the email modules we'll need
-            from email.mime.text import MIMEText
+        fp = ForgotPassword(token = token)
+        fp.user_id = valid_user.id
+        session.add(fp)
 
-            text = """Please go to the following link to reset your password:
+        valid_user.user_type = User.FORGOT_PASSWORD
+        session.add(valid_user)
+
+        # Import smtplib for the actual sending function
+        import smtplib
+        
+        # Import the email modules we'll need
+        from email.mime.text import MIMEText
+
+        text = """Please go to the following link to reset your password:
 
 http://fluidnexus.net/reset_password/%s
 
@@ -360,16 +365,16 @@ If you have any questions please reply to this e-mail.
 Best,
 
 fluidnexus.net""" % token
-            msg = MIMEText(text)
-            msg["Subject"] = "Forgotten password for %s" % (user.email)
-            msg["From"] = "fluidnexux@fluidnexus.net"
-            msg["To"] = user.email
-            s = smtplib.SMTP("localhost")
-            s.sendmail("fluidnexus@fluidNexus.net", [user.email], msg.as_string())
-            s.quit()
+        msg = MIMEText(text)
+        msg["Subject"] = "Forgotten password for %s" % (fs.email.value)
+        msg["From"] = "fluidnexux@fluidnexus.net"
+        msg["To"] = fs.email.value
+        s = smtplib.SMTP("localhost")
+        s.sendmail("fluidnexus@fluidNexus.net", [fs.email.value], msg.as_string())
+        s.quit()
 
-            request.session.flash(_("Please check your e-mail for the link to reset your password."))
-            return HTTPFound(location = route_url("home", request))
+        request.session.flash(_("Please check your e-mail for the link to reset your password."))
+        return HTTPFound(location = route_url("home", request))
 
     if (fs is None):
         fs = ForgotPasswordFieldSet().bind(User, session = session)

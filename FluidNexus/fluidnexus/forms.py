@@ -54,7 +54,7 @@ class RegisterUserFieldSet(FieldSet):
         inc = [self.username.label(_("* Username (will be used to publicly identify you on the site)")).required().validate(username_different),
                self.password1.password().label(_("* Password")).required(),
                self.password2.password().label(_("* Confirm password")).required().validate(password_match),
-               self.email.label(_("* E-mail address (will not be displayed, required only for password recovery")).required(),
+               self.email.label(_("* E-mail address (will not be displayed, required only for password recovery)")).required(),
                self.given_name.label(_("* Given name (will not be displayed)")).required(),
                self.surname.label(_("* Surname (will not be displayed)")).required(),
                self.homepage.label(_("Homepage (may be displayed)")),
@@ -119,7 +119,9 @@ class ForgotPasswordFieldSet(FieldSet):
         """Pre-configuration"""
         FieldSet.__init__(self, User)
 
-        inc = [self.email.label(_("* E-mail address you provided when registering")).required().validate(email_match),
+        inc = [
+            self.username.label(_("* Username you provided when registering")),
+            self.email.label(_("* E-mail address you provided when registering")).required().validate(email_match),
               ]
         self.configure(include = inc)
 
