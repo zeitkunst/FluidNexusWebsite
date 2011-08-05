@@ -162,7 +162,7 @@ def api_nexus_message_update(request):
     if ("message" not in request.params):
         return {"error": _("No 'message' parameter found")}
     else:
-        message = simplejson.loads(request.params["message"])
+        message = simplejson.loads(request.params["message"], encoding="utf-8")
 
         # Get the nonce
         nonce = message["message_nonce"]
