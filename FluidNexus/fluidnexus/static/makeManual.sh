@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "Copying images"
+cp -R images/android_* manual/images/
+cp -R images/desktop_* manual/images/
+
 echo "Creating manual"
 rst2html.py --stylesheet-path=css/desktop_manual.css manual.rst manual/index.html
 

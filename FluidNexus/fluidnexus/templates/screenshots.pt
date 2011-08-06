@@ -28,6 +28,17 @@
                     <a href="${images_static_url}/desktop_preferences_nexus.png" title="Desktop Nexus preferences"><img src="${images_static_url}/thumbs/desktop_preferences_nexus.png" alt="desktop preferences nexus"/></a>
                 </div>
             </div>
+            <div class="screenshots">
+                <h1>Platform Screenshots</h1>
+                <div class="lightbox">
+                    <a href="${images_static_url}/fluid_nexus_ubuntu.png" title="Fluid Nexus on Kubuntu"><img src="${images_static_url}/thumbs/fluid_nexus_ubuntu.png" alt="fluid nexus ubuntu"/></a>
+                    <a href="${images_static_url}/fluid_nexus_osx.png" title="Fluid Nexus on OSX"><img src="${images_static_url}/thumbs/fluid_nexus_osx.png" alt="fluid nexus osx"/></a>
+                    <a href="${images_static_url}/fluid_nexus_windowsXP.png" title="Fluid Nexus on Windows XP"><img src="${images_static_url}/thumbs/fluid_nexus_windowsXP.png" alt="fluid nexus windowsXP"/></a>
+                    <a href="${images_static_url}/fluid_nexus_windows7.png" title="Fluid Nexus on Windows 7"><img src="${images_static_url}/thumbs/fluid_nexus_windows7.png" alt="fluid nexus windows7"/></a>
+
+                </div>
+
+            </div>
         </div>
     </div>
     </tal:block>

@@ -35,7 +35,7 @@ if sys.version_info[:3] < (2,5,0):
     requires.append('pysqlite')
 
 setup(name='FluidNexus',
-      version='0.0',
+      version='0.1.0',
       description='FluidNexus',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
