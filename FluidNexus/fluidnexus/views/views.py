@@ -714,7 +714,7 @@ def rss(request):
 
     for item in items:
         rssItem = PyRSS2Gen.RSSItem(title = item.title,
-            description = item.content,
+            description = textile.textile(item.content),
             pubDate = datetime.datetime.fromtimestamp(item.created_time),
             link = item.link,
             guid = PyRSS2Gen.Guid(item.guid),
