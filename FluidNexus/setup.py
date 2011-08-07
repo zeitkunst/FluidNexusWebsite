@@ -30,6 +30,7 @@ requires = [
     'cherrypy',
     'pyrss2gen',
     'PIL',
+    'supervisor',
     ]
 
 if sys.version_info[:3] < (2,5,0):
