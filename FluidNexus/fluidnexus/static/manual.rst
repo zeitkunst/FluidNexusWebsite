@@ -282,6 +282,13 @@ Preferences
 
 Both the Android and the Desktop applications have preferences that allow you to control how the applications behave.
 
+General
++++++++
+
+On both Android and the Desktop is an option whether or not to pass along messages you have blacklisted.  If checked, blacklisted messages will be sent.
+
+On Android you additionally have an option to vibrate when new messages arrive.
+
 Network
 +++++++
 
