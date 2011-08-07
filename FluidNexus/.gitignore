@@ -1,0 +1,5 @@
+build
+data/sessions
+sstore
+FluidNexus.db
+FluidNexus.egg-info

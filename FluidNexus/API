@@ -1,0 +1,21 @@
+GET /api/01/nexus/messages.{json}
+
+Return the latest Nexus messages in the given format.
+
+GET /api/01/nexus/messages/{hash}.{json}
+
+Return the Nexus messages for the given hash in the given format.
+
+GET /api/01/nexus/hashes.{json}
+
+Return the latest message hashes in the given format.
+
+GET /api/01/nexus/hashes/{message_hash}.{json}
+
+Return whether the Nexus has the given message_hash
+
+POST /api/01/nexus/message/update.{json}
+
+(This method will be controlled by OAuth.)
+
+Post a new message to the Nexus timeline.  Required parameter "message" is a JSON-encoded string with the following required members: message_title, message_content, message_hash, message_time, message_type
