@@ -28,6 +28,7 @@ def doNexusMessages(request = None, page_num = 1, limit = 10):
         if (message.attachment_path != ""):
             fullPath, extension = os.path.splitext(message.attachment_original_filename)
             message.massaged_attachment_path = "/static/attachments/" + os.path.basename(message.attachment_path) + extension
+            message.massaged_attachment_path_tn = "/static/attachments/" + os.path.basename(message.attachment_path) + "_tn" + extension
         modifiedMessages.append(message)
 
     if (page_num < p.pages):

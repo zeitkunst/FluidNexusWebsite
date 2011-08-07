@@ -1,4 +1,6 @@
-import base64, hashlib, os, random, time
+import base64, hashlib, os, random, re, time
+
+import Image
 
 from sqlalchemy import desc
 
@@ -192,11 +194,11 @@ def api_nexus_message_update(request):
             return {"error": "The message with hash '%s' already exists in the Nexus" % message["message_hash"]}
 
 
-        # TODO
-        # make user based on user_id attached to this oauth token
         m = NexusMessage()
         m.title = message["message_title"]
-        m.content = message["message_content"]
+
+        # Strip any potential HTML tags in the content
+        m.content = re.sub(r'<[^>]*?>', '', message["message_content"]) 
         m.message_hash = message["message_hash"]
         m.message_type = message["message_type"]
         m.created_time = message["message_time"]
@@ -223,6 +225,17 @@ def api_nexus_message_update(request):
 
                 fp.write(data)
             fp.close()
+
+            # Resize if an image
+            if (m.message_type == 2):
+                size = 200, 200
+                try:
+                    # Probably needs some validation here...
+                    im = Image.open(message_attachment_path + extension)
+                    im.thumbnail(size)
+                    im.save(message_attachment_path + "_tn" + extension)
+                except IOError:
+                    pass
 
             m.attachment_original_filename = attachment_original_filename
             m.attachment_path = message_attachment_path

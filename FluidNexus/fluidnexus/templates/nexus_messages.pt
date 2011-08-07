@@ -24,7 +24,7 @@
                             <tal:block tal:switch="message.message_type">
                                 <p tal:case="0">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
                                 <p tal:case="1">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
-                                <a href="${message.massaged_attachment_path}"><img src="${message.massaged_attachment_path}" alt="${message.attachment_original_filename}" width="300" tal:case="2" /></a>
+                                <a href="${message.massaged_attachment_path}"><img src="${message.massaged_attachment_path_tn}" alt="${message.attachment_original_filename}" tal:case="2" /></a>
                                 <p tal:case="3">Attachment: <a href="${message.massaged_attachment_path}">${message.attachment_original_filename}</a></p>
                             </tal:block>
                         </tal:block>
