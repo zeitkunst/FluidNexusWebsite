@@ -8,7 +8,7 @@ echo "Creating manual"
 rst2html.py --stylesheet-path=css/desktop_manual.css manual.rst manual/index.html
 
 echo "Copying to desktop version"
-cp -R manual /home/nknouf/Documents/Research/Projects/FluidNexus/code/FluidNexus/share/FluidNexus/
+cp -R manual /home/nknouf/Documents/Research/Projects/FluidNexus/code/FluidNexus/share/fluid-nexus/
 
 echo "Copying to Android version"
 cp -R manual/* /home/nknouf/Documents/Research/Projects/FluidNexus/code/FluidNexusAndroid/assets/

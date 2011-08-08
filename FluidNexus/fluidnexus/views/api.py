@@ -327,7 +327,7 @@ def api_request_token(request):
         consumerToken = Token.getByConsumerID(consumer.id)
         if consumerToken:
             if (consumerToken.token_type == consumerToken.ACCESS):
-                return HTTPFound(location = consumerToken.callback_url)
+                return Response(simplejson.dumps({'result': route_url('api_access_token', request)}))
             elif (consumerToken.token_type == consumerToken.AUTHORIZATION):
                 # TODO
                 # Check that the token hasn't already expired
