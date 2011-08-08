@@ -15,6 +15,15 @@
             <p i18n:translate="">Fluid Nexus bypasses Internet intermediaries' control over the identification and circulation of messages.  This makes Fluid Nexus an important tool for activists.  Access to the data stored by Fluid Nexus requires a search warrant for <em>your own</em> devices&mdash;or another device running the software.  No identifying information regarding the sender is attached to a message, putting the sender in control.  And in conjunction with other software such as <a href="https://guardianproject.info/apps/securecam/">ObscuraCam</a> identities can be further obfuscated as desired or necessary.</p>
             <p i18n:translate="">In the event that information needs to reach a broad audience, we've added another feature called the <a href="/nexus">Nexus</a>.  The <a href="/nexus">Nexus</a> is a space on this site for "public" messages to be automatically uploaded by any Fluid Nexus user.  The <a href="/nexus">Nexus</a> includes text, audio, images, and video capabilities.  The sender has control whether the message will become public or not.</p>
             <p i18n:translate="">For more information on Fluid Nexus, see the paper <a href="${pdfs_static_url}/DCM2009Submitted.pdf" i18n:name="dcmsubmitted">"Transnetworks and the Fluid Nexus Project"</a>, forthcoming in Fall 2011 in the proceedings of dis/connecting/media 2009.</p>
+            <div>
+                <h2 i18n:translate="">Articles of Interest</h2>
+                <p><a href="https://www.nytimes.com/2011/06/12/world/12internet.html?pagewanted=1&_r=1&hp">"U.S. Underwrites Internet Detour Around Censors"</a></p>
+                <p><a href="http://www.cbc.ca/news/technology/story/2011/01/28/f-egypt-web-blackout.html">"Busting Egypt's web blackout: Savvy Egyptians using dial-up connections, unused ports to stay connected"</a></p>
+                <p><a href="http://techcrunch.com/2011/02/27/humans-are-the-routers/">"Humans Are The Routers"</a></p>
+                <p><a href="http://www.physorg.com/news198298057.html">"New project enables mobile phone use in areas with no reception"</a></p>
+                <p><a href="http://www.guardian.co.uk/world/2009/oct/04/man-arrested-twitter-g20-us?INTCMP=SRCH">"New York man accused of using Twitter to direct protesters during G20 summit"</a></p>
+                <p i18n:translate=""></p>
+            </div>
         </div>
     </div>
     </tal:block>
