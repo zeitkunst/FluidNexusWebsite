@@ -499,7 +499,6 @@ def initialize_sql():
         now = time.time()
         user = User()
         user.username = "admin"
-        #user.password = hashlib.sha256("password").hexdigest()
         user.password = bcrypt.hashpw("password", bcrypt.gensalt())
         user.given_name = "Admin"
         user.surname = "Admin"

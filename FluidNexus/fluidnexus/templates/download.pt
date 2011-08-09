@@ -28,7 +28,7 @@
                 <p>The archived code is available in the <code>S60</code> folder of the <a href="https://github.com/zeitkunst/FluidNexus">Fluid Nexus git repository</a>.</p>
             </div>
             <h1>Source Code...</h1>
-            <p i18n:translate="">... is available on github.</p>
+            <p i18n:translate="">... is available on github under the GPLv3.  <em>We consider GPL violations to be a serious offense</em>.</p>
             <h2><a href="https://github.com/zeitkunst/FluidNexusAndroid">Android client</a></h2>
             <h2><a href="https://github.com/zeitkunst/FluidNexus">Desktop/Laptop client for Windows/Linux</a></h2>
         </div>
