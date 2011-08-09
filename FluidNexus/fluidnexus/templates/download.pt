@@ -31,6 +31,7 @@
             <p i18n:translate="">... is available on github under the GPLv3.  <em>We consider GPL violations to be a serious offense</em>.</p>
             <h2><a href="https://github.com/zeitkunst/FluidNexusAndroid">Android client</a></h2>
             <h2><a href="https://github.com/zeitkunst/FluidNexus">Desktop/Laptop client for Windows/Linux</a></h2>
+            <h2><a href="https://github.com/zeitkunst/FluidNexusWebsite">Website</a></h2>
         </div>
     </div>
     </tal:block>

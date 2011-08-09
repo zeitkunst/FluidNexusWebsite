@@ -71,7 +71,7 @@
         <div id="footer" class="row">
             <div class="pre_2 col_4" style="font-size: 0.7em;" >
                 <p i18n:translate="">Donate to our bitcoin address: 18GD6vMjmXthGhDNDhNMEoEthoGkUXkQR3a</p>
-                <p i18n:translate="">Text on this website is available under the <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License v1.3 (or later)</a>.</p>
+                <p i18n:translate="">Text on this website is available under the <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License v1.3 (or later)</a>.  <a href="https://github.com/zeitkunst/FluidNexusWebsite">Website code</a> is available under the <a href="http://www.gnu.org/licenses/agpl.html">AGPLv3</a>.</p>
             </div>
             <div class="col_4">
                 <p>
