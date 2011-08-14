@@ -74,16 +74,20 @@
 <p>In this manual <strong>Android</strong> refers to the Android application, while <strong>Desktop</strong> refers to the application for Windows and Linux PCs.</p>
 <p>The following icons are used throughout the manual and in the applications themselves:</p>
 <dl class="docutils">
+<dt><img alt="Outgoing messages" src="${images_static_url}/menu_outgoing.png" style="width: 48px;" /> Outgoing messages</dt>
+<dd>Messages that you've created and that will be passed to other devices running Fluid Nexus</dd>
+</dl>
+<dl class="docutils">
+<dt><img alt="High priority messages" src="${images_static_url}/menu_high_priority.png" style="width: 48px;" /> High priority messages</dt>
+<dd>Messages that have been marked as high priority; these can be considered <em>life or death</em> messages.</dd>
+</dl>
+<dl class="docutils">
 <dt><img alt="Public messages created by you" src="${images_static_url}/menu_public.png" style="width: 48px;" /> Public messages created by you</dt>
 <dd>Messages that you have marked as public and will be pushed by yourself or someone else to the Nexus</dd>
 </dl>
 <dl class="docutils">
 <dt><img alt="Public messages created by someone else" src="${images_static_url}/menu_public_other.png" style="width: 48px;" /> Public messages created by someone else</dt>
 <dd>Messages that someone else has marked as public and will be pushed by yourself or someone else to the Nexus</dd>
-</dl>
-<dl class="docutils">
-<dt><img alt="Outgoing messages" src="${images_static_url}/menu_outgoing.png" style="width: 48px;" /> Outgoing messages</dt>
-<dd>Messages that you've created and that will be passed to other devices running Fluid Nexus</dd>
 </dl>
 <dl class="docutils">
 <dt><img alt="Other messages" src="${images_static_url}/menu_all.png" style="width: 48px;" /> Other messages</dt>
@@ -167,6 +171,7 @@
 <p class="caption">Desktop new message window</p>
 </div>
 <p>Fill out the desired title and message.  Messages can be marked as potentially being sent to the Nexus by checking &quot;Public (push to Nexus?)&quot;.  Attachments can be added as well.  In the Desktop application simply press &quot;Choose File...&quot; to open up a file dialog and select the desired attachment.  On Android, select the type of attachment (audio, image, video) and then tap &quot;Add Attachment...&quot; to open up the native file choosing application.</p>
+<p>You can also set the &quot;priority&quot; of the message.  Currently there are two options: &quot;Normal&quot; and &quot;Life or Death&quot;.  <em>Only use the &quot;Life or Death&quot; option if someone's life depends on receiving the message</em>.</p>
 <div class="figure">
 <img alt="android new message attachment type" src="${images_static_url}/android_new_message_attachment_type.png" style="width: 400px;" />
 <p class="caption">Selecting an attachment type on Android</p>
@@ -315,7 +320,7 @@ message FluidNexusMessages {
 }
 </pre>
 <p>Note that no directly identifying information is either sent in the message nor saved in the database.  The only way identifying information might be saved is via anything placed in the message itself.  Also note that there are no limitations on the length of the message.</p>
-<p>The application uses a SHA1 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of <a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table">distributed hash table</a> with the goal of replicating the entire table amongst all devices.</p>
+<p>The application uses a SHA256 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of <a class="reference external" href="https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table">distributed hash table</a> with the goal of replicating the entire table amongst all devices.</p>
 </div>
 <div class="section" id="network-modalities">
 <h2><a class="toc-backref" href="#id27">6.2&nbsp;&nbsp;&nbsp;Network Modalities</a></h2>

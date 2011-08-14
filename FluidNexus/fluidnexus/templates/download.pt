@@ -24,8 +24,12 @@
             <div>
                 <h2 i18n:translate="">Nokia Series 60</h2>
                 <p i18n:translate="">The Nokia Series 60 version is based on an older version of the Fluid Nexus protocol and is not compatible with the current Android and Windows/Linux applications.  We provide the link to the source code for historical interest and potential use by those who only have access to Series 60 devices.</p>
-                <p i18n:translate="">Developers wanting to help us port the Series 60 code to the current version of the protocol, please contact us.  The main sticking point is ensuring that the Google Protocol Buffer python library works on Series 60.</p>
+                <p i18n:translate="">Developers wanting to help us port the Series 60 code to the current version of the protocol, please contact us.  The main sticking point is ensuring that the Google Protocol Buffer python library works on Series 60.  Alternatively, code could be reused from the Android port in a potential J2ME port for Series 60.</p>
                 <p>The archived code is available in the <code>S60</code> folder of the <a href="https://github.com/zeitkunst/FluidNexus">Fluid Nexus git repository</a>.</p>
+            </div>
+            <div>
+                <h2 i18n:translate="">OpenWRT</h2>
+                <p i18n:translate="">We are working on a port to <a href="https://openwrt.org/">OpenWRT</a> to allow a router to be setup as a full-time Fluid Nexus node.  Interested developers should contact us.</p>
             </div>
             <h1>Source Code...</h1>
             <p i18n:translate="">... is available on github under the GPLv3.  <em>We consider GPL violations to be a serious offense</em>.</p>

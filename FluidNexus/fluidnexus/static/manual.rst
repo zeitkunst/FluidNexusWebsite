@@ -49,6 +49,20 @@ In this manual **Android** refers to the Android application, while **Desktop** 
 
 The following icons are used throughout the manual and in the applications themselves:
 
+.. |menu_outgoing| image:: images/menu_outgoing.png
+    :alt: Outgoing messages
+    :width: 48px
+
+|menu_outgoing| Outgoing messages
+    Messages that you've created and that will be passed to other devices running Fluid Nexus
+
+.. |menu_high_priority| image:: images/menu_high_priority.png
+    :alt: High priority messages
+    :width: 48px
+
+|menu_high_priority| High priority messages
+    Messages that have been marked as high priority; these can be considered *life or death* messages.
+
 .. |menu_public| image:: images/menu_public.png
     :alt: Public messages created by you
     :width: 48px
@@ -63,12 +77,6 @@ The following icons are used throughout the manual and in the applications thems
 |menu_public_other| Public messages created by someone else
     Messages that someone else has marked as public and will be pushed by yourself or someone else to the Nexus
 
-.. |menu_outgoing| image:: images/menu_outgoing.png
-    :alt: Outgoing messages
-    :width: 48px
-
-|menu_outgoing| Outgoing messages
-    Messages that you've created and that will be passed to other devices running Fluid Nexus
 
 .. |menu_all| image:: images/menu_all.png
     :alt: Other messages
@@ -193,6 +201,8 @@ New messages can be created by selecting the "New Message" menu item on Android 
     Desktop new message window
 
 Fill out the desired title and message.  Messages can be marked as potentially being sent to the Nexus by checking "Public (push to Nexus?)".  Attachments can be added as well.  In the Desktop application simply press "Choose File..." to open up a file dialog and select the desired attachment.  On Android, select the type of attachment (audio, image, video) and then tap "Add Attachment..." to open up the native file choosing application.
+
+You can also set the "priority" of the message.  Currently there are two options: "Normal" and "Life or Death".  *Only use the "Life or Death" option if someone's life depends on receiving the message*.
 
 .. figure:: images/android_new_message_attachment_type.png
     :alt: android new message attachment type
@@ -408,7 +418,7 @@ Fluid Nexus uses protocol buffers to share data.  The following documents our me
 
 Note that no directly identifying information is either sent in the message nor saved in the database.  The only way identifying information might be saved is via anything placed in the message itself.  Also note that there are no limitations on the length of the message.
 
-The application uses a SHA1 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of `distributed hash table <https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table>`_ with the goal of replicating the entire table amongst all devices.
+The application uses a SHA256 hash of the message title and message content to determine whether or not the message needs to be exchanged.  These hashes are first exchanged between devices to determine what needs to be sent.  Thus Fluid Nexus uses a type of `distributed hash table <https://secure.wikimedia.org/wikipedia/en/wiki/Distributed_hash_table>`_ with the goal of replicating the entire table amongst all devices.
 
 Network Modalities
 ------------------

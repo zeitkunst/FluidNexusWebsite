@@ -10,7 +10,7 @@
                 <div id="nexus_front">
                     <h1><img src="${images_static_url}/nexus_front.png" alt="Nexus"/></h1>
                 </div>
-                <p i18n:translate=""><strong>Note</strong>: Nexus messages are provided by users of the Fluid Nexus software.  The aggregate of these messages is not pre-reviewed.  The user listed as the one posting to the Nexus is not necessarily the one who created the message.  Please take this into account when considering the veracity of the messages posted below.</p>
+                <p i18n:translate=""><strong>Note</strong>: Nexus messages are provided by users of the Fluid Nexus software.  The aggregate of these messages is not pre-reviewed.  The user listed as the one posting to the Nexus is not necessarily the one who created the message.  Please take this into account when considering the veracity of the messages posted below.  For more information see the <a href="/infos/nexus">Nexus tutorial</a>.</p>
                 <div class="pager">
                     <p><tal:block condition="previous_page"><a href="/nexus/${previous_page}">Previous</a></tal:block> Page ${page_num} of ${pages}.  <tal:block condition="next_page"><a href="/nexus/${next_page}">Next</a></tal:block></p>
                 </div>
