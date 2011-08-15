@@ -21,7 +21,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.exceptions import Forbidden, NotFound
 from sqlalchemy import engine_from_config
 
-from pyramid_beaker import session_factory_from_settings
+from pyramid_beaker import session_factory_from_settings, set_cache_regions_from_settings
 
 from fluidnexus.models import initialize_sql, create_session
 from fluidnexus.models import FormAlchemyRootFactory
@@ -38,6 +38,7 @@ def main(global_config, **settings):
     authn_policy = AuthTktAuthenticationPolicy('fluidnexus', callback=groupfinder)
     authz_policy = ACLAuthorizationPolicy()
     session_factory = session_factory_from_settings(settings)
+    set_cache_regions_from_settings(settings)
     config = Configurator(settings=settings,
                           session_factory = session_factory,
                          root_factory='fluidnexus.models.RootFactory',

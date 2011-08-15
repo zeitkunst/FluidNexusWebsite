@@ -31,6 +31,7 @@ requires = [
     'pyrss2gen',
     'PIL',
     'supervisor',
+    'python-memcached',
     ]
 
 if sys.version_info[:3] < (2,5,0):

@@ -28,6 +28,9 @@ import textile
 import bcrypt
 import PyRSS2Gen
 
+from beaker.cache import cache_region, CacheManager
+from beaker.util import parse_cache_config_options
+
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -54,6 +57,21 @@ _ = TranslationStringFactory('fluidnexus')
 save_name = _("Save")
 delete_name = _("Delete")
 
+cache_opts = {
+    'cache.data_dir': '/tmp/cache/data',
+    'cache.lock_dir': '/tmp/cache/lock',
+    'cache.regions': 'short_term, long_term',
+    'cache.short_term.type': 'ext:memcached',
+    'cache.short_term.url': '127.0.0.1:11211',
+    'cache.short_term.expire': '60',
+    'cache.medium_term.type': 'ext:memcached',
+    'cache.medium_term.url': '127.0.0.1:11211',
+    'cache.medium_term.expire': '3600',
+    'cache.long_term.type': 'ext:memcached',
+    'cache.long_term.url': '127.0.0.1:11211',
+    'cache.long_term.expire': '86400',
+}
+cache = CacheManager(**parse_cache_config_options(cache_opts))
 
 def doViewBlog(request = None, page_num = 1, limit = 10):
     session = DBSession()
@@ -82,7 +100,7 @@ def doViewBlog(request = None, page_num = 1, limit = 10):
     else:
         previous_page = 0
 
-    return dict(title = _("Nexus Messages"), posts = modifiedPosts, pages = p.pages, page_num = page_num, previous_page = previous_page, next_page = next_page)
+    return dict(title = _("Fluid Nexus Blog"), posts = modifiedPosts, pages = p.pages, page_num = page_num, previous_page = previous_page, next_page = next_page)
 
 @view_config(route_name = "home", renderer = "../templates/home.pt")
 def home(request):
@@ -95,13 +113,40 @@ def view_blog(request):
     matchdict = request.matchdict
     page_num = matchdict["page_num"]
 
+    short_term = cache.regions["short_term"]
+    view_blog_cache = cache.get_cache("view_blog", **short_term)
+
+    def viewBlog():
+        data = doViewBlog(request, page_num = int(page_num))
+        return data
+
+    results = view_blog_cache.get(key = hashlib.sha256(str(request) + str(page_num)).hexdigest(),
+        createfunc = viewBlog
+    )
+    return results
+
+
     return doViewBlog(request, page_num = int(page_num))
 
 @view_config(route_name = "view_blog_nopagenum", renderer = "../templates/blog.pt")
 def view_blog_nopagenum(request):
     session = DBSession()
+    
+    # TODO
+    # HACK
+    # Don't know why none of the decorators work, none of the config file parts work, and why I have to do this by hand.  Something is definitely not setup properly in pyramid-beaker for caching.
+    short_term = cache.regions["short_term"]
+    view_blog_cache = cache.get_cache("view_blog", **short_term)
 
-    return doViewBlog(request, page_num = 1)
+    def viewBlog():
+        data = doViewBlog(request, page_num = 1)
+        return data
+
+    #return doViewBlog(request, page_num = 1)
+    results = view_blog_cache.get(key = hashlib.sha256(str(request) + "1").hexdigest(),
+        createfunc = viewBlog
+    )
+    return results
 
 
 @view_config(route_name = "view_blog_post", renderer = "../templates/blog_post.pt")
@@ -533,7 +578,6 @@ def faq(request):
 @view_config(route_name = "infos_videos", renderer = "../templates/videos.pt")
 def videos(request):
     """Videos page."""
-    session = DBSession()
 
     return dict(title = _("Fluid Nexus Videos"))
 
@@ -541,21 +585,18 @@ def videos(request):
 @view_config(route_name = "infos_manual", renderer = "../templates/manual.pt")
 def manual(request):
     """Manual page."""
-    session = DBSession()
 
     return dict(title = _("Fluid Nexus Manual"))
 
 @view_config(route_name = "infos_screenshots", renderer = "../templates/screenshots.pt")
 def screenshots(request):
     """Screenshots page."""
-    session = DBSession()
 
     return dict(title = _("Fluid Nexus Screenshots"))
 
 @view_config(route_name = "infos_nexus", renderer = "../templates/nexus.pt")
 def nexus(request):
     """Nexus info page."""
-    session = DBSession()
 
     return dict(title = _("Nexus Information"))
 
