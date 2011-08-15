@@ -1,4 +1,4 @@
-ALLDIRS = ['/var/www/fluidnexus.net/htdocs/dev/FluidNexusWebsite/lib/python2.5/site-packages']
+ALLDIRS = ['/var/www/fluidnexus.net/FluidNexusWebsite/lib/python2.6/site-packages']
 
 import os
 import sys 
@@ -19,9 +19,9 @@ for item in list(sys.path):
         sys.path.remove(item) 
 sys.path[:0] = new_sys_path 
 
-os.environ['PYTHON_EGG_CACHE'] = '/var/www/fluidnexus.net/htdocs/dev/FluidNexusWebsite/.python-eggs'
+os.environ['PYTHON_EGG_CACHE'] = '/var/www/fluidnexus.net/FluidNexusWebsite/.python-eggs'
 
 from pyramid.paster import get_app
 application = get_app(
-  '/var/www/fluidnexus.net/htdocs/dev/FluidNexusWebsite/FluidNexus/production.ini', 'main')
+  '/var/www/fluidnexus.net/FluidNexusWebsite/FluidNexus/production.ini', 'main')
 
