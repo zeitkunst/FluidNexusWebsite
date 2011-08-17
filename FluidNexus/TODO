@@ -2,9 +2,11 @@ Before Release
 ==============
 
 * update links for fluidnexus site in Desktop, Android versions
-* Create video
 * Test registering for nexus key/secret on final site
-* Create links for Windows installer on downloads page
-* Create links for OS X dmg on downloads page
 * Clean database on fluidnexus.net; add opening blog post
+
+After Release
+=============
+
 * Add push to twitter with excerpts and bit.ly links
+* Create video

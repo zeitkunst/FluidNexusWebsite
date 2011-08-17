@@ -32,15 +32,30 @@ All are welcome.  Please contact the author.
 Introduction
 ============
 
-Fluid Nexus is an intervention into staid practices surrounding networks. In the second decade of the twenty-first century, networks continue to be defined by their stable topology, their ability to be captured in an image or graph. Peer-to-peer technologies have promised new arrangements absent centralized control, but they still rely on stationary devices. Mobile phones bring movement and motion but nevertheless remain wedded to conventional network providers.
+In the second decade of the twenty-first century, networks continue to be defined by their stable topology represented in an image or graph.  Peer-to-peer technologies promised new arrangements absent centralized control, but they still rely on stationary devices.  Mobile phones remain wedded to conventional network providers.
 
-Networks do not need to be understood as stable entities with well-traversed paths. Instead, we can combine peer-to-peer with movement to use machines and humans as equal parts of an information transfer infrastructure. Fluid, temporary, ad-hoc networks can be created and destroyed as necessary, passing information from one person to another, spreading out as a contagion and eventually reaching everyone using the service. People become mobile nodes in the network (known in computer science as a `sneaker net <http://en.wikipedia.org/wiki/Sneakernet>`_) while their devices take care of transferring data from one device to another.
+Instead, the combination of peer-to-peer with mobility enables a new concept of an information transfer infrastructure that relies on fluid, temporary, ad-hoc networks.  People and devices are at once implicated as mobile nodes in this network (known in computer science as a `sneakernet <http://en.wikipedia.org/wiki/Sneakernet>`_).
 
-Since information in Fluid Nexus does not travel through any centralized networks it cannot be saved by any Internet intermediary, potentially revealing identifiable information. Nor can any intermediary decide to censor a particular message. These facts make Fluid Nexus an important tool for activists. Access to the data stored by Fluid Nexus requires a search warrant---or another device running the software. Indeed it is this "broadcast" nature of Fluid Nexus that makes it such a potent tool. In the long-run, anyone else running the software will eventually have every message sent by any other user, making it nigh impossible to censor any single message. No identifying information regarding the sender is attached to a message---the sender is in control of what he or she wishes to reveal. And in conjunction with other software such as `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ identities can be further obfuscated as desired or necessary.
+Fluid Nexus bypasses Internet intermediaries' control over the identification and circulation of messages.  This makes Fluid Nexus an important tool for activists.  Access to the data stored by Fluid Nexus requires a search warrant for *your own* devices---or another device running the software.  No identifying information regarding the sender is attached to a message, putting the sender in control.  And in conjunction with other software such as `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ identities can be further obfuscated as desired or necessary.
 
-Yet sometimes it is important for information to reach a broader audience, and at this time that requires going through the Internet. To facilitate this we've created the `Nexus <http://fluidnexus.net/nexus>`_, a place for certain types of messages which are marked as "public" to be automatically uploaded by any Fluid Nexus user to this website. Again, the control of whether a message can be uploaded or not is left in the fingertips of the sender. The Nexus can become a place to distribute necessary bits of text, audio, images, and video to a wider audience.
+In the event that information needs to reach a broad audience, we've added another feature called the `Nexus <http://fluidnexus.net/nexus>`_.  The Nexus is a space on this site for "public" messages to be automatically uploaded by any Fluid Nexus user.  The Nexus includes text, audio, images, and video capabilities.  The sender has control whether the message will become public or not.
 
-For more information regarding our theoretical motivations, see "`Transnetworks and the Fluid Nexus Project`_" to be published in Fall 2011 in the proceedings of dis/connecting/media 2009.
+For more information on Fluid Nexus, see the paper "`Transnetworks and the Fluid Nexus Project`_", forthcoming in Fall 2011 in the proceedings of dis/connecting/media 2009.
+
+Articles of Interest
+--------------------
+
+* `U.S. Underwrites Internet Detour Around Censors <https://www.nytimes.com/2011/06/12/world/12internet.html?pagewanted=1&_r=1&hp>`_
+
+* `Busting Egypt's web blackout: Savvy Egyptians using dial-up connections, unused ports to stay connected <http://www.cbc.ca/news/technology/story/2011/01/28/f-egypt-web-blackout.html>`_
+
+* `Humans Are The Routers <http://techcrunch.com/2011/02/27/humans-are-the-routers/>`_
+
+* `New project enables mobile phone use in areas with no reception <http://www.physorg.com/news198298057.html>`_
+
+* `New York man accused of using Twitter to direct protesters during G20 summit <http://www.guardian.co.uk/world/2009/oct/04/man-arrested-twitter-g20-us?INTCMP=SRCH>`_
+
+* `New York City Subpoenas TXTmob For All Text Messages Sent At Republican Convention <http://www.techdirt.com/articles/20080330/234737699.shtml>`_
 
 Terminology & Icons
 ===================
