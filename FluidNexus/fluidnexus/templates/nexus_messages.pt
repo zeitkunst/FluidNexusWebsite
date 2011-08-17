@@ -18,7 +18,7 @@
         		<article class="nexus_message" tal:repeat="message messages">
                     <h1 class="nexus_message_title">${message.title}</h1>
                     <div class="nexus_message_content">
-                		<div class="content" tal:replace="structure message.getFormattedContent()">
+                		<div class="content" tal:replace="structure message.formattedContent">
                 		</div>
                         <tal:block tal:condition="message.attachment_path">
                             <tal:block tal:switch="message.message_type">
@@ -30,7 +30,7 @@
                         </tal:block>
                     </div>
             		<div class="nexus_post_time" i18n:translate="">
-                        Pushed into the Nexus by <span class="nexus_author"><tal:block tal:replace="message.username" i18n:name="username"/></span> on <time datetime="${message.getISOTime()}"><span tal:replace="message.getFormattedTime()" i18n:name="formatted_time" /></time>.
+                        Pushed into the Nexus by <span class="nexus_author"><tal:block tal:replace="message.username" i18n:name="username"/></span> on <time datetime="${message.ISOTime}"><span tal:replace="message.formattedTime" i18n:name="formatted_time" /></time>.
             		</div>
         		</article>
                 <div class="pager">

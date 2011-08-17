@@ -219,6 +219,7 @@ def api_nexus_message_update(request):
         m.message_hash = message["message_hash"]
         m.message_type = message["message_type"]
         m.created_time = message["message_time"]
+        m.priority = message["message_priority"]
 
         if (request.params.has_key("message_attachment")):
             attachment = request.params.get("message_attachment")
@@ -251,7 +252,7 @@ def api_nexus_message_update(request):
                     im = Image.open(message_attachment_path + extension)
                     im.thumbnail(size)
                     im.save(message_attachment_path + "_tn" + extension)
-                except IOError:
+                except IOError, e:
                     pass
 
             m.attachment_original_filename = attachment_original_filename

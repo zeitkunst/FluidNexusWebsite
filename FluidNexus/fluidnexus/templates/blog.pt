@@ -16,11 +16,11 @@
         		<article class="post" tal:repeat="post posts">
                     <h1 class="post_title"><a href="${post.post_url}">${post.title}</a></h1>
                     <div class="post_content">
-                		<div class="content" tal:replace="structure post.getFormattedContent()">
+                		<div class="content" tal:replace="structure post.formattedContent">
                 		</div>
                     </div>
             		<div class="blog_post_time" i18n:translate="">
-                        Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username"/></span> on <time datetime="${post.getISOTime()}"><span tal:replace="post.getFormattedTime()" i18n:name="formatted_time" /></time>.
+                        Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username"/></span> on <time datetime="${post.ISOTime}"><span tal:replace="post.formattedTime" i18n:name="formatted_time" /></time>.
             		</div>
         		</article>
             </div>

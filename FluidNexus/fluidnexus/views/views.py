@@ -76,7 +76,6 @@ cache = CacheManager(**parse_cache_config_options(cache_opts))
 def doViewBlog(request = None, page_num = 1, limit = 10):
     session = DBSession()
 
-
     p = Pager(session.query(Post).join(User).order_by(desc(Post.created_time)), page_num, limit)
     posts = p.results
 
@@ -88,6 +87,9 @@ def doViewBlog(request = None, page_num = 1, limit = 10):
         # move these to classmethod
         post.username = post.user.username
         post.post_url = route_url("view_blog_post", request, post_id = post.id)
+        post.formattedContent = post.getFormattedContent()
+        post.ISOTime = post.getISOTime()
+        post.formattedTime = post.getFormattedTime()
         modifiedPosts.append(post)
 
     if (page_num < p.pages):

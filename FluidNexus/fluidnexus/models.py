@@ -327,6 +327,7 @@ class NexusMessage(Base):
     created_time = Column('time', Float, default = float(0.0))
     attachment_path = Column('attachment_path', String, default = "")
     attachment_original_filename = Column('attachment_original_filename',       String, default = "")
+    priority = Column('priority', Integer, default = 0) 
     user_id = Column(Integer, ForeignKey('users.id'), nullable = False)
 
     user = relationship(User, backref=backref('nexus_messages', order_by=id))
