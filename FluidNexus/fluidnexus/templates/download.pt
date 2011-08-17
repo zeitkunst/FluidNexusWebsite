@@ -29,6 +29,11 @@
                 <p i18n:translate="">Android APK: 8460364e2865d5a424c57cc4fd131441f1e6d85b</p>
             </div>
             <div>
+                <h2 i18n:translate="">Bugs</h2>
+                <p i18n:translate="">There are undoubtedly bugs.  We track bugs through the "launchpad" system.  For the desktop versions, please <a href="https://bugs.launchpad.net/fluidnexus">report them here</a>, and for the Android version, please <a href="https://bugs.launchpad.net/fluidnexus-android">report them here</a>.  We will also accept bug reports by e-mail, but much prefer to have them posted to the bug tracker so that we can keep things in order.  Thanks!</p>
+                <p i18n:translate=""></p>
+            </div>
+            <div>
                 <h2 i18n:translate="">Nokia Series 60</h2>
                 <p i18n:translate="">The Nokia Series 60 version is based on an older version of the Fluid Nexus protocol and is not compatible with the current Android and Windows/Linux applications.  We provide the link to the source code for historical interest and potential use by those who only have access to Series 60 devices.</p>
                 <p i18n:translate="">Developers wanting to help us port the Series 60 code to the current version of the protocol, please contact us.  The main sticking point is ensuring that the Google Protocol Buffer python library works on Series 60.  Alternatively, code could be reused from the Android port in a potential J2ME port for Series 60.</p>
