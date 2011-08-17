@@ -1,8 +1,6 @@
 Before Release
 ==============
 
-* update links for fluidnexus site in Desktop, Android versions
-* Test registering for nexus key/secret on final site
 * Clean database on fluidnexus.net; add opening blog post
 
 After Release

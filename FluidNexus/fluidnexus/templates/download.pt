@@ -23,9 +23,9 @@
             <p i18n:translate="">An early, not-entirely-functional version for OS X is available.  In this version Bluetooth does not work as we have to port our current Bluetooth code to use <code>lightblue</code> on OS X.  Zeroconf should work, but this has not been tested.  If you want to try it out, you can <a href="/static/downloads/FluidNexus-current.dmg">download the dmg</a>; it has only been tested on Snow Leopard.  Chances are that it might work on Leopard, but it will not work on Tiger.</p>
             <div>
                 <h2 i18n:translate="">File Hashes (sha1)</h2>
-                <p i18n:translate="">Source distribution: 238c035b9756b592254c92efd334241d2b9eb332</p>
-                <p i18n:translate="">Windows Setup exe: 28dad83b09670da3af84edda4cd3a1fb6b7a1adf</p>
-                <p i18n:translate="">OS X dmg: 6c33a0c3567578a5ae91c62b8fc16fea5b46bea3</p>
+                <p i18n:translate="">Source distribution: 6afacb32894577c4a502824c7cc651e3fb303d88</p>
+                <p i18n:translate="">Windows Setup exe: 0e374cf14d5943ffa63dc066e3324a2e6f413748</p>
+                <p i18n:translate="">OS X dmg: 604607fdbd70d4faefbdfa280663f7262eb88b0b</p>
                 <p i18n:translate="">Android APK: </p>
             </div>
             <div>
