@@ -184,7 +184,11 @@ def api_nexus_message_update(request):
         message = simplejson.loads(request.params["message"], encoding="utf-8")
 
         # Get the nonce
-        nonce = message["message_nonce"]
+        try:
+            nonce = message["message_nonce"]
+        except KeyError:
+            return {"error": "You think you can get in without following the rules?  No cookie for you!"}
+
         # Check the nonce
         if (not ConsumerNonce.checkNonce(nonce)):
             return {"error": "Nonce not correct."}
