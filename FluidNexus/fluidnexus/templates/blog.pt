@@ -20,7 +20,7 @@
                 		</div>
                     </div>
             		<div class="blog_post_time" i18n:translate="">
-                        Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username"/></span> on <time datetime="${post.ISOTime}"><span tal:replace="post.formattedTime" i18n:name="formatted_time" /></time>.
+                        Posted by <span class="blog_author"><tal:block tal:replace="post.username" i18n:name="username"/></span> on <time datetime="${post.ISOTime}"><span tal:replace="post.formattedTime" i18n:name="formatted_time" /></time>.  <a href="${post.post_url}">Comments</a>
             		</div>
         		</article>
             </div>

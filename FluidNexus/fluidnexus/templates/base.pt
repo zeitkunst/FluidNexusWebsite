@@ -7,8 +7,8 @@
 <head>
     <title>${title}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <meta name="keywords" content="python web application" />
-    <meta name="description" content="pyramid web application" />
+    <meta name="keywords" content="mobile messaging, ad-hoc, bluetooth, wifi, android, linux, windows" />
+    <meta name="description" content="Mobile messaging without centralized networks" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" type="application/rss+xml" title="Fluid Nexus RSS feed" href="/feed/rss" />
 
