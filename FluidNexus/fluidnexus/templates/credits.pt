@@ -9,7 +9,7 @@
             <h2 i18n:translate="">Contact</h2>
             <p i18n:translate="">You can contact all of the members of the project at fluidnexus {{@}} fluidnexus [[.]] net.</p>
             <p i18n:translate="">If you prefer to send us a private, encrypted e-mail, you may use our web-form at PrivacyBox.de: <a href="http://privacybox.de/fluidnexus.msg">http://privacybox.de/fluidnexus.msg</a>. The contact form is available using a Tor hidden service at <a href="http://c4wcxidkfhvmzhw6.onion/fluidnexus.msg">http://c4wcxidkfhvmzhw6.onion/fluidnexus.msg</a> or using an Invisible Internet Project node at <a href="http://privacybox.i2p/fluidnexus.msg">http://privacybox.i2p/fluidnexus.msg</a>.</p>
-            <p i18n:translate="">Nicholas A. Knouf can be contacted at nknouf {{@}} zeitkunst [[.]] org; his <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xA070C588A43C9CC9">pgp public key is also available</a>.</p>
+            <p i18n:translate=""><a href="http://zeitkunst.org">Nicholas A. Knouf</a> can be contacted at nknouf {{@}} zeitkunst [[.]] org; his <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xA070C588A43C9CC9">pgp public key is also available</a>.  All of the developers of the project can be reached via PGP encrypted e-mail using <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x8C94D744DC2DAB0F">their public key</a>.</p>
             <h2 i18n:translate="">Updates</h2>
             <p i18n:translate="">If you'd like to keep up-to-date with information about the software, please e-mail announce-subscribe@fluidnexus.net.  <em>We will never share your e-mail address with anyone</em>.
             <h2 i18n:translate="">Donate</h2>
