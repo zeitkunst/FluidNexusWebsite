@@ -246,6 +246,26 @@ code {
     font-family: "Courier", "Courier New", monospace;
 }
 
+pre {
+    overflow: auto;
+}
+
+sup,
+sub {
+    height: 0;
+    line-height: 1;
+    vertical-align: baseline;
+    position: relative;
+}
+
+sup {
+    bottom: 1ex;
+}
+
+sub {
+    top: .5ex;
+}
+
 a {
     color: #EB302D;
     text-decoration: underline;

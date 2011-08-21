@@ -17,7 +17,7 @@
             <h2 i18n:translate="">Thanks</h2>
             <p i18n:translate="">Thanks to Niranjan Sivakumar for testing help.  Thanks also to Claudia Costa Pederson for feedback during the writing of this software.</p>
             <h2 i18n:translate="">Inspiration</h2>
-            <p i18n:translate=""><a href="http://k0a1a.net/netless/">netless, by Danja Vasiliev</a>; <a href="http://www.deadswap.net/">Dead Swap, by Telekommunisten</a>; <a href="http://www.feraltrade.org/">Feral Trade, by Kate Rich</a>; and most importantly, <a href="http://www.appliedautonomy.com/txtmob.html">TXTmob, by the Institute for Applied Autonomy</a>.</p>
+            <p i18n:translate=""><a href="http://k0a1a.net/netless/">netless, by Danja Vasiliev</a>; <a href="http://www.deadswap.net/">Dead Swap, by Telekommunisten</a>; <a href="http://www.feraltrade.org/">Feral Trade, by Kate Rich</a>; <a href="https://guardianproject.info/">guardian project</a>; and <a href="http://www.appliedautonomy.com/txtmob.html">TXTmob, by the Institute for Applied Autonomy</a>.</p>
             <h2 i18n:translate="">Initial Version Credits</h2>
             <p i18n:translate="">The initial version of Fluid Nexus for Series 60 Nokia phones running Python was written in conjunction with Bruno Vianna, Luis Ayuso; design help by Mónica Sánchez; and the support of <a href="http://medialab-prado.es">Medialab Prado</a> during the 2° Encuentro Inclusiva-net: redes digitales y espacio fisico.</p>
             <h2 i18n:translate="">Website Credits</h2>
