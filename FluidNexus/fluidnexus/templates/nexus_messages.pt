@@ -16,7 +16,7 @@
                 </div>
 
         		<article class="nexus_message" tal:repeat="message messages">
-                    <h1 class="nexus_message_title">${message.title}</h1>
+                <h1 class="nexus_message_title"><a href="${message.message_url}">${message.title}</a></h1>
                     <div class="nexus_message_content">
                 		<div class="content" tal:replace="structure message.formattedContent">
                 		</div>

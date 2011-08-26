@@ -417,11 +417,11 @@ ul#navigation a:hover {
 
 }
 
-.post_title a {
+.nexus_message_title a, .post_title a {
     color: #ccc;
 }
 
-.post_title a:hover {
+.nexus_message_title a:hover, .post_title a:hover {
     color: #84302d;
 }
 

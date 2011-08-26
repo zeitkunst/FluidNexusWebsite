@@ -94,6 +94,7 @@ def main(global_config, **settings):
     # NEXUS
     config.add_route("view_nexus_messages", "/nexus/{page_num}")
     config.add_route("view_nexus_messages_nopagenum", "/nexus")
+    config.add_route("view_nexus_message", "/nexus/message/{message_id}")
 
     # API
     config.add_route("api_request_key", "/api/01/request_key")

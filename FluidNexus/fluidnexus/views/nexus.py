@@ -24,6 +24,7 @@ from beaker.cache import cache_region, CacheManager
 from beaker.util import parse_cache_config_options
 
 from pyramid.i18n import TranslationStringFactory
+from pyramid.url import route_url
 from pyramid.view import view_config
 
 from fluidnexus.models import DBSession
@@ -62,6 +63,7 @@ def doNexusMessages(request = None, page_num = 1, limit = 10):
         # TODO
         # move these to classmethod
         message.username = message.user.username
+        message.message_url = route_url("view_nexus_message", request, message_id = message.id)
         message.formattedContent = message.getFormattedContent()
         message.ISOTime = message.getISOTime()
         message.formattedTime = message.getFormattedTime()
@@ -113,3 +115,20 @@ def view_nexus_messages_nopagenum(request):
         createfunc = nexusMessages
     )
     return results
+
+@view_config(route_name = "view_nexus_message", renderer = "../templates/nexus_message.pt")
+def view_nexus_message(request):
+    session = DBSession()
+    matchdict = request.matchdict
+    message = session.query(NexusMessage).filter(NexusMessage.id == matchdict["message_id"]).one()
+    user = session.query(User).filter(User.id == message.user_id).one()
+    message.username = user.username
+    message.formattedContent = message.getFormattedContent()
+    message.ISOTime = message.getISOTime()
+    message.formattedTime = message.getFormattedTime()
+
+    # TODO
+    # Add in comment supports; needs a new, separate NexusComment table
+    #message_comment_url = route_url("view_nexus_message", request, message_id = message.id)
+
+    return dict(title = message.title + _(" || Nexus Message"), message = message) 
