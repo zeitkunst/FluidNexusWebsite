@@ -31,23 +31,27 @@ All are welcome.  Please contact the author.
 
 Introduction
 ============
-
 In the second decade of the twenty-first century, networks continue to be defined by their stable topology represented in an image or graph.  Peer-to-peer technologies promised new arrangements absent centralized control, but they still rely on stationary devices.  Mobile phones remain wedded to conventional network providers.
 
 Instead, the combination of peer-to-peer with mobility enables a new concept of an information transfer infrastructure that relies on fluid, temporary, ad-hoc networks.  People and devices are at once implicated as mobile nodes in this network (known in computer science as a `sneakernet <http://en.wikipedia.org/wiki/Sneakernet>`_).
 
-Fluid Nexus bypasses Internet intermediaries' control over the identification and circulation of messages.  This makes Fluid Nexus an important tool for activists.  Access to the data stored by Fluid Nexus requires a search warrant for *your own* devices---or another device running the software.  No identifying information regarding the sender is attached to a message, putting the sender in control.  And in conjunction with other software such as `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ identities can be further obfuscated as desired or necessary.
+Fluid Nexus is a demonstration of how one might design software to bypass Internet intermediaries' control over the identification and circulation of messages.  It is a piece of interrogative software art, of a piece with other attempts to rework network topology such as the Eternal Network used by mail artists or projects such as Dead Swap or netless.  We draw partial inspiration from the potential activist re-purposing of digital technologies without being subsumed by the same goals.
 
 In the event that information needs to reach a broad audience, we've added another feature called the `Nexus <http://fluidnexus.net/nexus>`_.  The Nexus is a space on this site for "public" messages to be automatically uploaded by any Fluid Nexus user.  The Nexus includes text, audio, images, and video capabilities.  The sender has control whether the message will become public or not.
+
+While Fluid Nexus is designed for non-Internet-based communications, we have also developed the `Nexus <http://fluidnexus.net/nexus>`_, a space on this site for "public" messages to be automatically uploaded by any Fluid Nexus user.  The Nexus includes text, audio, images, and video capabilities, and the original sender has control whether the message will become public or not.  The Nexus extends the reach of the Fluid Nexus non-network beyond those using the software on their phone or laptop/desktop.
 
 For more information on Fluid Nexus, see the paper "`Transnetworks and the Fluid Nexus Project`_", forthcoming in Fall 2011 in the proceedings of dis/connecting/media 2009.
 
 Articles of Interest
 --------------------
 
+* `Eternal Network: A Mail Art Anthology <http://www.actlab.utexas.edu/emma/Library/eternalnetwork.html>`_
+* `Stewart Home, "Mail Art", in _The Assault on Culture_ <http://www.stewarthomesociety.org/ass/ma.htm>`_
+
 * `U.S. Underwrites Internet Detour Around Censors <https://www.nytimes.com/2011/06/12/world/12internet.html?pagewanted=1&_r=1&hp>`_
 
-* `Busting Egypt's web blackout: Savvy Egyptians using dial-up connections, unused ports to stay connected <http://www.cbc.ca/news/technology/story/2011/01/28/f-egypt-web-blackout.html>`_
+.. * `Busting Egypt's web blackout: Savvy Egyptians using dial-up connections, unused ports to stay connected <http://www.cbc.ca/news/technology/story/2011/01/28/f-egypt-web-blackout.html>`_
 
 * `Humans Are The Routers <http://techcrunch.com/2011/02/27/humans-are-the-routers/>`_
 
@@ -55,7 +59,7 @@ Articles of Interest
 
 * `New York man accused of using Twitter to direct protesters during G20 summit <http://www.guardian.co.uk/world/2009/oct/04/man-arrested-twitter-g20-us?INTCMP=SRCH>`_
 
-* `New York City Subpoenas TXTmob For All Text Messages Sent At Republican Convention <http://www.techdirt.com/articles/20080330/234737699.shtml>`_
+.. * `New York City Subpoenas TXTmob For All Text Messages Sent At Republican Convention <http://www.techdirt.com/articles/20080330/234737699.shtml>`_
 
 Terminology & Icons
 ===================
@@ -76,7 +80,7 @@ The following icons are used throughout the manual and in the applications thems
     :width: 48px
 
 |menu_high_priority| High priority messages
-    Messages that have been marked as high priority; these can be considered *life or death* messages.
+    Messages that have been marked as high priority.
 
 .. |menu_public| image:: images/menu_public.png
     :alt: Public messages created by you
@@ -120,11 +124,11 @@ Security
 Identifying Information
 -----------------------
 
-Data is stored unencrypted in a local sqlite database.  It is best that you     take care of encryption yourself, such as by using ecryptfs home directories or LUKS encrypted devices on Linux.  For Android we plan on implementing `SQLCipher <https://guardianproject.info/code/sqlcipher/>`_ in the near future.
+Messages are stored on Android in an encrypted `SQLCipher <https://guardianproject.info/code/sqlcipher/>`_ database; received attachments are currently stored unencrypted.  On Linux and Windows you will need to use local forms of encryption such as by using ecryptfs home directories or LUKS encrypted devices on Linux or TrueCrypt volumes on Windows.
 
-Data is sent over Bluetooth_ without any transport layer encryption.  This is    something we plan on implementing in the future.
+.. Data is sent over Bluetooth_ without any transport layer encryption.  This is something we plan on implementing in the future.
 
-Data is sent over link-local wifi using zeroconf for service discovery without  any transport layer encryption.  This is something we plan on implementing in   the future.
+.. Data is sent over link-local wifi using zeroconf for service discovery without  any transport layer encryption.  This is something we plan on implementing in   the future.
 
 While we do not save any identifying information, it is possible that you may inadvertently identify yourself through something you write or share using Fluid Nexus.  Please take this into account when using the software.  On Android, we suggest the use of `ObscuraCam <https://guardianproject.info/apps/securecam/>`_ to anonymize any photos that you decide to share.
 
@@ -134,14 +138,14 @@ Data Sharing
 Bluetooth
 +++++++++
 
-On Android, devices must be paired before any data sharing can occur.  This should happen in a safe location prior to an event.  Because of this need for pairing it is less likely that those unknown to you will be able to access Fluid Nexus messages *when you are using the Bluetooth_ network modality alone*; however, it is still possible that someone can sniff your Bluetooth traffic and thus see what messages are being sent.
+On Android, devices must be paired before any data sharing can occur.  Because of this need for pairing it is less likely that those unknown to you will be able to access Fluid Nexus messages *when you are using the Bluetooth_ network modality alone*; however, it is still possible that someone can sniff your Bluetooth traffic and thus see what messages are being sent.
 
 On the Desktop in our testing we have not needed to pair devices ahead of time to share data amongst Linux and Windows clients.  Reports from other uses would be welcome.
 
 Zeroconf
 ++++++++
 
-On Android and the Desktop, devices will share messages with *any other device running Fluid Nexus*.  This means that others, whom you do not know, will be able to receive Fluid Nexus message (but Fluid Nexus Messages alone) from your device.  This is by design, as Fluid Nexus is a broadcast flooding protocol, meant to spread messages as far and as wide as possible.  Please take care to remove identifying information if you deem this to be a risk.
+On Android and the Desktop, devices will share messages with *any other device running Fluid Nexus*.  This means that others, whom you do not know, will be able to receive Fluid Nexus message (but Fluid Nexus Messages alone) from your device.  This is by design, as Fluid Nexus is a broadcast flooding protocol, meant to spread messages as far and as wide as possible.
 
 Using Fluid Nexus
 =================
@@ -217,7 +221,7 @@ New messages can be created by selecting the "New Message" menu item on Android 
 
 Fill out the desired title and message.  Messages can be marked as potentially being sent to the Nexus by checking "Public (push to Nexus?)".  Attachments can be added as well.  In the Desktop application simply press "Choose File..." to open up a file dialog and select the desired attachment.  On Android, select the type of attachment (audio, image, video) and then tap "Add Attachment..." to open up the native file choosing application.
 
-You can also set the "priority" of the message.  Currently there are two options: "Normal" and "Life or Death".  *Only use the "Life or Death" option if someone's life depends on receiving the message*.
+You can also set the "priority" of the message.  Currently there are two options: "Normal" and "High".
 
 .. figure:: images/android_new_message_attachment_type.png
     :alt: android new message attachment type
@@ -422,11 +426,17 @@ Fluid Nexus uses protocol buffers to share data.  The following documents our me
             VIDEO = 3;
         }
     
+        enum MessagePriority {
+            NORMAL = 0;
+            HIGH = 1;
+        }
+    
         optional MessageType message_type = 7;
+        optional MessagePriority message_priority = 18;
         optional bytes message_attachment = 8;
         optional string message_attachment_original_filename = 9;
     }
-    
+
     message FluidNexusMessages {
         repeated FluidNexusMessage message = 1;
     }
