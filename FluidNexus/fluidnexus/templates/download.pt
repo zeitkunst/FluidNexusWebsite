@@ -19,8 +19,8 @@
             <p i18n:translate="">Developers wanting to help us improve the software, please <a href="/credits">contact us</a>.</p>
             <p i18n:translate="">Please read the <a href="/infos/faq">FAQs</a> before downloading.</p>
             <h2 i18n:translate=""><img width="64" src="${images_static_url}/google_android.png" alt="android icon"/>Android</h2>
-            <p i18n:translate=""><strike>An alpha version is available on the <a href="https://market.android.com/details?id=net.fluidnexus.FluidNexusAndroid">Android Market</a>.</strike></p>
-            <p i18n:translate="">Unfortunately, Google's Android Market automatically tracks the number of Fluid Nexus installs and sends anonymized crash information.  We have not yet found a way to disable this automatic tracking.  If you are worried about Google tracking your download, you can always download the latest version from <strike><a href="/static/downloads/net.fluidnexus.FluidNexusAndroid.apk">our website</a></strike>.  You will have to build the software for the moment from source.  Please download from our github repository below.  We keep no logs of who accesses the site and do not collect any usage information.</p>
+            <p i18n:translate="">An alpha version is available on the <a href="https://market.android.com/details?id=net.fluidnexus.FluidNexusAndroid">Android Market</a>.</p>
+            <p i18n:translate="">Unfortunately, Google's Android Market automatically tracks the number of Fluid Nexus installs and sends anonymized crash information.  We have not yet found a way to disable this automatic tracking.  If you are worried about Google tracking your download, you can always download the latest version from <a href="/static/downloads/net.fluidnexus.FluidNexusAndroid.apk">our website</a>.  You will have to build the software for the moment from source.  Please download from our github repository below.  We keep no logs of who accesses the site and do not collect any usage information.</p>
             <h2 i18n:translate="">Windows/Linux</h2>
             <p i18n:translate="">The application is available for download from <a href="http://pypi.python.org/pypi/fluid-nexus">pypi</a> or via <code>easy_install fluid-nexus</code>.</p>
             <p i18n:translate="">If you are worried about your download being tracked, you can also download the source from <a href="/static/downloads/fluid-nexus-current.tar.gz">our website</a> (along with the <a href="/static/downloads/Fluid_Nexus_Setup.exe">Windows installer</a>).  We keep no logs of who access the site and do not collect any usage information.</p>
@@ -31,10 +31,10 @@
             <p i18n:translate="">An early, not-entirely-functional version for OS X is available.  In this version Bluetooth does not work as we have to port our current Bluetooth code to use <code>lightblue</code> on OS X.  Zeroconf should work, but this has not been tested.  If you want to try it out, you can <a href="/static/downloads/FluidNexus-current.dmg">download the dmg</a>; it has only been tested on Snow Leopard.  Chances are that it might work on Leopard, but it will not work on Tiger.</p>
             <div>
                 <h2 i18n:translate="">File Hashes (sha1)</h2>
-                <p i18n:translate="">Source distribution: 6afacb32894577c4a502824c7cc651e3fb303d88</p>
-                <p i18n:translate="">Windows Setup exe: 0e374cf14d5943ffa63dc066e3324a2e6f413748</p>
-                <p i18n:translate="">OS X dmg: 604607fdbd70d4faefbdfa280663f7262eb88b0b</p>
-                <p i18n:translate="">Android APK: 5175eb127635858dc49b851f0ed8ffc9e66184d9</p>
+                <p i18n:translate="">Source distribution: 6ac5fdca5c97b79bf60cccb779b15045531081e7</p>
+                <p i18n:translate="">Windows Setup exe: 0528e836b684ebc41d8cf3c506669ce4c425d906</p>
+                <p i18n:translate="">OS X dmg: b567c377e030b33f70718cb72cf3ddacd1dce313</p>
+                <p i18n:translate="">Android APK: 78c48ceaebc1ff5625f87058ccf5b3e4400c0f36</p>
             </div>
             <div>
                 <h2 i18n:translate="">Bugs</h2>
