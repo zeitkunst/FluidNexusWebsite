@@ -12,8 +12,8 @@
             <p i18n:translate=""><a href="http://zeitkunst.org">Nicholas A. Knouf</a> can be contacted at nknouf {{@}} zeitkunst [[.]] org; his <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xA070C588A43C9CC9">pgp public key is also available</a>.  All of the developers of the project can be reached via PGP encrypted e-mail using <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x8C94D744DC2DAB0F">their public key</a>.</p>
             <h2 i18n:translate="">Updates</h2>
             <p i18n:translate="">If you'd like to keep up-to-date with information about the software, please e-mail announce-subscribe@fluidnexus.net.  <em>We will never share your e-mail address with anyone</em>.
-            <h2 i18n:translate="">Donate</h2>
-            <p>You can donate to our bitcoin address: 18GD6vMjmXthGhDNDhNMEoEthoGkUXkQR3.  Even a fraction of a coin helps us know that our work is appreciated.  Thanks!</p>
+            <!--<h2 i18n:translate="">Donate</h2>-->
+            <!--<p>You can donate to our bitcoin address: 18GD6vMjmXthGhDNDhNMEoEthoGkUXkQR3.  Even a fraction of a coin helps us know that our work is appreciated.  Thanks!</p>-->
             <h2 i18n:translate="">Thanks</h2>
             <p i18n:translate="">Thanks to Niranjan Sivakumar for testing help.  Thanks also to Claudia Costa Pederson for feedback during the writing of this software.</p>
             <h2 i18n:translate="">Inspiration</h2>
